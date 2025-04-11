@@ -6,10 +6,10 @@ const HeaderContainer = styled.header`
   top: 0;
   left: 0;
   right: 0;
-  background-color: ${props => props.scrolled ? props.theme.background : 'transparent'};
-  backdrop-filter: ${props => props.scrolled ? 'blur(10px)' : 'none'};
-  box-shadow: ${props => props.scrolled ? '0 2px 10px rgba(0, 0, 0, 0.1)' : 'none'};
-  color: ${props => props.scrolled ? props.theme.text : 'white'};
+  background-color: ${props => props.$scrolled ? props.theme.background : 'transparent'};
+  backdrop-filter: ${props => props.$scrolled ? 'blur(10px)' : 'none'};
+  box-shadow: ${props => props.$scrolled ? '0 2px 10px rgba(0, 0, 0, 0.1)' : 'none'};
+  color: ${props => props.$scrolled ? props.theme.text : 'white'};
   padding: 15px 0;
   transition: all 0.3s ease;
   z-index: 1000;
@@ -37,7 +37,7 @@ const NavMenu = styled.nav`
   @media (max-width: 768px) {
     position: fixed;
     top: 0;
-    right: ${props => props.isOpen ? '0' : '-100%'};
+    right: ${props => props.$isOpen ? '0' : '-100%'};
     width: 70%;
     height: 100vh;
     background-color: ${props => props.theme.secondaryBackground};
@@ -45,14 +45,14 @@ const NavMenu = styled.nav`
     justify-content: flex-start;
     padding-top: 80px;
     transition: all 0.3s ease;
-    box-shadow: ${props => props.isOpen ? '-5px 0 15px rgba(0, 0, 0, 0.1)' : 'none'};
+    box-shadow: ${props => props.$isOpen ? '-5px 0 15px rgba(0, 0, 0, 0.1)' : 'none'};
   }
 `;
 
 const NavItem = styled.a`
   margin: 0 15px;
   text-decoration: none;
-  color: ${props => props.scrolled ? props.theme.text : 'white'};
+  color: ${props => props.$scrolled ? props.theme.text : 'white'};
   font-weight: 600;
   position: relative;
   transition: all 0.3s ease;
@@ -98,27 +98,27 @@ const HamburgerButton = styled.button`
 const HamburgerIcon = styled.div`
   width: 25px;
   height: 3px;
-  background-color: ${props => props.scrolled ? props.theme.text : 'white'};
+  background-color: ${props => props.$scrolled ? props.theme.text : 'white'};
   position: relative;
   transition: all 0.3s ease;
-  transform: ${props => props.isOpen ? 'rotate(45deg)' : 'none'};
+  transform: ${props => props.$isOpen ? 'rotate(45deg)' : 'none'};
   
   &:before, &:after {
     content: '';
     position: absolute;
     width: 25px;
     height: 3px;
-    background-color: ${props => props.scrolled ? props.theme.text : 'white'};
+    background-color: ${props => props.$scrolled ? props.theme.text : 'white'};
     transition: all 0.3s ease;
   }
   
   &:before {
-    transform: ${props => props.isOpen ? 'rotate(90deg) translate(0, 0)' : 'translateY(-8px)'};
+    transform: ${props => props.$isOpen ? 'rotate(90deg) translate(0, 0)' : 'translateY(-8px)'};
   }
   
   &:after {
-    transform: ${props => props.isOpen ? 'rotate(90deg) translate(0, 0)' : 'translateY(8px)'};
-    opacity: ${props => props.isOpen ? 0 : 1};
+    transform: ${props => props.$isOpen ? 'rotate(90deg) translate(0, 0)' : 'translateY(8px)'};
+    opacity: ${props => props.$isOpen ? 0 : 1};
   }
 `;
 
@@ -151,18 +151,18 @@ const Header = () => {
   };
   
   return (
-    <HeaderContainer scrolled={scrolled}>
+    <HeaderContainer $scrolled={scrolled}>
       <HeaderContent>
-        <Logo onClick={scrollToTop}>190</Logo>
+        <Logo onClick={scrollToTop}>lel190</Logo>
         
         <HamburgerButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          <HamburgerIcon isOpen={isMenuOpen} scrolled={scrolled} />
+          <HamburgerIcon $isOpen={isMenuOpen} $scrolled={scrolled} />
         </HamburgerButton>
         
-        <NavMenu isOpen={isMenuOpen}>
+        <NavMenu $isOpen={isMenuOpen}>
           <NavItem 
             href="#about" 
-            scrolled={scrolled}
+            $scrolled={scrolled}
             onClick={(e) => {
               e.preventDefault();
               handleNavClick('#about');
@@ -172,7 +172,7 @@ const Header = () => {
           </NavItem>
           <NavItem 
             href="#projects" 
-            scrolled={scrolled}
+            $scrolled={scrolled}
             onClick={(e) => {
               e.preventDefault();
               handleNavClick('#projects');
@@ -182,7 +182,7 @@ const Header = () => {
           </NavItem>
           <NavItem 
             href="#skills" 
-            scrolled={scrolled}
+            $scrolled={scrolled}
             onClick={(e) => {
               e.preventDefault();
               handleNavClick('#skills');
@@ -194,7 +194,7 @@ const Header = () => {
             href="https://github.com/le-lel190" 
             target="_blank" 
             rel="noopener noreferrer"
-            scrolled={scrolled}
+            $scrolled={scrolled}
           >
             GitHub
           </NavItem>

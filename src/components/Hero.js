@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const fadeIn = keyframes`
@@ -65,6 +65,23 @@ const HeroContent = styled.div`
   animation: ${fadeIn} 1s ease-out;
 `;
 
+const Avatar = styled.div`
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  overflow: hidden;
+  border: 3px solid white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  animation: ${fadeIn} 1s ease-out;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
 const HeroTitle = styled.h1`
   font-size: clamp(2.5rem, 5vw, 4rem);
   margin-bottom: 1rem;
@@ -90,9 +107,9 @@ const HeroButtons = styled.div`
 
 const Button = styled.a`
   padding: 12px 25px;
-  background: ${props => props.primary ? props.theme.accent : 'transparent'};
+  background: ${props => props.$primary ? props.theme.accent : 'transparent'};
   color: white;
-  border: ${props => props.primary ? 'none' : `2px solid white`};
+  border: ${props => props.$primary ? 'none' : `2px solid white`};
   border-radius: 5px;
   font-size: 1rem;
   font-weight: 600;
@@ -100,26 +117,14 @@ const Button = styled.a`
   cursor: pointer;
   transition: all 0.3s ease;
   animation: ${slideUp} 0.8s ease-out forwards;
-  animation-delay: ${props => props.delay || '0s'};
+  animation-delay: ${props => props.$delay || '0s'};
   opacity: 0;
 
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    background: ${props => props.primary ? props.theme.accent : 'rgba(255, 255, 255, 0.1)'};
+    background: ${props => props.$primary ? props.theme.accent : 'rgba(255, 255, 255, 0.1)'};
   }
-`;
-
-const TagLine = styled.div`
-  position: absolute;
-  bottom: 50px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  color: white;
-  font-size: 1.2rem;
-  animation: ${fadeIn} 1s ease-out 1s forwards;
-  opacity: 0;
 `;
 
 const ScrollIndicator = styled.div`
@@ -185,15 +190,18 @@ const Hero = () => {
       </VideoBackground>
       <Overlay />
       <HeroContent>
-        <HeroTitle>Hi, I'm 190 👋</HeroTitle>
+        <Avatar>
+          <img src={`${process.env.PUBLIC_URL}/images/avatar.jpg`} alt="Anson's avatar" />
+        </Avatar>
+        <HeroTitle>Hi, I'm Anson <span role="img" aria-label="Waving hand">👋</span></HeroTitle>
         <HeroSubtitle>
           A computer science student at CUHK passionate about frontend development and creating beautiful user experiences.
         </HeroSubtitle>
         <HeroButtons>
-          <Button href="#about" primary delay="0.3s" onClick={scrollToContent}>
+          <Button href="#about" $primary $delay="0.3s" onClick={scrollToContent}>
             About Me
           </Button>
-          <Button href="#projects" delay="0.5s" onClick={(e) => {
+          <Button href="#projects" $delay="0.5s" onClick={(e) => {
             e.preventDefault();
             document.querySelector('#projects').scrollIntoView({ behavior: 'smooth' });
           }}>
@@ -201,7 +209,6 @@ const Hero = () => {
           </Button>
         </HeroButtons>
       </HeroContent>
-      <TagLine>Let's build something amazing together</TagLine>
       <ScrollIndicator onClick={scrollToContent} />
     </HeroContainer>
   );

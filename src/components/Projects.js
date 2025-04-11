@@ -22,7 +22,7 @@ const ProjectGrid = styled.div`
 `;
 
 const ProjectCard = styled.div`
-  background-color: white;
+  background-color: ${props => props.theme.secondaryBackground};
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -35,10 +35,12 @@ const ProjectCard = styled.div`
 
 const ProjectTitle = styled.h3`
   margin-bottom: 0.5rem;
+  color: ${props => props.theme.text};
 `;
 
 const ProjectDescription = styled.p`
   margin-bottom: 1rem;
+  color: ${props => props.theme.text};
 `;
 
 const Tags = styled.div`
@@ -48,8 +50,8 @@ const Tags = styled.div`
 `;
 
 const Tag = styled.span`
-  background-color: #e9ecef;
-  color: #6c757d;
+  background-color: ${props => props.theme.border};
+  color: ${props => props.theme.text};
   font-size: 0.8rem;
   padding: 3px 10px;
   margin-right: 5px;
@@ -59,7 +61,7 @@ const Tag = styled.span`
 
 const Button = styled.a`
   display: inline-block;
-  background-color: #007bff;
+  background-color: ${props => props.theme.accent};
   color: white;
   padding: 8px 16px;
   border-radius: 8px;

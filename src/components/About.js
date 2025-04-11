@@ -59,8 +59,9 @@ const AboutImage = styled.div`
   animation: ${fadeInUp} 0.8s forwards;
   animation-delay: 0.2s;
   opacity: 0;
+  position: relative;
   
-  img {
+  .main-image {
     width: 100%;
     height: auto;
     transition: transform 0.5s ease;
@@ -88,7 +89,7 @@ const AboutItem = styled.div`
   align-items: center;
   margin-bottom: 1.5rem;
   animation: ${fadeInUp} 0.8s forwards;
-  animation-delay: ${props => props.delay || '0s'};
+  animation-delay: ${props => props.$delay || '0s'};
   opacity: 0;
   
   .icon {
@@ -147,36 +148,47 @@ const About = () => {
       <AboutContainer>
         <AboutContent>
           <AboutText>
-            Hello! I'm 190, a passionate Computer Science student at CUHK with a keen interest in frontend development and creating beautiful user experiences. I enjoy building interactive web applications and exploring different technologies.
+            Hello! I'm Anson (lel190), a passionate Computer Science student at CUHK with a keen interest in 
+            different frontend frameworks and creating beautiful user experiences. I am also interested in reverse engineering and memory hacking 
+            even though I am just a beginner.
           </AboutText>
           
-          <AboutItem delay="0.2s">
-            <div className="icon">📚</div>
+          <AboutItem $delay="0.2s">
+            <div className="icon">
+              <span role="img" aria-label="Books">📚</span>
+            </div>
             <div className="text">Currently studying Computer Science at CUHK</div>
           </AboutItem>
           
-          <AboutItem delay="0.3s">
-            <div className="icon">🌱</div>
+          <AboutItem $delay="0.3s">
+            <div className="icon">
+              <span role="img" aria-label="Growing plant">🌱</span>
+            </div>
             <div className="text">Exploring different frontend frameworks</div>
           </AboutItem>
           
-          <AboutItem delay="0.4s">
-            <div className="icon">💻</div>
-            <div className="text">Working on exciting web development projects</div>
+          <AboutItem $delay="0.4s">
+            <div className="icon">
+              <span role="img" aria-label="Computer">💻</span>
+            </div>
+            <div className="text">Learning backend development with Node.js and Express.js</div>
           </AboutItem>
           
-          <AboutItem delay="0.5s">
-            <div className="icon">📫</div>
-            <div className="text">Reach me via Discord: 190</div>
+          <AboutItem $delay="0.5s">
+            <div className="icon">
+              <span role="img" aria-label="Lock">🔒</span>
+            </div>
+            <div className="text">Interested in cybersecurity and ethical hacking</div>
           </AboutItem>
           
-          <ContactButton href="mailto:your-email@example.com">
+          <ContactButton href="https://linktr.ee/lel190" target="_blank" rel="noopener noreferrer">
             Contact Me
           </ContactButton>
         </AboutContent>
         
         <AboutImage>
           <img 
+            className="main-image"
             src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80" 
             alt="Coding workspace" 
           />

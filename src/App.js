@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Header from './components/Header';
 import About from './components/About';
@@ -43,8 +43,8 @@ const lightTheme = {
 const darkTheme = {
   background: '#121212',
   secondaryBackground: '#1e1e1e',
-  text: '#e9ecef',
-  secondaryText: '#adb5bd',
+  text: '#ffffff',
+  secondaryText: '#e0e0e0',
   accent: '#0d6efd',
   border: '#343a40'
 };
@@ -110,8 +110,8 @@ function App() {
           <Skills />
         </Main>
         <Footer />
-        <ThemeToggle onClick={toggleTheme}>
-          {theme === lightTheme ? '🌙' : '☀️'}
+        <ThemeToggle onClick={toggleTheme} aria-label={theme === lightTheme ? "Switch to dark mode" : "Switch to light mode"}>
+          {theme === lightTheme ? <span role="img" aria-hidden="true">🌙</span> : <span role="img" aria-hidden="true">☀️</span>}
         </ThemeToggle>
       </AppContainer>
     </ThemeProvider>

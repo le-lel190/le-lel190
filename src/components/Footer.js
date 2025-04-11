@@ -113,9 +113,9 @@ const Footer = () => {
     <FooterContainer>
       <FooterContent>
         <FooterColumn>
-          <Logo>190</Logo>
+          <Logo>lel190 - Anson</Logo>
           <Description>
-            A computer science student at CUHK passionate about frontend development and creating beautiful user experiences.
+            A computer science student at CUHK exploring different frontend frameworks, and am interested in reverse engineering and memory hacking.
           </Description>
           <SocialLinks>
             <SocialLink href="https://github.com/le-lel190" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -124,7 +124,7 @@ const Footer = () => {
             <SocialLink href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
               <i className="fab fa-twitter"></i>
             </SocialLink>
-            <SocialLink href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <SocialLink href="https://www.linkedin.com/in/le-anson-cheung/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <i className="fab fa-linkedin"></i>
             </SocialLink>
           </SocialLinks>
@@ -139,8 +139,7 @@ const Footer = () => {
         
         <FooterColumn>
           <FooterTitle>Contact</FooterTitle>
-          <FooterLink href="mailto:your-email@example.com">Email</FooterLink>
-          <FooterLink href="#">Discord: 190</FooterLink>
+          <FooterLink href="https://linktr.ee/lel190">Linktree</FooterLink>
           <FooterLink href="https://github.com/le-lel190">GitHub</FooterLink>
         </FooterColumn>
       </FooterContent>

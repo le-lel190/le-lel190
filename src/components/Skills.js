@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Section = styled.section`
   padding: 60px 0;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid ${props => props.theme.border};
   
   &:last-child {
     border-bottom: none;
@@ -12,6 +12,7 @@ const Section = styled.section`
 
 const Title = styled.h2`
   margin-bottom: 1.5rem;
+  color: ${props => props.theme.text};
 `;
 
 const SkillsGrid = styled.div`
@@ -26,7 +27,7 @@ const SkillsGrid = styled.div`
 `;
 
 const SkillCategory = styled.div`
-  background-color: white;
+  background-color: ${props => props.theme.secondaryBackground};
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -34,6 +35,7 @@ const SkillCategory = styled.div`
 
 const CategoryTitle = styled.h3`
   margin-bottom: 0.5rem;
+  color: ${props => props.theme.text};
 `;
 
 const SkillsList = styled.ul`
@@ -43,17 +45,22 @@ const SkillsList = styled.ul`
 
 const SkillItem = styled.li`
   margin-bottom: 5px;
+  color: ${props => props.theme.text};
 `;
 
 // Sample skills data - you can replace with your actual skills
 const skillsData = [
   {
     category: 'Languages',
-    skills: ['JavaScript', 'HTML/CSS', 'Python']
+    skills: ['Python', 'C/C++', 'Java', 'R', 'SQL']
   },
   {
-    category: 'Frameworks',
-    skills: ['React']
+    category: 'Web Development',
+    skills: ['React', 'Node.js', 'Express.js', 'JavaScript', 'HTML/CSS']
+  },
+  {
+    category: 'Other',
+    skills: ['Git', 'Linux', 'Docker']
   }
   // Add more categories as needed
 ];
