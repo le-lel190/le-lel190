@@ -1,4 +1,4 @@
-(this["webpackJsonpgithub-profile"]=this["webpackJsonpgithub-profile"]||[]).push([[0],{10:function(e,t,a){e.exports=a(19)},18:function(e,t,a){},19:function(e,t,a){"use strict";a.r(t);var r=a(0),n=a.n(r),o=a(6),i=a.n(o),l=(a(18),a(1));const s=l.d.header`
+(this["webpackJsonpgithub-profile"]=this["webpackJsonpgithub-profile"]||[]).push([[0],{10:function(e,t,a){e.exports=a(19)},18:function(e,t,a){},19:function(e,t,a){"use strict";a.r(t);var o=a(0),r=a.n(o),n=a(6),i=a.n(n),l=(a(18),a(1));const s=l.d.header`
   position: fixed;
   top: 0;
   left: 0;
@@ -105,7 +105,7 @@
     transform: ${e=>e.$isOpen?"rotate(90deg) translate(0, 0)":"translateY(8px)"};
     opacity: ${e=>e.$isOpen?0:1};
   }
-`;var x=()=>{const[e,t]=Object(r.useState)(!1),[a,o]=Object(r.useState)(!1);Object(r.useEffect)(()=>{const e=()=>{const e=window.scrollY;t(e>50)};return window.addEventListener("scroll",e),()=>{window.removeEventListener("scroll",e)}},[]);const i=e=>{document.querySelector(e).scrollIntoView({behavior:"smooth"}),o(!1)};return n.a.createElement(s,{$scrolled:e},n.a.createElement(d,null,n.a.createElement(c,{onClick:()=>{window.scrollTo({top:0,behavior:"smooth"})}},"lel190"),n.a.createElement(g,{onClick:()=>o(!a)},n.a.createElement(h,{$isOpen:a,$scrolled:e})),n.a.createElement(m,{$isOpen:a},n.a.createElement(p,{href:"#about",$scrolled:e,onClick:e=>{e.preventDefault(),i("#about")}},"About"),n.a.createElement(p,{href:"#projects",$scrolled:e,onClick:e=>{e.preventDefault(),i("#projects")}},"Projects"),n.a.createElement(p,{href:"#skills",$scrolled:e,onClick:e=>{e.preventDefault(),i("#skills")}},"Skills"),n.a.createElement(p,{href:"https://github.com/le-lel190",target:"_blank",rel:"noopener noreferrer",$scrolled:e},"GitHub"))))};const u=l.e`
+`;var x=()=>{const[e,t]=Object(o.useState)(!1),[a,n]=Object(o.useState)(!1);Object(o.useEffect)(()=>{const e=()=>{const e=window.scrollY;t(e>50)};return window.addEventListener("scroll",e),()=>{window.removeEventListener("scroll",e)}},[]);const i=e=>{document.querySelector(e).scrollIntoView({behavior:"smooth"}),n(!1)};return r.a.createElement(s,{$scrolled:e},r.a.createElement(d,null,r.a.createElement(c,{onClick:()=>{window.scrollTo({top:0,behavior:"smooth"})}},"lel190"),r.a.createElement(g,{onClick:()=>n(!a)},r.a.createElement(h,{$isOpen:a,$scrolled:e})),r.a.createElement(m,{$isOpen:a},r.a.createElement(p,{href:"#about",$scrolled:e,onClick:e=>{e.preventDefault(),i("#about")}},"About"),r.a.createElement(p,{href:"#projects",$scrolled:e,onClick:e=>{e.preventDefault(),i("#projects")}},"Projects"),r.a.createElement(p,{href:"#skills",$scrolled:e,onClick:e=>{e.preventDefault(),i("#skills")}},"Skills"),r.a.createElement(p,{href:"https://github.com/le-lel190",target:"_blank",rel:"noopener noreferrer",$scrolled:e},"GitHub"))))};const u=l.e`
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -146,7 +146,7 @@
   }
 `,y=l.d.div`
   animation: ${u} 0.8s forwards;
-`,E=l.d.div`
+`,$=l.d.div`
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -169,7 +169,7 @@
     margin-top: 30px;
     animation-delay: 0s;
   }
-`,$=l.d.p`
+`,E=l.d.p`
   margin-bottom: 1.5rem;
   font-size: 1.1rem;
   line-height: 1.8;
@@ -223,10 +223,10 @@
   z-index: -1;
   top: -150px;
   right: -150px;
-`;var j=()=>n.a.createElement(f,{id:"about"},n.a.createElement(z,null),n.a.createElement(b,null,"About Me"),n.a.createElement(w,null,n.a.createElement(y,null,n.a.createElement($,null,"Hello! I'm Anson (lel190), a passionate Computer Science student at CUHK with a keen interest in different frontend frameworks and creating beautiful user experiences. I am also interested in reverse engineering and memory hacking even though I am just a beginner."),n.a.createElement(v,{$delay:"0.2s"},n.a.createElement("div",{className:"icon"},n.a.createElement("span",{role:"img","aria-label":"Books"},"\ud83d\udcda")),n.a.createElement("div",{className:"text"},"Currently studying Computer Science at CUHK")),n.a.createElement(v,{$delay:"0.3s"},n.a.createElement("div",{className:"icon"},n.a.createElement("span",{role:"img","aria-label":"Growing plant"},"\ud83c\udf31")),n.a.createElement("div",{className:"text"},"Exploring different frontend frameworks")),n.a.createElement(v,{$delay:"0.4s"},n.a.createElement("div",{className:"icon"},n.a.createElement("span",{role:"img","aria-label":"Computer"},"\ud83d\udcbb")),n.a.createElement("div",{className:"text"},"Learning backend development with Node.js and Express.js")),n.a.createElement(v,{$delay:"0.5s"},n.a.createElement("div",{className:"icon"},n.a.createElement("span",{role:"img","aria-label":"Lock"},"\ud83d\udd12")),n.a.createElement("div",{className:"text"},"Interested in cybersecurity and ethical hacking")),n.a.createElement(k,{href:"https://linktr.ee/lel190",target:"_blank",rel:"noopener noreferrer"},"Contact Me")),n.a.createElement(E,null,n.a.createElement("img",{className:"main-image",src:"https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80",alt:"Coding workspace"}))));const S=l.d.section`
+`;var j=()=>r.a.createElement(f,{id:"about"},r.a.createElement(z,null),r.a.createElement(b,null,"About Me"),r.a.createElement(w,null,r.a.createElement(y,null,r.a.createElement(E,null,"Hello! I'm Anson (lel190), a passionate Computer Science student at CUHK with a keen interest in different frontend frameworks and creating beautiful user experiences. I am also interested in reverse engineering and memory hacking even though I am just a beginner."),r.a.createElement(v,{$delay:"0.2s"},r.a.createElement("div",{className:"icon"},r.a.createElement("span",{role:"img","aria-label":"Books"},"\ud83d\udcda")),r.a.createElement("div",{className:"text"},"Currently studying Computer Science at CUHK")),r.a.createElement(v,{$delay:"0.3s"},r.a.createElement("div",{className:"icon"},r.a.createElement("span",{role:"img","aria-label":"Growing plant"},"\ud83c\udf31")),r.a.createElement("div",{className:"text"},"Exploring different frontend frameworks")),r.a.createElement(v,{$delay:"0.4s"},r.a.createElement("div",{className:"icon"},r.a.createElement("span",{role:"img","aria-label":"Computer"},"\ud83d\udcbb")),r.a.createElement("div",{className:"text"},"Learning backend development with Node.js and Express.js")),r.a.createElement(v,{$delay:"0.5s"},r.a.createElement("div",{className:"icon"},r.a.createElement("span",{role:"img","aria-label":"Lock"},"\ud83d\udd12")),r.a.createElement("div",{className:"text"},"Interested in cybersecurity and ethical hacking")),r.a.createElement(k,{href:"https://linktr.ee/lel190",target:"_blank",rel:"noopener noreferrer"},"Contact Me")),r.a.createElement($,null,r.a.createElement("img",{className:"main-image",src:"https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80",alt:"Coding workspace"}))));const C=l.d.section`
   padding: 60px 0;
   border-bottom: 1px solid #e9ecef;
-`,C=l.d.h2`
+`,S=l.d.h2`
   margin-bottom: 1.5rem;
   position: relative;
   display: inline-block;
@@ -313,7 +313,7 @@
       pointer-events: none;
     }
   `}
-`,A=l.d.div`
+`,I=l.d.div`
   position: absolute;
   bottom: 0;
   left: 0;
@@ -332,7 +332,7 @@
   animation: ${O} ${e=>e.$duration}s linear infinite;
   animation-delay: ${e=>e.$delay}s;
   animation-play-state: paused;
-`,I=l.d.div`
+`,A=l.d.div`
   position: absolute;
   top: 10px;
   right: 10px;
@@ -347,13 +347,13 @@
   animation: ${Y} 2s ease-in-out infinite;
   display: flex;
   align-items: center;
-`,L=l.d.div`
+`,B=l.d.div`
   position: relative;
   z-index: 1;
-`,T=l.d.h3`
+`,L=l.d.h3`
   margin-bottom: 0.5rem;
   color: ${e=>e.theme.text};
-`,B=l.d.p`
+`,T=l.d.p`
   margin-bottom: 1rem;
   color: ${e=>e.theme.text};
 `,D=l.d.div`
@@ -411,21 +411,21 @@
   ${H}:hover & {
     opacity: 1;
   }
-`,_=l.d.div`
+`,K=l.d.div`
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 10px;
-`,K=l.d.div`
+`,V=l.d.div`
   font-size: 0.9rem;
   opacity: 0.8;
-`,V=[{id:1,title:"Secret...",description:"Secret...",tags:["React","Node.js"],link:"#",inProgress:!0,progress:35,dustParticles:(e=>{const t=[];for(let a=0;a<e;a++)t.push({id:a,size:5*Math.random()+2,left:100*Math.random(),duration:3*Math.random()+2,delay:2*Math.random()});return t})(15),comingSoon:!0,estimatedCompletion:"June 2023",icon:"hammer"}];var q=()=>n.a.createElement(S,{id:"projects",className:"under-construction"},n.a.createElement(C,null,"Projects"),n.a.createElement(N,null,V.map(e=>n.a.createElement(H,{key:e.id,$inProgress:e.inProgress,className:e.inProgress?"in-progress":""},e.inProgress&&n.a.createElement(I,null,n.a.createElement("span",{className:"construction-icon "+e.icon},"hammer"===e.icon?"\ud83d\udd28":"\ud83d\udd27"),"IN PROGRESS"),e.comingSoon&&n.a.createElement(J,null,n.a.createElement(_,null,"Coming Soon"),n.a.createElement(K,null,"Estimated completion: ",e.estimatedCompletion)),n.a.createElement(L,null,n.a.createElement(T,null,e.title),n.a.createElement(B,null,e.description),e.inProgress&&n.a.createElement(U,null,n.a.createElement(X,{$progress:e.progress})),n.a.createElement(D,null,e.tags.map((e,t)=>n.a.createElement(G,{key:t},e))),n.a.createElement(R,{href:e.link},e.inProgress?"Preview":"View Project")),e.inProgress&&n.a.createElement(A,{className:"dust-particles"},e.dustParticles.map(e=>n.a.createElement(M,{key:e.id,className:"particle",$size:e.size,$left:e.left,$duration:e.duration,$delay:e.delay})))))));const F=l.d.section`
+`,_=[{id:1,title:"Secret...",description:"Secret...",tags:["React","Node.js"],link:"#",inProgress:!0,progress:35,dustParticles:(e=>{const t=[];for(let a=0;a<e;a++)t.push({id:a,size:5*Math.random()+2,left:100*Math.random(),duration:3*Math.random()+2,delay:2*Math.random()});return t})(15),comingSoon:!0,estimatedCompletion:"To Be Available",icon:"hammer"}];var q=()=>r.a.createElement(C,{id:"projects",className:"under-construction"},r.a.createElement(S,null,"Projects"),r.a.createElement(N,null,_.map(e=>r.a.createElement(H,{key:e.id,$inProgress:e.inProgress,className:e.inProgress?"in-progress":""},e.inProgress&&r.a.createElement(A,null,r.a.createElement("span",{className:"construction-icon "+e.icon},"hammer"===e.icon?"\ud83d\udd28":"\ud83d\udd27"),"IN PROGRESS"),e.comingSoon&&r.a.createElement(J,null,r.a.createElement(K,null,"Coming Soon"),r.a.createElement(V,null,"Estimated completion: ",e.estimatedCompletion)),r.a.createElement(B,null,r.a.createElement(L,null,e.title),r.a.createElement(T,null,e.description),e.inProgress&&r.a.createElement(U,null,r.a.createElement(X,{$progress:e.progress})),r.a.createElement(D,null,e.tags.map((e,t)=>r.a.createElement(G,{key:t},e))),r.a.createElement(R,{href:e.link},e.inProgress?"Preview":"View Project")),e.inProgress&&r.a.createElement(I,{className:"dust-particles"},e.dustParticles.map(e=>r.a.createElement(M,{key:e.id,className:"particle",$size:e.size,$left:e.left,$duration:e.duration,$delay:e.delay})))))));const W=l.d.section`
   padding: 60px 0;
   border-bottom: 1px solid ${e=>e.theme.border};
   
   &:last-child {
     border-bottom: none;
   }
-`,W=l.d.h2`
+`,F=l.d.h2`
   margin-bottom: 1.5rem;
   color: ${e=>e.theme.text};
 `,Q=l.d.div`
@@ -451,7 +451,7 @@
 `,ae=l.d.li`
   margin-bottom: 5px;
   color: ${e=>e.theme.text};
-`,re=[{category:"Languages",skills:["Python","C/C++","Java","R","SQL"]},{category:"Web Development",skills:["React","Node.js","Express.js","JavaScript","HTML/CSS"]},{category:"Other",skills:["Git","Linux","Docker"]}];var ne=()=>n.a.createElement(F,{id:"skills"},n.a.createElement(W,null,"Skills"),n.a.createElement(Q,null,re.map((e,t)=>n.a.createElement(Z,{key:t},n.a.createElement(ee,null,e.category),n.a.createElement(te,null,e.skills.map((e,t)=>n.a.createElement(ae,{key:t},e)))))));const oe=l.d.footer`
+`,oe=[{category:"Languages",skills:["Python","C/C++","Java","R","SQL"]},{category:"Web Development",skills:["React","Node.js","Express.js","JavaScript","HTML/CSS"]},{category:"Other",skills:["Git","Linux","Docker"]}];var re=()=>r.a.createElement(W,{id:"skills"},r.a.createElement(F,null,"Skills"),r.a.createElement(Q,null,oe.map((e,t)=>r.a.createElement(Z,{key:t},r.a.createElement(ee,null,e.category),r.a.createElement(te,null,e.skills.map((e,t)=>r.a.createElement(ae,{key:t},e)))))));const ne=l.d.footer`
   background-color: ${e=>e.theme.secondaryBackground};
   color: ${e=>e.theme.text};
   padding: 50px 0 20px;
@@ -538,7 +538,7 @@
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-`;var xe=()=>n.a.createElement(oe,null,n.a.createElement(ie,null,n.a.createElement(le,null,n.a.createElement(se,null,"lel190 - Anson"),n.a.createElement(de,null,"A computer science student at CUHK exploring different frontend frameworks, and am interested in reverse engineering and memory hacking."),n.a.createElement(ce,null,n.a.createElement(me,{href:"https://github.com/le-lel190",target:"_blank",rel:"noopener noreferrer","aria-label":"GitHub"},n.a.createElement("i",{className:"fab fa-github"})),n.a.createElement(me,{href:"#",target:"_blank",rel:"noopener noreferrer","aria-label":"Twitter"},n.a.createElement("i",{className:"fab fa-twitter"})),n.a.createElement(me,{href:"https://www.linkedin.com/in/le-anson-cheung/",target:"_blank",rel:"noopener noreferrer","aria-label":"LinkedIn"},n.a.createElement("i",{className:"fab fa-linkedin"})))),n.a.createElement(le,null,n.a.createElement(pe,null,"Links"),n.a.createElement(ge,{href:"#about"},"About"),n.a.createElement(ge,{href:"#projects"},"Projects"),n.a.createElement(ge,{href:"#skills"},"Skills")),n.a.createElement(le,null,n.a.createElement(pe,null,"Contact"),n.a.createElement(ge,{href:"https://linktr.ee/lel190"},"Linktree"),n.a.createElement(ge,{href:"https://github.com/le-lel190"},"GitHub"))),n.a.createElement(he,null,n.a.createElement("p",null,"\xa9 ",(new Date).getFullYear()," 190. All rights reserved.")));const ue=l.e`
+`;var xe=()=>r.a.createElement(ne,null,r.a.createElement(ie,null,r.a.createElement(le,null,r.a.createElement(se,null,"lel190 - Anson"),r.a.createElement(de,null,"A computer science student at CUHK exploring different frontend frameworks, and am interested in reverse engineering and memory hacking."),r.a.createElement(ce,null,r.a.createElement(me,{href:"https://github.com/le-lel190",target:"_blank",rel:"noopener noreferrer","aria-label":"GitHub"},r.a.createElement("i",{className:"fab fa-github"})),r.a.createElement(me,{href:"https://www.linkedin.com/in/le-anson-cheung/",target:"_blank",rel:"noopener noreferrer","aria-label":"LinkedIn"},r.a.createElement("i",{className:"fab fa-linkedin"})))),r.a.createElement(le,null,r.a.createElement(pe,null,"Links"),r.a.createElement(ge,{href:"#about"},"About"),r.a.createElement(ge,{href:"#projects"},"Projects"),r.a.createElement(ge,{href:"#skills"},"Skills")),r.a.createElement(le,null,r.a.createElement(pe,null,"Contact"),r.a.createElement(ge,{href:"https://linktr.ee/lel190"},"Linktree"),r.a.createElement(ge,{href:"https://github.com/le-lel190"},"GitHub"))),r.a.createElement(he,null));const ue=l.e`
   from {
     opacity: 0;
   }
@@ -583,14 +583,14 @@
     rgba(0, 0, 0, 0.6) 50%,
     ${e=>e.theme.background} 100%
   );
-`,Ee=l.d.div`
+`,$e=l.d.div`
   position: relative;
   z-index: 1;
   text-align: center;
   max-width: 800px;
   padding: 0 20px;
   animation: ${ue} 1s ease-out;
-`,$e=l.d.div`
+`,Ee=l.d.div`
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -642,7 +642,7 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     background: ${e=>e.$primary?e.theme.accent:"rgba(255, 255, 255, 0.1)"};
   }
-`,Se=l.d.div`
+`,Ce=l.d.div`
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -678,7 +678,7 @@
       transform: translateX(-50%) translateY(15px);
     }
   }
-`;var Ce=()=>{const[e,t]=Object(r.useState)(!1),a=()=>{window.scrollTo({top:window.innerHeight,behavior:"smooth"})};return n.a.createElement(be,null,n.a.createElement(we,{autoPlay:!0,muted:!0,loop:!0,onLoadedData:()=>t(!0),style:{opacity:e?.2:0}},n.a.createElement("source",{src:"https://assets.codepen.io/3364143/7btrrd.mp4",type:"video/mp4"}),"Your browser does not support the video tag."),n.a.createElement(ye,null),n.a.createElement(Ee,null,n.a.createElement($e,null,n.a.createElement("img",{src:"/le-lel190/images/avatar.jpg",alt:"Anson's avatar"})),n.a.createElement(ve,null,"Hi, I'm Anson ",n.a.createElement("span",{role:"img","aria-label":"Waving hand"},"\ud83d\udc4b")),n.a.createElement(ke,null,"A computer science student at CUHK passionate about frontend development and creating beautiful user experiences."),n.a.createElement(ze,null,n.a.createElement(je,{href:"#about",$primary:!0,$delay:"0.3s",onClick:a},"About Me"),n.a.createElement(je,{href:"#projects",$delay:"0.5s",onClick:e=>{e.preventDefault(),document.querySelector("#projects").scrollIntoView({behavior:"smooth"})}},"See My Projects"))),n.a.createElement(Se,{onClick:a}))};const Ne=l.b`
+`;var Se=()=>{const[e,t]=Object(o.useState)(!1),a=()=>{window.scrollTo({top:window.innerHeight,behavior:"smooth"})};return r.a.createElement(be,null,r.a.createElement(we,{autoPlay:!0,muted:!0,loop:!0,onLoadedData:()=>t(!0),style:{opacity:e?.2:0}},r.a.createElement("source",{src:"https://assets.codepen.io/3364143/7btrrd.mp4",type:"video/mp4"}),"Your browser does not support the video tag."),r.a.createElement(ye,null),r.a.createElement($e,null,r.a.createElement(Ee,null,r.a.createElement("img",{src:"/le-lel190/images/avatar.jpg",alt:"Anson's avatar"})),r.a.createElement(ve,null,"Hi, I'm Anson ",r.a.createElement("span",{role:"img","aria-label":"Waving hand"},"\ud83d\udc4b")),r.a.createElement(ke,null,"Currently pursuing a Bachelor's degree in Computer Science at CUHK. I am currently interested in frontend development and exploring CI/CD tools."),r.a.createElement(ze,null,r.a.createElement(je,{href:"#about",$primary:!0,$delay:"0.3s",onClick:a},"About Me"),r.a.createElement(je,{href:"#projects",$delay:"0.5s",onClick:e=>{e.preventDefault(),document.querySelector("#projects").scrollIntoView({behavior:"smooth"})}},"See My Projects"))),r.a.createElement(Ce,{onClick:a}))};const Ne=l.b`
   body {
     margin: 0;
     padding: 0;
@@ -710,7 +710,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
-`,Ae=l.d.button`
+`,Ie=l.d.button`
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -736,5 +736,5 @@
   &:focus {
     outline: none;
   }
-`;var Me=function(){const[e,t]=Object(r.useState)(Ye);return n.a.createElement(l.a,{theme:e},n.a.createElement(Ne,null),n.a.createElement(Oe,null,n.a.createElement(Ce,null),n.a.createElement(x,null),n.a.createElement(He,null,n.a.createElement(j,null),n.a.createElement(q,null),n.a.createElement(ne,null)),n.a.createElement(xe,null),n.a.createElement(Ae,{onClick:()=>{t(e===Pe?Ye:Pe)},"aria-label":e===Pe?"Switch to dark mode":"Switch to light mode"},e===Pe?n.a.createElement("span",{role:"img","aria-hidden":"true"},"\ud83c\udf19"):n.a.createElement("span",{role:"img","aria-hidden":"true"},"\u2600\ufe0f"))))};i.a.createRoot(document.getElementById("root")).render(n.a.createElement(n.a.StrictMode,null,n.a.createElement(Me,null)))}},[[10,1,2]]]);
-//# sourceMappingURL=main.427cd6ec.chunk.js.map
+`;var Me=function(){const[e,t]=Object(o.useState)(Ye);return r.a.createElement(l.a,{theme:e},r.a.createElement(Ne,null),r.a.createElement(Oe,null,r.a.createElement(Se,null),r.a.createElement(x,null),r.a.createElement(He,null,r.a.createElement(j,null),r.a.createElement(q,null),r.a.createElement(re,null)),r.a.createElement(xe,null),r.a.createElement(Ie,{onClick:()=>{t(e===Pe?Ye:Pe)},"aria-label":e===Pe?"Switch to dark mode":"Switch to light mode"},e===Pe?r.a.createElement("span",{role:"img","aria-hidden":"true"},"\ud83c\udf19"):r.a.createElement("span",{role:"img","aria-hidden":"true"},"\u2600\ufe0f"))))};i.a.createRoot(document.getElementById("root")).render(r.a.createElement(r.a.StrictMode,null,r.a.createElement(Me,null)))}},[[10,1,2]]]);
+//# sourceMappingURL=main.abc87aec.chunk.js.map
