@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/le-lel190/static/css/main.e8473ec0.chunk.css",
+    "main.js": "/le-lel190/static/js/main.427cd6ec.chunk.js",
+    "main.js.map": "/le-lel190/static/js/main.427cd6ec.chunk.js.map",
+    "runtime-main.js": "/le-lel190/static/js/runtime-main.0c75ba25.js",
+    "runtime-main.js.map": "/le-lel190/static/js/runtime-main.0c75ba25.js.map",
+    "static/js/2.353b4aa9.chunk.js": "/le-lel190/static/js/2.353b4aa9.chunk.js",
+    "static/js/2.353b4aa9.chunk.js.map": "/le-lel190/static/js/2.353b4aa9.chunk.js.map",
+    "index.html": "/le-lel190/index.html",
+    "precache-manifest.7be12b3e0e90f2403ccc971560e4671e.js": "/le-lel190/precache-manifest.7be12b3e0e90f2403ccc971560e4671e.js",
+    "service-worker.js": "/le-lel190/service-worker.js",
+    "static/css/main.e8473ec0.chunk.css.map": "/le-lel190/static/css/main.e8473ec0.chunk.css.map",
+    "static/js/2.353b4aa9.chunk.js.LICENSE.txt": "/le-lel190/static/js/2.353b4aa9.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0c75ba25.js",
+    "static/js/2.353b4aa9.chunk.js",
+    "static/css/main.e8473ec0.chunk.css",
+    "static/js/main.427cd6ec.chunk.js"
+  ]
+}
