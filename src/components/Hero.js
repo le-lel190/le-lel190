@@ -195,7 +195,8 @@ const Hero = () => {
         </Avatar>
         <HeroTitle>Hi, I'm Anson <span role="img" aria-label="Waving hand">👋</span></HeroTitle>
         <HeroSubtitle>
-          A computer science student at CUHK passionate about frontend development and creating beautiful user experiences.
+          Currently pursuing a Bachelor's degree in Computer Science at CUHK.
+          I am currently interested in frontend development and exploring CI/CD tools.
         </HeroSubtitle>
         <HeroButtons>
           <Button href="#about" $primary $delay="0.3s" onClick={scrollToContent}>

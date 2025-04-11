@@ -268,7 +268,7 @@ const projectData = [
     progress: 35,
     dustParticles: createDustParticles(15),
     comingSoon: true,
-    estimatedCompletion: 'June 2023',
+    estimatedCompletion: 'To Be Available',
     icon: 'hammer' // hammer or jackhammer
   },
   // Add more projects here

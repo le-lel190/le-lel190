@@ -121,9 +121,6 @@ const Footer = () => {
             <SocialLink href="https://github.com/le-lel190" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <i className="fab fa-github"></i>
             </SocialLink>
-            <SocialLink href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-              <i className="fab fa-twitter"></i>
-            </SocialLink>
             <SocialLink href="https://www.linkedin.com/in/le-anson-cheung/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <i className="fab fa-linkedin"></i>
             </SocialLink>
@@ -145,7 +142,7 @@ const Footer = () => {
       </FooterContent>
       
       <Copyright>
-        <p>&copy; {new Date().getFullYear()} 190. All rights reserved.</p>
+        {/* <p>&copy; {new Date().getFullYear()} lel190. All rights reserved.</p> */}
       </Copyright>
     </FooterContainer>
   );
