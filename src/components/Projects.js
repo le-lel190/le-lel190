@@ -256,10 +256,16 @@ const createDustParticles = (count) => {
   return particles;
 };
 
-// Sample project data - you can replace this with your actual projects
 const projectData = [
   {
     id: 1,
+    title: 'Cookie Sharing 🍪',
+    description: 'We share cookies here, Peace and Love!',
+    tags: ['Cookie Session', 'Bypass'],
+    link: 'https://github.com/le-lel190/Cookies_Sharing',
+  },
+  {
+    id: 2,
     title: 'Secret...',
     description: 'Secret...',
     tags: ['React', 'Node.js'],
@@ -270,8 +276,7 @@ const projectData = [
     comingSoon: true,
     estimatedCompletion: 'To Be Available',
     icon: 'hammer' // hammer or jackhammer
-  },
-  // Add more projects here
+  }
 ];
 
 const Projects = () => {
