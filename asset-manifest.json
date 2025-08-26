@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/le-lel190/static/css/main.a2c16b02.css",
-    "main.js": "/le-lel190/static/js/main.3f42adf2.js",
+    "main.js": "/le-lel190/static/js/main.2e229bb7.js",
     "index.html": "/le-lel190/index.html",
     "main.a2c16b02.css.map": "/le-lel190/static/css/main.a2c16b02.css.map",
-    "main.3f42adf2.js.map": "/le-lel190/static/js/main.3f42adf2.js.map"
+    "main.2e229bb7.js.map": "/le-lel190/static/js/main.2e229bb7.js.map"
   },
   "entrypoints": [
     "static/css/main.a2c16b02.css",
-    "static/js/main.3f42adf2.js"
+    "static/js/main.2e229bb7.js"
   ]
 }
