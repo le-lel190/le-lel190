@@ -269,7 +269,7 @@ const projectData = [
     title: 'shared-session-hhh',
     description: 'ahahaha',
     tags: ['CF Workers & KV', 'TS', 'Bash', 'Node'],
-    link: 'https://1237819.xyz',
+    link: 'http://1237819.xyz',
   },
   {
     id: 3,
