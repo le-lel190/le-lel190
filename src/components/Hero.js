@@ -196,7 +196,7 @@ const Hero = () => {
         <HeroTitle>Hi, I'm Anson <span role="img" aria-label="Waving hand">👋</span></HeroTitle>
         <HeroSubtitle>
           Currently pursuing a Bachelor's degree in Computer Science at CUHK.
-          I am currently interested in frontend development and exploring CI/CD tools.
+          I am currently interested in cyber security and CTF challenges.
         </HeroSubtitle>
         <HeroButtons>
           <Button href="#about" $primary $delay="0.3s" onClick={scrollToContent}>
