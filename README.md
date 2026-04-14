@@ -12,3 +12,7 @@ This is my GitHub profile page built with React.
 
 - React
 - GitHub Pages
+
+## Contributor Notes
+
+For repository workflow, commands, and editing guidance, see `AGENTS.md`.
