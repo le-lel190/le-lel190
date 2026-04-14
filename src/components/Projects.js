@@ -259,17 +259,17 @@ const createDustParticles = (count) => {
 const projectData = [
   {
     id: 1,
-    title: 'Cookie Sharing 🍪',
-    description: 'We share cookies here, Peace and Love!',
-    tags: ['Cookie Session', 'Bypass'],
-    link: 'https://github.com/le-lel190/Cookies_Sharing',
+    title: 'AI API Gateway',
+    description: 'An AI API gateway/platform I built to provide a clean, centralized access point for AI services at https://api.lel190.dev.',
+    tags: ['AI', 'API', 'Gateway', 'Platform'],
+    link: 'https://api.lel190.dev',
   },
   {
     id: 2,
-    title: 'shared-session-hhh',
-    description: 'ahahaha',
-    tags: ['CF Workers & KV', 'TS', 'Bash', 'Node'],
-    link: 'http://1237819.xyz',
+    title: 'No-Account Temp Mail',
+    description: 'A no-account temporary email service I built on Cloudflare for quick disposable inbox access without signup.',
+    tags: ['Cloudflare Workers', 'KV', 'D1', 'Temp Mail'],
+    link: 'https://971236.xyz/',
   },
   {
     id: 3,
