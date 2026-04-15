@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Header from './components/Header';
-import About from './components/About';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Footer from './components/Footer';
@@ -13,12 +12,10 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     background-color: ${props => props.theme.background};
     color: ${props => props.theme.text};
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
+    font-family: ${props => props.theme.fontBody};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   * {
@@ -31,22 +28,32 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const lightTheme = {
-  background: '#ffffff',
-  secondaryBackground: '#f8f9fa',
-  text: '#212529',
-  secondaryText: '#6c757d',
-  accent: '#0d6efd',
-  border: '#e9ecef'
+const darkTheme = {
+  background: '#0a0a0a',
+  secondaryBackground: '#111111',
+  text: '#e0e0e0',
+  secondaryText: '#888888',
+  accent: '#00ff41',
+  accentCyan: '#00d4ff',
+  warning: '#ffb800',
+  border: '#1a1a1a',
+  glowBorder: 'rgba(0, 255, 65, 0.2)',
+  fontMono: "'JetBrains Mono', 'Courier New', monospace",
+  fontBody: "'Outfit', -apple-system, BlinkMacSystemFont, sans-serif",
 };
 
-const darkTheme = {
-  background: '#121212',
-  secondaryBackground: '#1e1e1e',
-  text: '#ffffff',
-  secondaryText: '#e0e0e0',
-  accent: '#0d6efd',
-  border: '#343a40'
+const lightTheme = {
+  background: '#f0ede6',
+  secondaryBackground: '#e8e4dc',
+  text: '#1a1a1a',
+  secondaryText: '#555555',
+  accent: '#00ff41',
+  accentCyan: '#00889a',
+  warning: '#cc9200',
+  border: '#d4d0c8',
+  glowBorder: 'rgba(0, 255, 65, 0.15)',
+  fontMono: "'JetBrains Mono', 'Courier New', monospace",
+  fontBody: "'Outfit', -apple-system, BlinkMacSystemFont, sans-serif",
 };
 
 const AppContainer = styled.div`
@@ -63,37 +70,9 @@ const Main = styled.main`
   padding: 0 15px;
 `;
 
-const ThemeToggle = styled.button`
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: ${props => props.theme.accent};
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-
-  &:focus {
-    outline: none;
-  }
-`;
-
 function App() {
   const [theme, setTheme] = useState(darkTheme);
-  
+
   const toggleTheme = () => {
     setTheme(theme === lightTheme ? darkTheme : lightTheme);
   };
@@ -103,19 +82,15 @@ function App() {
       <GlobalStyle />
       <AppContainer>
         <Hero />
-        <Header />
+        <Header toggleTheme={toggleTheme} isLight={theme === lightTheme} />
         <Main>
-          <About />
           <Projects />
           <Skills />
         </Main>
         <Footer />
-        <ThemeToggle onClick={toggleTheme} aria-label={theme === lightTheme ? "Switch to dark mode" : "Switch to light mode"}>
-          {theme === lightTheme ? <span role="img" aria-hidden="true">🌙</span> : <span role="img" aria-hidden="true">☀️</span>}
-        </ThemeToggle>
       </AppContainer>
     </ThemeProvider>
   );
 }
 
-export default App; 
+export default App;
