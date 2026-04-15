@@ -8,8 +8,7 @@ const HeaderContainer = styled.header`
   right: 0;
   background-color: ${props => props.$scrolled ? props.theme.background : 'transparent'};
   backdrop-filter: ${props => props.$scrolled ? 'blur(10px)' : 'none'};
-  box-shadow: ${props => props.$scrolled ? '0 2px 10px rgba(0, 0, 0, 0.1)' : 'none'};
-  color: ${props => props.$scrolled ? props.theme.text : 'white'};
+  box-shadow: ${props => props.$scrolled ? '0 2px 10px rgba(0, 0, 0, 0.3)' : 'none'};
   padding: 15px 0;
   transition: all 0.3s ease;
   z-index: 1000;
@@ -26,14 +25,21 @@ const HeaderContent = styled.div`
 `;
 
 const Logo = styled.div`
-  font-size: 1.5rem;
+  font-family: ${props => props.theme.fontMono};
+  font-size: 1.3rem;
   font-weight: 700;
   cursor: pointer;
+  color: ${props => props.theme.accent};
+
+  .cursor {
+    animation: blink 1s step-end infinite;
+  }
 `;
 
 const NavMenu = styled.nav`
   display: flex;
-  
+  align-items: center;
+
   @media (max-width: 768px) {
     position: fixed;
     top: 0;
@@ -45,18 +51,20 @@ const NavMenu = styled.nav`
     justify-content: flex-start;
     padding-top: 80px;
     transition: all 0.3s ease;
-    box-shadow: ${props => props.$isOpen ? '-5px 0 15px rgba(0, 0, 0, 0.1)' : 'none'};
+    box-shadow: ${props => props.$isOpen ? '-5px 0 15px rgba(0, 0, 0, 0.3)' : 'none'};
   }
 `;
 
 const NavItem = styled.a`
   margin: 0 15px;
   text-decoration: none;
-  color: ${props => props.$scrolled ? props.theme.text : 'white'};
-  font-weight: 600;
+  color: ${props => props.theme.text};
+  font-family: ${props => props.theme.fontMono};
+  font-size: 0.85rem;
+  font-weight: 400;
   position: relative;
-  transition: all 0.3s ease;
-  
+  transition: color 0.3s ease;
+
   &:after {
     content: '';
     position: absolute;
@@ -67,18 +75,37 @@ const NavItem = styled.a`
     bottom: -5px;
     transition: width 0.3s ease;
   }
-  
+
   &:hover {
     color: ${props => props.theme.accent};
-    
-    &:after {
-      width: 100%;
-    }
+    &:after { width: 100%; }
   }
-  
+
   @media (max-width: 768px) {
     margin: 20px 30px;
-    font-size: 1.2rem;
+    font-size: 1rem;
+  }
+`;
+
+const ThemeToggleBtn = styled.button`
+  background: none;
+  border: 1px solid ${props => props.theme.border};
+  color: ${props => props.theme.accent};
+  font-family: ${props => props.theme.fontMono};
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  margin-left: 15px;
+
+  &:hover {
+    background: ${props => props.theme.glowBorder};
+  }
+
+  @media (max-width: 768px) {
+    margin: 20px 30px;
+    margin-left: 30px;
   }
 `;
 
@@ -89,7 +116,7 @@ const HamburgerButton = styled.button`
   cursor: pointer;
   padding: 5px;
   z-index: 1001;
-  
+
   @media (max-width: 768px) {
     display: block;
   }
@@ -98,110 +125,87 @@ const HamburgerButton = styled.button`
 const HamburgerIcon = styled.div`
   width: 25px;
   height: 3px;
-  background-color: ${props => props.$scrolled ? props.theme.text : 'white'};
+  background-color: ${props => props.theme.accent};
   position: relative;
   transition: all 0.3s ease;
   transform: ${props => props.$isOpen ? 'rotate(45deg)' : 'none'};
-  
+
   &:before, &:after {
     content: '';
     position: absolute;
     width: 25px;
     height: 3px;
-    background-color: ${props => props.$scrolled ? props.theme.text : 'white'};
+    background-color: ${props => props.theme.accent};
     transition: all 0.3s ease;
   }
-  
+
   &:before {
     transform: ${props => props.$isOpen ? 'rotate(90deg) translate(0, 0)' : 'translateY(-8px)'};
   }
-  
+
   &:after {
     transform: ${props => props.$isOpen ? 'rotate(90deg) translate(0, 0)' : 'translateY(8px)'};
     opacity: ${props => props.$isOpen ? 0 : 1};
   }
 `;
 
-const Header = () => {
+const Header = ({ toggleTheme, isLight }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   useEffect(() => {
     const handleScroll = () => {
-      const offset = window.scrollY;
-      setScrolled(offset > 50);
+      setScrolled(window.scrollY > 50);
     };
-    
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
+
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleNavClick = (id) => {
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
   };
-  
+
   return (
     <HeaderContainer $scrolled={scrolled}>
       <HeaderContent>
-        <Logo onClick={scrollToTop}>lel190</Logo>
-        
-        <HamburgerButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          <HamburgerIcon $isOpen={isMenuOpen} $scrolled={scrolled} />
+        <Logo onClick={scrollToTop}>lel190<span className="cursor">█</span></Logo>
+
+        <HamburgerButton onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+          <HamburgerIcon $isOpen={isMenuOpen} />
         </HamburgerButton>
-        
+
         <NavMenu $isOpen={isMenuOpen}>
-          <NavItem 
-            href="#about" 
-            $scrolled={scrolled}
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick('#about');
-            }}
+          <NavItem
+            href="#projects"
+            onClick={(e) => { e.preventDefault(); handleNavClick('#projects'); }}
           >
-            About
+            projects
           </NavItem>
-          <NavItem 
-            href="#projects" 
-            $scrolled={scrolled}
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick('#projects');
-            }}
+          <NavItem
+            href="#skills"
+            onClick={(e) => { e.preventDefault(); handleNavClick('#skills'); }}
           >
-            Projects
+            skills
           </NavItem>
-          <NavItem 
-            href="#skills" 
-            $scrolled={scrolled}
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick('#skills');
-            }}
-          >
-            Skills
-          </NavItem>
-          <NavItem 
-            href="https://github.com/le-lel190" 
-            target="_blank" 
+          <NavItem
+            href="https://github.com/le-lel190"
+            target="_blank"
             rel="noopener noreferrer"
-            $scrolled={scrolled}
           >
-            GitHub
+            github
           </NavItem>
+          <ThemeToggleBtn onClick={toggleTheme}>
+            [{isLight ? 'dark' : 'light'}]
+          </ThemeToggleBtn>
         </NavMenu>
       </HeaderContent>
     </HeaderContainer>
   );
 };
 
-export default Header; 
+export default Header;
