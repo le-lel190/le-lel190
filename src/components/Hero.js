@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React, { useState, useEffect, useCallback } from 'react';
+import styled from 'styled-components';
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
+const bootLines = [
+  '[OK] Loading kernel modules...',
+  '[OK] Mounting filesystems...',
+  '[OK] Starting network services...',
+  '[OK] Initializing security protocols...',
+  '[OK] Loading user profile...',
+];
 
-const slideUp = keyframes`
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-`;
+const profileLines = [
+  'root@anson:~$ cat /etc/profile',
+  '─────────────────────────────────',
+  'Name:      Anson Cheung',
+  'Handle:    lel190',
+  'Role:      CS Student @ CUHK',
+  'Interests: Cybersecurity, CTF, Reverse Engineering',
+  'Status:    Building things...',
+  '─────────────────────────────────',
+  'root@anson:~$ █',
+];
 
 const HeroContainer = styled.div`
   position: relative;
@@ -28,103 +28,105 @@ const HeroContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background: ${props => props.theme.background};
   overflow: hidden;
-`;
 
-const VideoBackground = styled.video`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.2;
-  filter: brightness(0.6);
-`;
-
-const Overlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.6) 50%,
-    ${props => props.theme.background} 100%
-  );
-`;
-
-const HeroContent = styled.div`
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  max-width: 800px;
-  padding: 0 20px;
-  animation: ${fadeIn} 1s ease-out;
-`;
-
-const Avatar = styled.div`
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  margin: 0 auto 20px;
-  overflow: hidden;
-  border: 3px solid white;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  animation: ${fadeIn} 1s ease-out;
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 65, 0.03) 2px,
+      rgba(0, 255, 65, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
   }
 `;
 
-const HeroTitle = styled.h1`
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  margin-bottom: 1rem;
-  color: white;
-  font-weight: 700;
+const TerminalWindow = styled.div`
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  width: 90%;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid ${props => props.theme.glowBorder};
+  border-radius: 8px;
+  padding: 30px;
+  font-family: ${props => props.theme.fontMono};
+  box-shadow: 0 0 40px rgba(0, 255, 65, 0.1);
 `;
 
-const HeroSubtitle = styled.p`
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
-  margin-bottom: 2rem;
-  color: rgba(255, 255, 255, 0.8);
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+const TerminalHeader = styled.div`
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid ${props => props.theme.border};
+`;
+
+const TerminalDot = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: ${props => props.$color};
+`;
+
+const TerminalLine = styled.div`
+  color: ${props => props.$isCommand ? props.theme.accent : props.theme.secondaryText};
+  font-size: 0.85rem;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-break: break-word;
 `;
 
 const HeroButtons = styled.div`
   display: flex;
   gap: 15px;
-  justify-content: center;
+  margin-top: 20px;
   flex-wrap: wrap;
+  animation: slideInFromBottom 0.5s ease-out;
 `;
 
-const Button = styled.a`
-  padding: 12px 25px;
-  background: ${props => props.$primary ? props.theme.accent : 'transparent'};
-  color: white;
-  border: ${props => props.$primary ? 'none' : `2px solid white`};
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: 600;
+const HeroButton = styled.a`
+  padding: 10px 20px;
+  font-family: ${props => props.theme.fontMono};
+  font-size: 0.85rem;
   text-decoration: none;
-  cursor: pointer;
+  border-radius: 4px;
   transition: all 0.3s ease;
-  animation: ${slideUp} 0.8s ease-out forwards;
-  animation-delay: ${props => props.$delay || '0s'};
-  opacity: 0;
+  cursor: pointer;
+  color: ${props => props.$primary ? props.theme.background : props.theme.accent};
+  background: ${props => props.$primary ? props.theme.accent : 'transparent'};
+  border: 1px solid ${props => props.theme.accent};
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    background: ${props => props.$primary ? props.theme.accent : 'rgba(255, 255, 255, 0.1)'};
+    box-shadow: 0 0 15px ${props => props.theme.glowBorder};
+    transform: translateY(-2px);
   }
+`;
+
+const SkipButton = styled.button`
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  background: none;
+  border: 1px solid ${props => props.theme.border};
+  color: ${props => props.theme.secondaryText};
+  font-family: ${props => props.theme.fontMono};
+  font-size: 0.75rem;
+  padding: 6px 14px;
+  cursor: pointer;
+  border-radius: 3px;
+  z-index: 3;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 1s forwards;
+  transition: color 0.3s ease;
+
+  &:hover { color: ${props => props.theme.accent}; }
 `;
 
 const ScrollIndicator = styled.div`
@@ -132,87 +134,131 @@ const ScrollIndicator = styled.div`
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 30px;
-  height: 50px;
-  border: 2px solid white;
-  border-radius: 15px;
+  width: 24px;
+  height: 40px;
+  border: 2px solid ${props => props.theme.accent};
+  border-radius: 12px;
   cursor: pointer;
-  animation: ${fadeIn} 1s ease-out 1.5s forwards;
+  z-index: 3;
   opacity: 0;
-  
+  animation: fadeIn 0.5s ease-out forwards;
+  animation-delay: ${props => props.$delay || '0s'};
+
   &::before {
     content: '';
     position: absolute;
     left: 50%;
-    top: 10px;
+    top: 8px;
     transform: translateX(-50%);
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
-    background: white;
-    animation: scrollAnimation 1.5s infinite;
+    background: ${props => props.theme.accent};
+    animation: scrollDot 1.5s infinite;
   }
-  
-  @keyframes scrollAnimation {
-    0% {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(-50%) translateY(15px);
-    }
+
+  @keyframes scrollDot {
+    0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
   }
 `;
 
 const Hero = () => {
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  
-  // Function to scroll down to the about section
+  const [phase, setPhase] = useState('boot');
+  const [visibleBootLines, setVisibleBootLines] = useState([]);
+  const [visibleProfileLines, setVisibleProfileLines] = useState([]);
+  const [skipped, setSkipped] = useState(false);
+
+  const skipAnimation = useCallback(() => {
+    setSkipped(true);
+    setVisibleBootLines(bootLines);
+    setVisibleProfileLines(profileLines);
+    setPhase('done');
+  }, []);
+
+  useEffect(() => {
+    if (skipped) return;
+
+    if (phase === 'boot') {
+      if (visibleBootLines.length < bootLines.length) {
+        const timer = setTimeout(() => {
+          setVisibleBootLines(bootLines.slice(0, visibleBootLines.length + 1));
+        }, 300);
+        return () => clearTimeout(timer);
+      } else {
+        const timer = setTimeout(() => setPhase('profile'), 500);
+        return () => clearTimeout(timer);
+      }
+    }
+
+    if (phase === 'profile') {
+      if (visibleProfileLines.length < profileLines.length) {
+        const timer = setTimeout(() => {
+          setVisibleProfileLines(profileLines.slice(0, visibleProfileLines.length + 1));
+        }, 200);
+        return () => clearTimeout(timer);
+      } else {
+        const timer = setTimeout(() => setPhase('done'), 300);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [phase, visibleBootLines, visibleProfileLines, skipped]);
+
   const scrollToContent = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: 'smooth'
-    });
+    document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <HeroContainer>
-      <VideoBackground
-        autoPlay
-        muted
-        loop
-        onLoadedData={() => setVideoLoaded(true)}
-        style={{ opacity: videoLoaded ? 0.2 : 0 }}
-      >
-        <source src="https://assets.codepen.io/3364143/7btrrd.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </VideoBackground>
-      <Overlay />
-      <HeroContent>
-        <Avatar>
-          <img src={`${process.env.PUBLIC_URL}/images/avatar.jpg`} alt="Anson's avatar" />
-        </Avatar>
-        <HeroTitle>Hi, I'm Anson <span role="img" aria-label="Waving hand">👋</span></HeroTitle>
-        <HeroSubtitle>
-          Currently pursuing a Bachelor's degree in Computer Science at CUHK.
-          I am currently interested in cyber security and CTF challenges.
-        </HeroSubtitle>
-        <HeroButtons>
-          <Button href="#about" $primary $delay="0.3s" onClick={scrollToContent}>
-            About Me
-          </Button>
-          <Button href="#projects" $delay="0.5s" onClick={(e) => {
-            e.preventDefault();
-            document.querySelector('#projects').scrollIntoView({ behavior: 'smooth' });
-          }}>
-            See My Projects
-          </Button>
-        </HeroButtons>
-      </HeroContent>
-      <ScrollIndicator onClick={scrollToContent} />
+      <TerminalWindow>
+        <TerminalHeader>
+          <TerminalDot $color="#ff5f57" />
+          <TerminalDot $color="#ffbd2e" />
+          <TerminalDot $color="#28c840" />
+        </TerminalHeader>
+
+        {visibleBootLines.map((line, i) => (
+          <TerminalLine key={`boot-${i}`} $isCommand={false}>{line}</TerminalLine>
+        ))}
+
+        {visibleProfileLines.map((line, i) => (
+          <TerminalLine
+            key={`profile-${i}`}
+            $isCommand={line.startsWith('root@') || line.startsWith('─')}
+          >
+            {line}
+          </TerminalLine>
+        ))}
+
+        {phase === 'done' && (
+          <HeroButtons>
+            <HeroButton
+              href="#projects"
+              $primary
+              onClick={(e) => { e.preventDefault(); scrollToContent(); }}
+            >
+              [view projects]
+            </HeroButton>
+            <HeroButton
+              href="https://github.com/le-lel190"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              [github]
+            </HeroButton>
+          </HeroButtons>
+        )}
+      </TerminalWindow>
+
+      {phase !== 'done' && (
+        <SkipButton onClick={skipAnimation}>skip ▸</SkipButton>
+      )}
+
+      {phase === 'done' && (
+        <ScrollIndicator $delay="0.5s" onClick={scrollToContent} />
+      )}
     </HeroContainer>
   );
 };
 
-export default Hero; 
+export default Hero;
