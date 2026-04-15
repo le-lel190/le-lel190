@@ -1,260 +1,121 @@
 import React from 'react';
-import styled, { keyframes, css } from 'styled-components';
+import styled from 'styled-components';
 
 const Section = styled.section`
-  padding: 60px 0;
-  border-bottom: 1px solid #e9ecef;
+  padding: 80px 0;
+  border-bottom: 1px solid ${props => props.theme.border};
 `;
 
-const Title = styled.h2`
-  margin-bottom: 1.5rem;
-  position: relative;
-  display: inline-block;
-  
-  ${props => props.$constructionTitle && css`
-    &:after {
-      content: "🚧";
-      font-size: 0.8em;
-      position: absolute;
-      top: -10px;
-      right: -30px;
-      animation: jackhammer 0.5s infinite;
-    }
-  `}
+const SectionHeader = styled.div`
+  font-family: ${props => props.theme.fontMono};
+  font-size: 1.1rem;
+  color: ${props => props.theme.accent};
+  margin-bottom: 30px;
+
+  .prompt { color: ${props => props.theme.secondaryText}; }
 `;
 
 const ProjectGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 20px;
-  margin-top: 30px;
-  
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
 `;
 
-// Construction stripe animation
-const moveStripes = keyframes`
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 50px 50px;
-  }
-`;
-
-// Blinking animation
-const blink = keyframes`
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-`;
-
-// Dust particle float animation
-const floatDust = keyframes`
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    transform: translateY(-100px) rotate(360deg);
-    opacity: 0;
-  }
-`;
-
 const ProjectCard = styled.div`
   background-color: ${props => props.theme.secondaryBackground};
+  border: 1px solid ${props => props.theme.border};
   border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  padding: 24px;
+  transition: all 0.3s ease;
   position: relative;
-  overflow: hidden;
-  
+
   &:hover {
-    transform: translateY(-5px);
-    
-    .dust-particles .particle {
-      animation-play-state: running;
-    }
+    border-color: ${props => props.theme.glowBorder};
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+    transform: translateY(-4px);
   }
-  
-  ${props => props.$inProgress && css`
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: repeating-linear-gradient(
-        -45deg,
-        rgba(255, 204, 0, 0.1),
-        rgba(255, 204, 0, 0.1) 10px,
-        rgba(0, 0, 0, 0.05) 10px,
-        rgba(0, 0, 0, 0.05) 20px
-      );
-      z-index: 0;
-      animation: ${moveStripes} 3s linear infinite;
-      pointer-events: none;
-    }
-  `}
-`;
-
-const DustParticles = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50px;
-  z-index: 3;
-  pointer-events: none;
-`;
-
-const DustParticle = styled.div`
-  position: absolute;
-  width: ${props => props.$size}px;
-  height: ${props => props.$size}px;
-  background-color: rgba(255, 204, 0, 0.3);
-  border-radius: 50%;
-  bottom: 0;
-  left: ${props => props.$left}%;
-  animation: ${floatDust} ${props => props.$duration}s linear infinite;
-  animation-delay: ${props => props.$delay}s;
-  animation-play-state: paused;
-`;
-
-const ConstructionBadge = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #ff9800;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.7rem;
-  font-weight: bold;
-  z-index: 2;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  animation: ${blink} 2s ease-in-out infinite;
-  display: flex;
-  align-items: center;
-`;
-
-const ProjectContent = styled.div`
-  position: relative;
-  z-index: 1;
 `;
 
 const ProjectTitle = styled.h3`
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
   color: ${props => props.theme.text};
+  font-family: ${props => props.theme.fontBody};
+  font-size: 1.2rem;
 `;
 
 const ProjectDescription = styled.p`
-  margin-bottom: 1rem;
-  color: ${props => props.theme.text};
+  margin-bottom: 16px;
+  color: ${props => props.theme.secondaryText};
+  font-size: 0.95rem;
+  line-height: 1.6;
 `;
 
 const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 15px 0;
+  margin-bottom: 16px;
 `;
 
 const Tag = styled.span`
-  background-color: ${props => props.theme.border};
-  color: ${props => props.theme.text};
-  font-size: 0.8rem;
-  padding: 3px 10px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  border-radius: 20px;
+  font-family: ${props => props.theme.fontMono};
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border: 1px solid ${props => props.theme.border};
+  border-radius: 3px;
+  color: ${props => props.theme.accentCyan};
+  margin-right: 6px;
+  margin-bottom: 6px;
 `;
 
 const Button = styled.a`
   display: inline-block;
-  background-color: ${props => props.theme.accent};
-  color: white;
+  font-family: ${props => props.theme.fontMono};
+  font-size: 0.85rem;
   padding: 8px 16px;
-  border-radius: 8px;
+  color: ${props => props.theme.accent};
+  background: transparent;
+  border: 1px solid ${props => props.theme.accent};
+  border-radius: 4px;
   text-decoration: none;
-  transition: background-color 0.3s ease;
-  
+  transition: all 0.3s ease;
+
   &:hover {
-    background-color: #0056b3;
+    background: ${props => props.theme.glowBorder};
+    box-shadow: 0 0 10px ${props => props.theme.glowBorder};
   }
 `;
 
-const ProgressBar = styled.div`
-  height: 6px;
-  background-color: rgba(0,0,0,0.1);
+const WipBadge = styled.div`
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-family: ${props => props.theme.fontMono};
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: ${props => props.theme.warning};
+  border: 1px solid ${props => props.theme.warning};
+  padding: 2px 8px;
   border-radius: 3px;
-  margin: 15px 0;
+`;
+
+const ProgressBar = styled.div`
+  height: 4px;
+  background-color: ${props => props.theme.border};
+  border-radius: 2px;
+  margin-bottom: 16px;
   overflow: hidden;
 `;
 
 const Progress = styled.div`
   height: 100%;
   width: ${props => props.$progress}%;
-  background-color: #4caf50;
-  border-radius: 3px;
+  background-color: ${props => props.theme.accent};
+  border-radius: 2px;
 `;
-
-const ComingSoonOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: 8px;
-  z-index: 10;
-  
-  ${ProjectCard}:hover & {
-    opacity: 1;
-  }
-`;
-
-const ComingSoonText = styled.div`
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-`;
-
-const EstimatedDate = styled.div`
-  font-size: 0.9rem;
-  opacity: 0.8;
-`;
-
-// Helper function to create dust particles
-const createDustParticles = (count) => {
-  const particles = [];
-  for (let i = 0; i < count; i++) {
-    particles.push({
-      id: i,
-      size: Math.random() * 5 + 2, // 2-7px
-      left: Math.random() * 100, // 0-100%
-      duration: Math.random() * 3 + 2, // 2-5s
-      delay: Math.random() * 2 // 0-2s
-    });
-  }
-  return particles;
-};
 
 const projectData = [
   {
@@ -279,72 +140,32 @@ const projectData = [
     link: '#',
     inProgress: true,
     progress: 35,
-    dustParticles: createDustParticles(15),
-    comingSoon: true,
-    estimatedCompletion: 'To Be Available',
-    icon: 'hammer' // hammer or jackhammer
   }
 ];
 
 const Projects = () => {
   return (
-    <Section id="projects" className="under-construction">
-      <Title>Projects</Title>
+    <Section id="projects">
+      <SectionHeader><span className="prompt">&gt; </span>ls ~/projects</SectionHeader>
       <ProjectGrid>
         {projectData.map(project => (
-          <ProjectCard 
-            key={project.id} 
-            $inProgress={project.inProgress}
-            className={project.inProgress ? 'in-progress' : ''}
-          >
+          <ProjectCard key={project.id}>
+            {project.inProgress && <WipBadge>[WIP]</WipBadge>}
+            <ProjectTitle>{project.title}</ProjectTitle>
+            <ProjectDescription>{project.description}</ProjectDescription>
             {project.inProgress && (
-              <ConstructionBadge>
-                <span className={`construction-icon ${project.icon}`}>
-                  {project.icon === 'hammer' ? '🔨' : '🔧'}
-                </span>
-                IN PROGRESS
-              </ConstructionBadge>
+              <ProgressBar>
+                <Progress $progress={project.progress} />
+              </ProgressBar>
             )}
-            
-            {project.comingSoon && (
-              <ComingSoonOverlay>
-                <ComingSoonText>Coming Soon</ComingSoonText>
-                <EstimatedDate>Estimated completion: {project.estimatedCompletion}</EstimatedDate>
-              </ComingSoonOverlay>
-            )}
-            
-            <ProjectContent>
-              <ProjectTitle>{project.title}</ProjectTitle>
-              <ProjectDescription>{project.description}</ProjectDescription>
-              {project.inProgress && (
-                <ProgressBar>
-                  <Progress $progress={project.progress} />
-                </ProgressBar>
-              )}
-              <Tags>
-                {project.tags.map((tag, index) => (
-                  <Tag key={index}>{tag}</Tag>
-                ))}
-              </Tags>
-              <Button href={project.link}>
-                {project.inProgress ? 'Preview' : 'View Project'}
-              </Button>
-            </ProjectContent>
-            
-            {project.inProgress && (
-              <DustParticles className="dust-particles">
-                {project.dustParticles.map(particle => (
-                  <DustParticle 
-                    key={particle.id}
-                    className="particle"
-                    $size={particle.size}
-                    $left={particle.left}
-                    $duration={particle.duration}
-                    $delay={particle.delay}
-                  />
-                ))}
-              </DustParticles>
-            )}
+            <Tags>
+              {project.tags.map((tag, index) => (
+                <Tag key={index}>{tag}</Tag>
+              ))}
+            </Tags>
+            <Button href={project.link}>
+              {project.inProgress ? '[preview]' : '[view project →]'}
+            </Button>
           </ProjectCard>
         ))}
       </ProjectGrid>
@@ -352,4 +173,4 @@ const Projects = () => {
   );
 };
 
-export default Projects; 
+export default Projects;

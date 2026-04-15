@@ -4,12 +4,17 @@ import { ThemeProvider } from 'styled-components';
 import Projects from './Projects';
 
 const theme = {
-  background: '#121212',
-  secondaryBackground: '#1e1e1e',
-  text: '#ffffff',
-  secondaryText: '#e0e0e0',
-  accent: '#0d6efd',
-  border: '#343a40'
+  background: '#0a0a0a',
+  secondaryBackground: '#111111',
+  text: '#e0e0e0',
+  secondaryText: '#888888',
+  accent: '#00ff41',
+  accentCyan: '#00d4ff',
+  warning: '#ffb800',
+  border: '#1a1a1a',
+  glowBorder: 'rgba(0, 255, 65, 0.2)',
+  fontMono: "'JetBrains Mono', 'Courier New', monospace",
+  fontBody: "'Outfit', -apple-system, BlinkMacSystemFont, sans-serif",
 };
 
 describe('Projects', () => {
