@@ -87,27 +87,6 @@ const NavItem = styled.a`
   }
 `;
 
-const ThemeToggleBtn = styled.button`
-  background: none;
-  border: 1px solid ${props => props.theme.border};
-  color: ${props => props.theme.accent};
-  font-family: ${props => props.theme.fontMono};
-  font-size: 0.8rem;
-  padding: 4px 10px;
-  cursor: pointer;
-  border-radius: 3px;
-  transition: all 0.3s ease;
-  margin-left: 15px;
-
-  &:hover {
-    background: ${props => props.theme.glowBorder};
-  }
-
-  @media (max-width: 768px) {
-    margin: 20px 30px;
-    margin-left: 30px;
-  }
-`;
 
 const HamburgerButton = styled.button`
   display: none;
@@ -149,7 +128,7 @@ const HamburgerIcon = styled.div`
   }
 `;
 
-const Header = ({ toggleTheme, isLight }) => {
+const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -199,9 +178,6 @@ const Header = ({ toggleTheme, isLight }) => {
           >
             github
           </NavItem>
-          <ThemeToggleBtn onClick={toggleTheme}>
-            [{isLight ? 'dark' : 'light'}]
-          </ThemeToggleBtn>
         </NavMenu>
       </HeaderContent>
     </HeaderContainer>
