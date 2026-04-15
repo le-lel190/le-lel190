@@ -2,9 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const FooterContainer = styled.footer`
-  background-color: ${props => props.theme.secondaryBackground};
-  color: ${props => props.theme.text};
-  padding: 50px 0 20px;
+  background-color: ${props => props.theme.background};
+  padding: 80px 0 30px;
 `;
 
 const FooterContent = styled.div`
@@ -12,140 +11,80 @@ const FooterContent = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 30px;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
+  text-align: center;
 `;
 
-const FooterColumn = styled.div`
+const SectionHeader = styled.div`
+  font-family: ${props => props.theme.fontMono};
+  font-size: 1.1rem;
+  color: ${props => props.theme.accent};
   margin-bottom: 30px;
+
+  .prompt { color: ${props => props.theme.secondaryText}; }
 `;
 
-const Logo = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 15px;
-`;
-
-const Description = styled.p`
-  color: ${props => props.theme.secondaryText};
-  margin-bottom: 20px;
-  line-height: 1.6;
-`;
-
-const SocialLinks = styled.div`
+const ContactLinks = styled.div`
   display: flex;
-  gap: 15px;
-  
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
 `;
 
-const SocialLink = styled.a`
-  color: ${props => props.theme.secondaryText};
-  font-size: 1.5rem;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    color: ${props => props.theme.accent};
-    transform: translateY(-3px);
-  }
-`;
-
-const FooterTitle = styled.h3`
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  font-weight: 600;
-  position: relative;
-  
-  &:after {
-    content: '';
-    position: absolute;
-    width: 30px;
-    height: 2px;
-    background-color: ${props => props.theme.accent};
-    left: 0;
-    bottom: -8px;
-    
-    @media (max-width: 768px) {
-      left: 50%;
-      transform: translateX(-50%);
-    }
-  }
-`;
-
-const FooterLink = styled.a`
-  display: block;
-  color: ${props => props.theme.secondaryText};
-  margin-bottom: 10px;
+const ContactLink = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: ${props => props.theme.text};
   text-decoration: none;
+  font-family: ${props => props.theme.fontMono};
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  border: 1px solid ${props => props.theme.border};
+  border-radius: 4px;
   transition: all 0.3s ease;
-  
+
   &:hover {
     color: ${props => props.theme.accent};
-    transform: translateX(5px);
-    
-    @media (max-width: 768px) {
-      transform: none;
-    }
+    border-color: ${props => props.theme.accent};
+    box-shadow: 0 0 15px ${props => props.theme.glowBorder};
+    transform: translateY(-2px);
   }
+
+  i { font-size: 1.1rem; }
 `;
 
 const Copyright = styled.div`
   text-align: center;
+  margin-top: 40px;
   padding-top: 20px;
   border-top: 1px solid ${props => props.theme.border};
   color: ${props => props.theme.secondaryText};
-  font-size: 0.9rem;
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
+  font-family: ${props => props.theme.fontMono};
+  font-size: 0.75rem;
 `;
 
 const Footer = () => {
   return (
     <FooterContainer>
       <FooterContent>
-        <FooterColumn>
-          <Logo>lel190 - Anson</Logo>
-          <Description>
-            A computer science student at CUHK exploring different frontend frameworks, and am interested in reverse engineering and memory hacking.
-          </Description>
-          <SocialLinks>
-            <SocialLink href="https://github.com/le-lel190" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <i className="fab fa-github"></i>
-            </SocialLink>
-            <SocialLink href="https://www.linkedin.com/in/le-anson-cheung/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <i className="fab fa-linkedin"></i>
-            </SocialLink>
-          </SocialLinks>
-        </FooterColumn>
-        
-        <FooterColumn>
-          <FooterTitle>Links</FooterTitle>
-          <FooterLink href="#about">About</FooterLink>
-          <FooterLink href="#projects">Projects</FooterLink>
-          <FooterLink href="#skills">Skills</FooterLink>
-        </FooterColumn>
-        
-        <FooterColumn>
-          <FooterTitle>Contact</FooterTitle>
-          <FooterLink href="https://linktr.ee/lel190">Linktree</FooterLink>
-          <FooterLink href="https://github.com/le-lel190">GitHub</FooterLink>
-        </FooterColumn>
+        <SectionHeader><span className="prompt">&gt; </span>./contact.sh</SectionHeader>
+        <ContactLinks>
+          <ContactLink href="https://github.com/le-lel190" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-github"></i> GitHub
+          </ContactLink>
+          <ContactLink href="https://www.linkedin.com/in/le-anson-cheung/" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-linkedin"></i> LinkedIn
+          </ContactLink>
+          <ContactLink href="https://linktr.ee/lel190" target="_blank" rel="noopener noreferrer">
+            <i className="fas fa-link"></i> Linktree
+          </ContactLink>
+        </ContactLinks>
+        <Copyright>
+          <p>&copy; {new Date().getFullYear()} lel190</p>
+        </Copyright>
       </FooterContent>
-      
-      <Copyright>
-        {/* <p>&copy; {new Date().getFullYear()} lel190. All rights reserved.</p> */}
-      </Copyright>
     </FooterContainer>
   );
 };
 
-export default Footer; 
+export default Footer;
