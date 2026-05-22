@@ -5,5 +5,5 @@
 - 📫 Feel free to reach me via Discord: 190 (yes my username is literally 190)
 
 - Know me more! https://lel190.dev
-- I am also hosting something similar to OpenRouter for me and my friends :) It can be accessed on api.lel190.dev
+- I am also hosting something similar to OpenRouter for me and my friends :) It can be accessed on https://api.lel190.dev
 - Ah yes I paid $20 for this domain 😭
