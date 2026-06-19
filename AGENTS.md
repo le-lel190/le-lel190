@@ -1,19 +1,14 @@
 # AGENTS.md
 
 ## Project Overview
-This repository is a small React-based GitHub profile / portfolio site. It currently uses React 18 with Create React App conventions through `react-scripts`, styles UI with `styled-components`, and deploys the production build to GitHub Pages.
-
-This file is intended for both coding agents and human contributors. Treat it as an operational guide for making safe changes, not as a product roadmap.
+React 18 portfolio site using Create React App, `styled-components`, and `framer-motion` for animations. Dark terminal theme only (no light mode). Deploys to GitHub Pages via `gh-pages`.
 
 ## Repository Map
-- `src/App.js` — main composition root. It wires together the page sections, defines light/dark theme objects, injects themed global styles, and owns the theme toggle.
-- `src/components/` — section-level UI components such as hero, header, about, projects, skills, and footer.
-- `src/index.js` — React entry point that renders `<App />` inside `React.StrictMode`.
-- `src/index.css` — baseline global CSS, scrollbar styling, and animation definitions.
-- `public/` — static Create React App assets.
-- `build/` — generated production output. Do not treat this as a source directory.
-- `README.md` — brief public-facing summary of the project.
-- `package.json` — scripts, dependencies, and GitHub Pages deployment configuration.
+- `src/App.js` — composition root. Defines single dark theme object, wraps in `ThemeProvider`, injects global styles
+- `src/components/` — Hero (interactive terminal), Header, Projects, Skills, Footer, AnimatedSection (scroll animation wrapper)
+- `src/utils/animations.js` — centralized Framer Motion animation variants
+- `src/index.css` — baseline CSS, scrollbar, keyframes
+- `build/` — generated. Do not edit manually
 
 ## Local Development / Build / Test / Deploy
 Install dependencies:
@@ -57,6 +52,13 @@ Theme handling currently lives in `src/App.js`. That file defines the light and 
 
 Global styling is split across two places: themed global styles inside `src/App.js` and non-theme baseline CSS inside `src/index.css`. When making visual changes, check both before assuming a style only exists in one place.
 
+**Animation system (added June 2026):**
+- `framer-motion` + `react-intersection-observer` provide scroll-triggered animations
+- `src/utils/animations.js` — centralized variants for consistency (fadeInUp, staggerContainer, etc.)
+- `src/components/AnimatedSection.js` — reusable wrapper with viewport detection and reduced-motion support
+- All animations use GPU-accelerated transforms (opacity/transform only) for 60fps performance
+- Components use `motion` from `styled-components` + direct framer-motion props (whileHover, variants, etc.)
+
 ## Editing Guidelines
 - Prefer small, localized edits over broad refactors.
 - Follow the existing React function-component style and current `styled-components` usage.
@@ -70,6 +72,7 @@ Global styling is split across two places: themed global styles inside `src/App.
 - Deployment is coupled to GitHub Pages configuration in `package.json`, especially the `homepage` value and deploy script.
 - This is a small repository, so path mismatches or renamed files under `src/components/` can break the app quickly. Re-check imports after structural edits.
 - `README.md` is concise and useful for project summary, but it does not capture all operational details contributors may need.
+- **Theme note:** This site is dark-only (no light mode). The single theme object in `src/App.js` defines terminal-aesthetic colors (green accent #00ff41, dark backgrounds).
 
 ## Verification Expectations
 After changing code or documentation that affects behavior, use the smallest meaningful verification step and escalate as needed:
