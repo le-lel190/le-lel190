@@ -8,9 +8,15 @@ import { useInView } from 'react-intersection-observer';
  * - Intersection Observer setup
  * - Reduced motion preferences
  * - Viewport detection thresholds
+ * - Optional glitch effects for Persona 5 style
  * 
  * Usage:
  * <AnimatedSection variants={fadeInUp}>
+ *   <YourContent />
+ * </AnimatedSection>
+ * 
+ * With glitch effect:
+ * <AnimatedSection variants={fadeInUp} glitch>
  *   <YourContent />
  * </AnimatedSection>
  */
@@ -21,6 +27,7 @@ const AnimatedSection = ({
   triggerOnce = true,
   className,
   style,
+  glitch = false,
   ...props 
 }) => {
   // Detect when element enters viewport
@@ -42,6 +49,13 @@ const AnimatedSection = ({
       }
     : variants;
 
+  // Optional glitch effect on entrance
+  const glitchStyle = glitch && inView && !prefersReducedMotion
+    ? {
+        animation: 'glitchFlash 0.4s ease-out',
+      }
+    : {};
+
   return (
     <motion.div
       ref={ref}
@@ -49,7 +63,7 @@ const AnimatedSection = ({
       animate={inView ? "visible" : "hidden"}
       variants={animationVariants}
       className={className}
-      style={style}
+      style={{ ...style, ...glitchStyle }}
       {...props}
     >
       {children}

@@ -71,7 +71,7 @@ const NavItem = styled(motion.a)`
     position: absolute;
     width: 0;
     height: 2px;
-    background-color: ${props => props.theme.accent};
+    background-color: ${props => props.theme.accentRed};
     left: 0;
     bottom: -5px;
     transition: width 0.3s ease;

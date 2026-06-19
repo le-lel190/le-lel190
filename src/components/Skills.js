@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
+import SectionIcon from './SectionIcon';
 import { fadeInLeft, fadeIn, staggerContainerFast, scaleIn } from '../utils/animations';
 
 const Section = styled.section`
@@ -14,8 +15,25 @@ const SectionHeader = styled.div`
   font-size: 1.1rem;
   color: ${props => props.theme.accent};
   margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  position: relative;
 
   .prompt { color: ${props => props.theme.secondaryText}; }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      ${props => props.theme.accentRed} 0%,
+      transparent 100%
+    );
+  }
 `;
 
 const TerminalBlock = styled.div`
@@ -23,6 +41,40 @@ const TerminalBlock = styled.div`
   border: 1px solid ${props => props.theme.border};
   border-radius: 8px;
   padding: 30px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(
+      135deg,
+      ${props => props.theme.accentRedGlow} 0%,
+      transparent 100%
+    );
+    clip-path: polygon(100% 0, 100% 100%, 0 0);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 4px,
+      rgba(230, 0, 18, 0.02) 4px,
+      rgba(230, 0, 18, 0.02) 8px
+    );
+    pointer-events: none;
+  }
 `;
 
 const CategoryHeader = styled.h3`
@@ -54,11 +106,35 @@ const SkillChip = styled(motion.span)`
   margin-right: 8px;
   margin-bottom: 8px;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(230, 0, 18, 0.05) 100%
+  );
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: ${props => props.theme.glowBorderRed};
+    transition: left 0.3s ease;
+    z-index: -1;
+  }
 
   &:hover {
-    border-color: ${props => props.theme.accent};
-    color: ${props => props.theme.accent};
-    box-shadow: 0 0 10px ${props => props.theme.glowBorder};
+    border-color: ${props => props.theme.accentRed};
+    color: ${props => props.theme.accentRed};
+    box-shadow: 0 0 10px ${props => props.theme.glowBorderRed};
+    transform: rotate(-2deg);
+  }
+
+  &:hover::before {
+    left: 0;
   }
 `;
 
@@ -81,7 +157,10 @@ const Skills = () => {
   return (
     <Section id="skills">
       <AnimatedSection variants={fadeInLeft}>
-        <SectionHeader><span className="prompt">&gt; </span>cat skills.txt</SectionHeader>
+        <SectionHeader>
+          <SectionIcon type="skills" size={40} />
+          <span className="prompt">&gt; </span>cat skills.txt
+        </SectionHeader>
       </AnimatedSection>
       
       <AnimatedSection variants={fadeIn}>
@@ -102,6 +181,7 @@ const Skills = () => {
                       variants={scaleIn}
                       whileHover={{ 
                         scale: 1.1,
+                        rotate: 2,
                         transition: { 
                           type: "spring", 
                           stiffness: 400, 

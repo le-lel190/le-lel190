@@ -5,8 +5,11 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
+import PersonaBackground from './components/PersonaBackground';
+import PersonaCursor from './components/PersonaCursor';
 
 const theme = {
+  // Original terminal colors
   background: '#0a0a0a',
   secondaryBackground: '#111111',
   text: '#e0e0e0',
@@ -16,6 +19,17 @@ const theme = {
   warning: '#ffb800',
   border: '#1a1a1a',
   glowBorder: 'rgba(0, 255, 65, 0.2)',
+  
+  // Persona 5 inspired colors
+  accentRed: '#e60012',
+  accentRedLight: '#ff3a4d',
+  accentRedGlow: 'rgba(230, 0, 18, 0.3)',
+  glowBorderRed: 'rgba(230, 0, 18, 0.2)',
+  accentYellow: '#ffff00',
+  deepBlack: '#000000',
+  offWhite: '#f5f5f5',
+  
+  // Fonts
   fontMono: "'JetBrains Mono', 'Courier New', monospace",
   fontBody: "'Outfit', -apple-system, BlinkMacSystemFont, sans-serif",
 };
@@ -62,6 +76,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <PersonaBackground />
+      <PersonaCursor />
       <AppContainer>
         <Hero />
         <Header />

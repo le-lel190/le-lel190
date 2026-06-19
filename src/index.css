@@ -52,3 +52,26 @@ html {
   from { transform: translateY(30px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
+
+@keyframes glitchFlash {
+  0% { 
+    filter: brightness(1);
+    text-shadow: none;
+  }
+  10% { 
+    filter: brightness(1.2);
+    text-shadow: 2px 0 #e60012, -2px 0 #00d4ff;
+  }
+  20% { 
+    filter: brightness(1);
+    text-shadow: none;
+  }
+  30% { 
+    filter: brightness(1.1);
+    text-shadow: -2px 0 #e60012, 2px 0 #00d4ff;
+  }
+  40%, 100% { 
+    filter: brightness(1);
+    text-shadow: none;
+  }
+}

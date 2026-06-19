@@ -4,10 +4,10 @@
 React 18 portfolio site using Create React App, `styled-components`, and `framer-motion` for animations. Dark terminal theme only (no light mode). Deploys to GitHub Pages via `gh-pages`.
 
 ## Repository Map
-- `src/App.js` — composition root. Defines single dark theme object, wraps in `ThemeProvider`, injects global styles
-- `src/components/` — Hero (interactive terminal), Header, Projects, Skills, Footer, AnimatedSection (scroll animation wrapper)
-- `src/utils/animations.js` — centralized Framer Motion animation variants
-- `src/index.css` — baseline CSS, scrollbar, keyframes
+- `src/App.js` — composition root. Defines dark theme object with Persona 5 colors, wraps in `ThemeProvider`, injects global styles, integrates PersonaBackground and PersonaCursor
+- `src/components/` — Hero (interactive terminal), Header, Projects, Skills, Footer, AnimatedSection (scroll animation wrapper), PersonaBackground (animated background layer), PersonaCursor (custom cursor), SectionIcon (animated SVG icons)
+- `src/utils/animations.js` — centralized Framer Motion animation variants (includes Persona 5-style animations: glitchIn, slashWipeIn, rotateIn, etc.)
+- `src/index.css` — baseline CSS, scrollbar, keyframes (includes glitchFlash animation)
 - `build/` — generated. Do not edit manually
 
 ## Local Development / Build / Test / Deploy
@@ -48,16 +48,24 @@ Notes:
 ## Architecture Notes
 The app is currently structured as a single-page, section-based React application. `src/App.js` imports and renders the major sections in order, so content and layout changes often stay localized to one component plus top-level composition.
 
-Theme handling currently lives in `src/App.js`. That file defines the light and dark theme objects, wraps the tree in `ThemeProvider`, and injects shared themed styles through `createGlobalStyle`.
+Theme handling currently lives in `src/App.js`. That file defines the dark theme object with both terminal colors (green) and Persona 5-inspired colors (red, yellow), wraps the tree in `ThemeProvider`, and injects shared themed styles through `createGlobalStyle`.
 
 Global styling is split across two places: themed global styles inside `src/App.js` and non-theme baseline CSS inside `src/index.css`. When making visual changes, check both before assuming a style only exists in one place.
 
 **Animation system (added June 2026):**
 - `framer-motion` + `react-intersection-observer` provide scroll-triggered animations
-- `src/utils/animations.js` — centralized variants for consistency (fadeInUp, staggerContainer, etc.)
-- `src/components/AnimatedSection.js` — reusable wrapper with viewport detection and reduced-motion support
+- `src/utils/animations.js` — centralized variants for consistency (fadeInUp, staggerContainer, glitchIn, slashWipeIn, rotateIn, etc.)
+- `src/components/AnimatedSection.js` — reusable wrapper with viewport detection, reduced-motion support, and optional glitch effects
 - All animations use GPU-accelerated transforms (opacity/transform only) for 60fps performance
 - Components use `motion` from `styled-components` + direct framer-motion props (whileHover, variants, etc.)
+
+**Persona 5-inspired visual system (added June 2026):**
+- `src/components/PersonaBackground.js` — fixed background layer with floating geometric shapes (18 elements), diagonal red stripes, scanline overlay, corner accents, and particle bursts
+- `src/components/PersonaCursor.js` — custom cursor with red dot, ring, and particle trail (desktop only, respects touch devices and reduced motion)
+- `src/components/SectionIcon.js` — animated SVG icons for sections (projects, skills, contact, hero) with stroke-draw animations and hover effects
+- Color scheme: green (#00ff41) for terminal/system, red (#e60012) for user interactions, yellow (#ffff00) for rare highlights
+- Visual effects: glitch text on hover, diagonal stripe reveals, red glow shadows, RGB split effects, spring-based micro-interactions
+- Performance: particle systems limited, touch device detection, reduced-motion support throughout
 
 ## Editing Guidelines
 - Prefer small, localized edits over broad refactors.
@@ -72,7 +80,7 @@ Global styling is split across two places: themed global styles inside `src/App.
 - Deployment is coupled to GitHub Pages configuration in `package.json`, especially the `homepage` value and deploy script.
 - This is a small repository, so path mismatches or renamed files under `src/components/` can break the app quickly. Re-check imports after structural edits.
 - `README.md` is concise and useful for project summary, but it does not capture all operational details contributors may need.
-- **Theme note:** This site is dark-only (no light mode). The single theme object in `src/App.js` defines terminal-aesthetic colors (green accent #00ff41, dark backgrounds).
+- **Theme note:** This site is dark-only (no light mode). The theme object in `src/App.js` defines terminal-aesthetic colors (green accent #00ff41) combined with Persona 5-inspired colors (red #e60012, yellow #ffff00). Green is used for terminal/system elements, red for UI interactions and highlights.
 
 ## Verification Expectations
 After changing code or documentation that affects behavior, use the smallest meaningful verification step and escalate as needed:

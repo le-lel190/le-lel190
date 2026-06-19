@@ -79,6 +79,31 @@ const TerminalWindow = styled(motion.div)`
   font-family: ${props => props.theme.fontMono};
   box-shadow: 0 0 40px rgba(0, 255, 65, 0.1);
   cursor: text;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 150%;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      ${props => props.theme.accentRed} 30%,
+      ${props => props.theme.accentRed} 70%,
+      transparent 100%
+    );
+    transform: rotate(-5deg);
+    transform-origin: center;
+    animation: redAccentPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes redAccentPulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
 `;
 
 const TerminalHeader = styled.div`
@@ -160,12 +185,30 @@ const HeroButton = styled(motion.a)`
   border-radius: 4px;
   transition: all 0.3s ease;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
   color: ${props => props.$primary ? props.theme.background : props.theme.accent};
   background: ${props => props.$primary ? props.theme.accent : 'transparent'};
   border: 1px solid ${props => props.theme.accent};
 
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 2px;
+    background: ${props => props.theme.accentRed};
+    transition: width 0.3s ease;
+  }
+
   &:hover {
     box-shadow: 0 0 15px ${props => props.theme.glowBorder};
+    border-color: ${props => props.$primary ? props.theme.accent : props.theme.accentRed};
+  }
+
+  &:hover::before {
+    width: 100%;
   }
 `;
 
@@ -198,7 +241,7 @@ const ScrollIndicator = styled.div`
   transform: translateX(-50%);
   width: 24px;
   height: 40px;
-  border: 2px solid ${props => props.theme.accent};
+  border: 2px solid ${props => props.theme.accentRed};
   border-radius: 12px;
   cursor: pointer;
   z-index: 3;
@@ -215,7 +258,7 @@ const ScrollIndicator = styled.div`
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    background: ${props => props.theme.accent};
+    background: ${props => props.theme.accentRed};
     animation: scrollDot 1.5s infinite;
   }
 

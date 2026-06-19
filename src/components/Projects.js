@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
-import { fadeInLeft, fadeInUp, staggerContainer } from '../utils/animations';
+import SectionIcon from './SectionIcon';
+import { fadeInLeft, rotateIn, staggerDiagonal } from '../utils/animations';
 
 const Section = styled.section`
   padding: 80px 0;
@@ -14,8 +15,25 @@ const SectionHeader = styled.div`
   font-size: 1.1rem;
   color: ${props => props.theme.accent};
   margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  position: relative;
 
   .prompt { color: ${props => props.theme.secondaryText}; }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      ${props => props.theme.accentRed} 0%,
+      transparent 100%
+    );
+  }
 `;
 
 const ProjectGrid = styled.div`
@@ -37,10 +55,35 @@ const ProjectCard = styled(motion.div)`
   position: relative;
   transform-style: preserve-3d;
   perspective: 1000px;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      ${props => props.theme.accentRedGlow} 50%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: all 0.4s ease;
+    transform: skewX(-15deg);
+    transform-origin: top right;
+  }
 
   &:hover {
-    border-color: ${props => props.theme.glowBorder};
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+    border-color: ${props => props.theme.glowBorderRed};
+    box-shadow: 0 0 20px ${props => props.theme.glowBorderRed};
+  }
+
+  &:hover::before {
+    width: 40%;
+    opacity: 1;
   }
 `;
 
@@ -49,6 +92,23 @@ const ProjectTitle = styled.h3`
   color: ${props => props.theme.text};
   font-family: ${props => props.theme.fontBody};
   font-size: 1.2rem;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+
+  ${ProjectCard}:hover & {
+    text-shadow: 
+      2px 0 ${props => props.theme.accentRed},
+      -2px 0 ${props => props.theme.accentCyan};
+    animation: glitch 0.3s ease;
+  }
+
+  @keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    25% { transform: translate(-2px, 1px); }
+    50% { transform: translate(2px, -1px); }
+    75% { transform: translate(-1px, -1px); }
+  }
 `;
 
 const ProjectDescription = styled.p`
@@ -86,10 +146,30 @@ const Button = styled.a`
   border-radius: 4px;
   text-decoration: none;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: ${props => props.theme.glowBorderRed};
+    transition: left 0.3s ease;
+    z-index: -1;
+  }
 
   &:hover {
-    background: ${props => props.theme.glowBorder};
-    box-shadow: 0 0 10px ${props => props.theme.glowBorder};
+    border-color: ${props => props.theme.accentRed};
+    color: ${props => props.theme.text};
+    box-shadow: 0 0 10px ${props => props.theme.glowBorderRed};
+  }
+
+  &:hover::before {
+    left: 0;
   }
 `;
 
@@ -151,11 +231,14 @@ const Projects = () => {
   return (
     <Section id="projects">
       <AnimatedSection variants={fadeInLeft}>
-        <SectionHeader><span className="prompt">&gt; </span>ls ~/projects</SectionHeader>
+        <SectionHeader>
+          <SectionIcon type="projects" size={40} />
+          <span className="prompt">&gt; </span>ls ~/projects
+        </SectionHeader>
       </AnimatedSection>
       
       <motion.div
-        variants={staggerContainer}
+        variants={staggerDiagonal}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
@@ -164,7 +247,7 @@ const Projects = () => {
           {projectData.map((project, index) => (
             <ProjectCard 
               key={project.id}
-              variants={fadeInUp}
+              variants={rotateIn}
               whileHover={{ 
                 y: -8,
                 rotateX: 2,

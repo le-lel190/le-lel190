@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
+import SectionIcon from './SectionIcon';
 import { fadeInLeft, fadeInUp, staggerContainer } from '../utils/animations';
 
 const FooterContainer = styled.footer`
@@ -22,8 +23,25 @@ const SectionHeader = styled.div`
   font-size: 1.1rem;
   color: ${props => props.theme.accent};
   margin-bottom: 30px;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
 
   .prompt { color: ${props => props.theme.secondaryText}; }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      ${props => props.theme.accentRed} 0%,
+      transparent 100%
+    );
+  }
 `;
 
 const ContactLinks = styled.div`
@@ -45,11 +63,29 @@ const ContactLink = styled(motion.a)`
   border: 1px solid ${props => props.theme.border};
   border-radius: 4px;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: ${props => props.theme.glowBorderRed};
+    transition: left 0.3s ease;
+    z-index: -1;
+  }
 
   &:hover {
-    color: ${props => props.theme.accent};
-    border-color: ${props => props.theme.accent};
-    box-shadow: 0 0 15px ${props => props.theme.glowBorder};
+    color: ${props => props.theme.accentRed};
+    border-color: ${props => props.theme.accentRed};
+    box-shadow: 0 0 15px ${props => props.theme.glowBorderRed};
+  }
+
+  &:hover::before {
+    left: 0;
   }
 
   i { font-size: 1.1rem; }
@@ -70,7 +106,10 @@ const Footer = () => {
     <FooterContainer>
       <FooterContent>
         <AnimatedSection variants={fadeInLeft}>
-          <SectionHeader><span className="prompt">&gt; </span>./contact.sh</SectionHeader>
+          <SectionHeader>
+            <SectionIcon type="contact" size={40} />
+            <span className="prompt">&gt; </span>./contact.sh
+          </SectionHeader>
         </AnimatedSection>
         
         <motion.div
