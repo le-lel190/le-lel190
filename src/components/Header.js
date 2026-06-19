@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -24,7 +25,7 @@ const HeaderContent = styled.div`
   align-items: center;
 `;
 
-const Logo = styled.div`
+const Logo = styled(motion.div)`
   font-family: ${props => props.theme.fontMono};
   font-size: 1.3rem;
   font-weight: 700;
@@ -55,7 +56,7 @@ const NavMenu = styled.nav`
   }
 `;
 
-const NavItem = styled.a`
+const NavItem = styled(motion.a)`
   margin: 0 15px;
   text-decoration: none;
   color: ${props => props.theme.text};
@@ -152,7 +153,17 @@ const Header = () => {
   return (
     <HeaderContainer $scrolled={scrolled}>
       <HeaderContent>
-        <Logo onClick={scrollToTop}>lel190<span className="cursor">█</span></Logo>
+        <Logo 
+          onClick={scrollToTop}
+          whileHover={{ 
+            scale: 1.05,
+            rotate: 1,
+            transition: { type: "spring", stiffness: 400, damping: 10 }
+          }}
+          whileTap={{ scale: 0.95 }}
+        >
+          lel190<span className="cursor">█</span>
+        </Logo>
 
         <HamburgerButton onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
           <HamburgerIcon $isOpen={isMenuOpen} />
@@ -162,12 +173,16 @@ const Header = () => {
           <NavItem
             href="#projects"
             onClick={(e) => { e.preventDefault(); handleNavClick('#projects'); }}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.95 }}
           >
             projects
           </NavItem>
           <NavItem
             href="#skills"
             onClick={(e) => { e.preventDefault(); handleNavClick('#skills'); }}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.95 }}
           >
             skills
           </NavItem>
@@ -175,6 +190,8 @@ const Header = () => {
             href="https://github.com/le-lel190"
             target="_blank"
             rel="noopener noreferrer"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.95 }}
           >
             github
           </NavItem>

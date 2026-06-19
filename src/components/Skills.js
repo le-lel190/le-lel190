@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import AnimatedSection from './AnimatedSection';
+import { fadeInLeft, fadeIn, staggerContainerFast, scaleIn } from '../utils/animations';
 
 const Section = styled.section`
   padding: 80px 0;
@@ -40,7 +43,7 @@ const SkillsRow = styled.div`
   flex-wrap: wrap;
 `;
 
-const SkillChip = styled.span`
+const SkillChip = styled(motion.span)`
   display: inline-block;
   font-family: ${props => props.theme.fontMono};
   font-size: 0.8rem;
@@ -77,19 +80,45 @@ const skillsData = [
 const Skills = () => {
   return (
     <Section id="skills">
-      <SectionHeader><span className="prompt">&gt; </span>cat skills.txt</SectionHeader>
-      <TerminalBlock>
-        {skillsData.map((category, index) => (
-          <div key={index}>
-            <CategoryHeader $first={index === 0}>{category.category}</CategoryHeader>
-            <SkillsRow>
-              {category.skills.map((skill, i) => (
-                <SkillChip key={i}>{skill}</SkillChip>
-              ))}
-            </SkillsRow>
-          </div>
-        ))}
-      </TerminalBlock>
+      <AnimatedSection variants={fadeInLeft}>
+        <SectionHeader><span className="prompt">&gt; </span>cat skills.txt</SectionHeader>
+      </AnimatedSection>
+      
+      <AnimatedSection variants={fadeIn}>
+        <TerminalBlock>
+          {skillsData.map((category, index) => (
+            <div key={index}>
+              <CategoryHeader $first={index === 0}>{category.category}</CategoryHeader>
+              <motion.div
+                variants={staggerContainerFast}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                <SkillsRow>
+                  {category.skills.map((skill, i) => (
+                    <SkillChip 
+                      key={i}
+                      variants={scaleIn}
+                      whileHover={{ 
+                        scale: 1.1,
+                        transition: { 
+                          type: "spring", 
+                          stiffness: 400, 
+                          damping: 10 
+                        }
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {skill}
+                    </SkillChip>
+                  ))}
+                </SkillsRow>
+              </motion.div>
+            </div>
+          ))}
+        </TerminalBlock>
+      </AnimatedSection>
     </Section>
   );
 };

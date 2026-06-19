@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { springIn } from '../utils/animations';
 
 const bootLines = [
   '[OK] Loading kernel modules...',
@@ -65,7 +67,7 @@ const HeroContainer = styled.div`
   }
 `;
 
-const TerminalWindow = styled.div`
+const TerminalWindow = styled(motion.div)`
   position: relative;
   z-index: 2;
   max-width: 700px;
@@ -150,7 +152,7 @@ const HeroButtons = styled.div`
   animation: slideInFromBottom 0.5s ease-out;
 `;
 
-const HeroButton = styled.a`
+const HeroButton = styled(motion.a)`
   padding: 10px 20px;
   font-family: ${props => props.theme.fontMono};
   font-size: 0.85rem;
@@ -164,7 +166,6 @@ const HeroButton = styled.a`
 
   &:hover {
     box-shadow: 0 0 15px ${props => props.theme.glowBorder};
-    transform: translateY(-2px);
   }
 `;
 
@@ -382,7 +383,12 @@ const Hero = () => {
 
   return (
     <HeroContainer>
-      <TerminalWindow onClick={focusInput}>
+      <TerminalWindow 
+        onClick={focusInput}
+        variants={springIn}
+        initial="hidden"
+        animate="visible"
+      >
         <TerminalHeader>
           <TerminalDot $color="#ff5f57" />
           <TerminalDot $color="#ffbd2e" />
@@ -427,6 +433,11 @@ const Hero = () => {
                 e.preventDefault();
                 scrollToContent();
               }}
+              whileHover={{ 
+                y: -3,
+                transition: { type: "spring", stiffness: 400, damping: 10 }
+              }}
+              whileTap={{ scale: 0.95 }}
             >
               [view projects]
             </HeroButton>
@@ -434,6 +445,11 @@ const Hero = () => {
               href="https://github.com/le-lel190"
               target="_blank"
               rel="noopener noreferrer"
+              whileHover={{ 
+                y: -3,
+                transition: { type: "spring", stiffness: 400, damping: 10 }
+              }}
+              whileTap={{ scale: 0.95 }}
             >
               [github]
             </HeroButton>

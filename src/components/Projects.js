@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import AnimatedSection from './AnimatedSection';
+import { fadeInLeft, fadeInUp, staggerContainer } from '../utils/animations';
 
 const Section = styled.section`
   padding: 80px 0;
@@ -25,18 +28,19 @@ const ProjectGrid = styled.div`
   }
 `;
 
-const ProjectCard = styled.div`
+const ProjectCard = styled(motion.div)`
   background-color: ${props => props.theme.secondaryBackground};
   border: 1px solid ${props => props.theme.border};
   border-radius: 8px;
   padding: 24px;
   transition: all 0.3s ease;
   position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 
   &:hover {
     border-color: ${props => props.theme.glowBorder};
     box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
-    transform: translateY(-4px);
   }
 `;
 
@@ -146,29 +150,49 @@ const projectData = [
 const Projects = () => {
   return (
     <Section id="projects">
-      <SectionHeader><span className="prompt">&gt; </span>ls ~/projects</SectionHeader>
-      <ProjectGrid>
-        {projectData.map(project => (
-          <ProjectCard key={project.id}>
-            {project.inProgress && <WipBadge>[WIP]</WipBadge>}
-            <ProjectTitle>{project.title}</ProjectTitle>
-            <ProjectDescription>{project.description}</ProjectDescription>
-            {project.inProgress && (
-              <ProgressBar>
-                <Progress $progress={project.progress} />
-              </ProgressBar>
-            )}
-            <Tags>
-              {project.tags.map((tag, index) => (
-                <Tag key={index}>{tag}</Tag>
-              ))}
-            </Tags>
-            <Button href={project.link}>
-              {project.inProgress ? '[preview]' : '[view project →]'}
-            </Button>
-          </ProjectCard>
-        ))}
-      </ProjectGrid>
+      <AnimatedSection variants={fadeInLeft}>
+        <SectionHeader><span className="prompt">&gt; </span>ls ~/projects</SectionHeader>
+      </AnimatedSection>
+      
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+      >
+        <ProjectGrid>
+          {projectData.map((project, index) => (
+            <ProjectCard 
+              key={project.id}
+              variants={fadeInUp}
+              whileHover={{ 
+                y: -8,
+                rotateX: 2,
+                rotateY: 2,
+                transition: { duration: 0.3, ease: "easeOut" }
+              }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {project.inProgress && <WipBadge>[WIP]</WipBadge>}
+              <ProjectTitle>{project.title}</ProjectTitle>
+              <ProjectDescription>{project.description}</ProjectDescription>
+              {project.inProgress && (
+                <ProgressBar>
+                  <Progress $progress={project.progress} />
+                </ProgressBar>
+              )}
+              <Tags>
+                {project.tags.map((tag, index) => (
+                  <Tag key={index}>{tag}</Tag>
+                ))}
+              </Tags>
+              <Button href={project.link}>
+                {project.inProgress ? '[preview]' : '[view project →]'}
+              </Button>
+            </ProjectCard>
+          ))}
+        </ProjectGrid>
+      </motion.div>
     </Section>
   );
 };

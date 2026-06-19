@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import AnimatedSection from './AnimatedSection';
+import { fadeInLeft, fadeInUp, staggerContainer } from '../utils/animations';
 
 const FooterContainer = styled.footer`
   background-color: ${props => props.theme.background};
@@ -30,7 +33,7 @@ const ContactLinks = styled.div`
   flex-wrap: wrap;
 `;
 
-const ContactLink = styled.a`
+const ContactLink = styled(motion.a)`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -47,7 +50,6 @@ const ContactLink = styled.a`
     color: ${props => props.theme.accent};
     border-color: ${props => props.theme.accent};
     box-shadow: 0 0 15px ${props => props.theme.glowBorder};
-    transform: translateY(-2px);
   }
 
   i { font-size: 1.1rem; }
@@ -67,18 +69,59 @@ const Footer = () => {
   return (
     <FooterContainer>
       <FooterContent>
-        <SectionHeader><span className="prompt">&gt; </span>./contact.sh</SectionHeader>
-        <ContactLinks>
-          <ContactLink href="https://github.com/le-lel190" target="_blank" rel="noopener noreferrer">
-            <i className="fab fa-github"></i> GitHub
-          </ContactLink>
-          <ContactLink href="https://www.linkedin.com/in/le-anson-cheung/" target="_blank" rel="noopener noreferrer">
-            <i className="fab fa-linkedin"></i> LinkedIn
-          </ContactLink>
-          <ContactLink href="https://linktr.ee/lel190" target="_blank" rel="noopener noreferrer">
-            <i className="fas fa-link"></i> Linktree
-          </ContactLink>
-        </ContactLinks>
+        <AnimatedSection variants={fadeInLeft}>
+          <SectionHeader><span className="prompt">&gt; </span>./contact.sh</SectionHeader>
+        </AnimatedSection>
+        
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
+          <ContactLinks>
+            <ContactLink 
+              href="https://github.com/le-lel190" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              variants={fadeInUp}
+              whileHover={{ 
+                y: -4,
+                transition: { type: "spring", stiffness: 400, damping: 10 }
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <i className="fab fa-github"></i> GitHub
+            </ContactLink>
+            <ContactLink 
+              href="https://www.linkedin.com/in/le-anson-cheung/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              variants={fadeInUp}
+              whileHover={{ 
+                y: -4,
+                transition: { type: "spring", stiffness: 400, damping: 10 }
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <i className="fab fa-linkedin"></i> LinkedIn
+            </ContactLink>
+            <ContactLink 
+              href="https://linktr.ee/lel190" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              variants={fadeInUp}
+              whileHover={{ 
+                y: -4,
+                transition: { type: "spring", stiffness: 400, damping: 10 }
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <i className="fas fa-link"></i> Linktree
+            </ContactLink>
+          </ContactLinks>
+        </motion.div>
+        
         <Copyright>
           <p>&copy; {new Date().getFullYear()} lel190</p>
         </Copyright>
