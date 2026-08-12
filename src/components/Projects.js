@@ -2,225 +2,189 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
-import SectionIcon from './SectionIcon';
-import { fadeInLeft, rotateIn, staggerDiagonal } from '../utils/animations';
+import { fadeInLeft, staggerDiagonal } from '../utils/animations';
 
 const Section = styled.section`
-  padding: 80px 0;
-  border-bottom: 1px solid ${props => props.theme.border};
+  padding: 88px 0;
+  border-top: 1px solid ${props => props.theme.border};
 `;
 
 const SectionHeader = styled.div`
   font-family: ${props => props.theme.fontMono};
-  font-size: 1.1rem;
-  color: ${props => props.theme.accent};
-  margin-bottom: 30px;
+  font-size: 1.05rem;
+  color: ${props => props.theme.text};
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
-  position: relative;
 
-  .prompt { color: ${props => props.theme.secondaryText}; }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 100px;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      ${props => props.theme.accentRed} 0%,
-      transparent 100%
-    );
+  .prompt {
+    color: ${props => props.theme.accent};
+    margin-right: 8px;
   }
+`;
+
+const SectionRule = styled.div`
+  width: 132px;
+  height: 1px;
+  background: linear-gradient(90deg, ${props => props.theme.accent}, transparent);
+  margin-bottom: 44px;
 `;
 
 const ProjectGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 980px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 680px) {
     grid-template-columns: 1fr;
   }
 `;
 
 const ProjectCard = styled(motion.div)`
-  background-color: ${props => props.theme.secondaryBackground};
+  background-color: ${props => props.theme.surface};
   border: 1px solid ${props => props.theme.border};
-  border-radius: 8px;
-  padding: 24px;
-  transition: all 0.3s ease;
+  border-radius: 12px;
+  padding: 24px 22px 20px;
+  display: flex;
+  flex-direction: column;
   position: relative;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 100%;
-    background: linear-gradient(
-      135deg,
-      transparent 0%,
-      ${props => props.theme.accentRedGlow} 50%,
-      transparent 100%
-    );
-    opacity: 0;
-    transition: all 0.4s ease;
-    transform: skewX(-15deg);
-    transform-origin: top right;
-  }
+  transition: border-color 0.2s ease, transform 0.2s ease;
 
   &:hover {
-    border-color: ${props => props.theme.glowBorderRed};
-    box-shadow: 0 0 20px ${props => props.theme.glowBorderRed};
+    border-color: ${props => props.theme.borderStrong};
+    transform: translateY(-3px);
   }
+`;
 
-  &:hover::before {
-    width: 40%;
-    opacity: 1;
-  }
+const CardIndex = styled.div`
+  font-family: ${props => props.theme.fontMono};
+  font-size: 0.71rem;
+  color: ${props => props.theme.textMuted};
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const ProjectTitle = styled.h3`
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   color: ${props => props.theme.text};
   font-family: ${props => props.theme.fontBody};
-  font-size: 1.2rem;
-  position: relative;
-  z-index: 1;
-  transition: all 0.3s ease;
-
-  ${ProjectCard}:hover & {
-    text-shadow: 
-      2px 0 ${props => props.theme.accentRed},
-      -2px 0 ${props => props.theme.accentCyan};
-    animation: glitch 0.3s ease;
-  }
-
-  @keyframes glitch {
-    0%, 100% { transform: translate(0); }
-    25% { transform: translate(-2px, 1px); }
-    50% { transform: translate(2px, -1px); }
-    75% { transform: translate(-1px, -1px); }
-  }
+  font-size: 1.18rem;
+  font-weight: 650;
+  letter-spacing: -0.012em;
 `;
 
 const ProjectDescription = styled.p`
-  margin-bottom: 16px;
-  color: ${props => props.theme.secondaryText};
-  font-size: 0.95rem;
-  line-height: 1.6;
+  margin-bottom: 18px;
+  color: ${props => props.theme.textDim};
+  font-size: 0.925rem;
+  line-height: 1.65;
+  flex: 1;
 `;
 
 const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 16px;
+  gap: 6px;
+  margin-bottom: 18px;
 `;
 
 const Tag = styled.span`
   font-family: ${props => props.theme.fontMono};
-  font-size: 0.75rem;
+  font-size: 0.69rem;
   padding: 3px 8px;
-  border: 1px solid ${props => props.theme.border};
-  border-radius: 3px;
-  color: ${props => props.theme.accentCyan};
-  margin-right: 6px;
-  margin-bottom: 6px;
+  border: 1px solid ${props => props.theme.borderStrong};
+  border-radius: 4px;
+  color: ${props => props.theme.textDim};
 `;
 
 const Button = styled.a`
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  align-self: flex-start;
   font-family: ${props => props.theme.fontMono};
-  font-size: 0.85rem;
-  padding: 8px 16px;
+  font-size: 0.79rem;
+  padding: 8px 14px;
   color: ${props => props.theme.accent};
   background: transparent;
-  border: 1px solid ${props => props.theme.accent};
-  border-radius: 4px;
+  border: 1px solid ${props => props.theme.accentLine};
+  border-radius: 6px;
   text-decoration: none;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
+  transition: all 0.18s ease;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: ${props => props.theme.glowBorderRed};
-    transition: left 0.3s ease;
-    z-index: -1;
+  &::after {
+    content: '→';
+    transition: transform 0.18s ease;
   }
 
   &:hover {
-    border-color: ${props => props.theme.accentRed};
-    color: ${props => props.theme.text};
-    box-shadow: 0 0 10px ${props => props.theme.glowBorderRed};
-  }
-
-  &:hover::before {
-    left: 0;
+    background: ${props => props.theme.accentFaint};
+    border-color: ${props => props.theme.accent};
+    &::after { transform: translateX(3px); }
   }
 `;
 
 const WipBadge = styled.div`
-  position: absolute;
-  top: 12px;
-  right: 12px;
   font-family: ${props => props.theme.fontMono};
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-size: 0.68rem;
+  font-weight: 550;
   color: ${props => props.theme.warning};
   border: 1px solid ${props => props.theme.warning};
   padding: 2px 8px;
-  border-radius: 3px;
+  border-radius: 4px;
+`;
+
+const ProgressLabel = styled.div`
+  font-family: ${props => props.theme.fontMono};
+  font-size: 0.68rem;
+  color: ${props => props.theme.textMuted};
+  margin-bottom: 6px;
 `;
 
 const ProgressBar = styled.div`
   height: 4px;
   background-color: ${props => props.theme.border};
-  border-radius: 2px;
-  margin-bottom: 16px;
+  border-radius: 99px;
+  margin-bottom: 18px;
   overflow: hidden;
 `;
 
 const Progress = styled.div`
   height: 100%;
   width: ${props => props.$progress}%;
-  background-color: ${props => props.theme.accent};
-  border-radius: 2px;
+  background-color: ${props => props.theme.warning};
+  border-radius: 99px;
 `;
 
 const projectData = [
   {
     id: 1,
+    index: '01',
     title: 'AI API Gateway',
-    description: 'An AI API gateway/platform I built to provide a clean, centralized access point for AI services at https://api.lel190.dev.',
+    description: 'A centralized gateway that fronts multiple AI providers behind one clean API. Built to give apps a single key, unified rate limits, and a consistent response shape — no vendor lock-in.',
     tags: ['AI', 'API', 'Gateway', 'Platform'],
     link: 'https://api.lel190.dev',
   },
   {
     id: 2,
+    index: '02',
     title: 'No-Account Temp Mail',
-    description: 'A no-account temporary email service I built on Cloudflare for quick disposable inbox access without signup.',
+    description: 'Disposable inboxes without the signup tax. Runs entirely on Cloudflare Workers with KV for mailboxes and D1 for storage — instant throwaway addresses for testing and privacy.',
     tags: ['Cloudflare Workers', 'KV', 'D1', 'Temp Mail'],
     link: 'https://971236.xyz/',
   },
   {
     id: 3,
-    title: 'Secret...',
-    description: 'Secret...',
-    tags: ['React', 'Node.js'],
+    index: '03',
+    title: 'Secret',
+    description: 'A reverse-engineering challenge I am building in my spare time. More details once it is ready to ship — follow along on GitHub.',
+    tags: ['Reverse Engineering', 'CTF', 'React', 'Node.js'],
     link: '#',
     inProgress: true,
     progress: 35,
@@ -232,37 +196,40 @@ const Projects = () => {
     <Section id="projects">
       <AnimatedSection variants={fadeInLeft}>
         <SectionHeader>
-          <SectionIcon type="projects" size={40} />
-          <span className="prompt">&gt; </span>ls ~/projects
+          <span className="prompt">&gt;</span> ls ~/projects
         </SectionHeader>
+        <SectionRule />
       </AnimatedSection>
-      
+
       <motion.div
         variants={staggerDiagonal}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, margin: "-80px" }}
       >
         <ProjectGrid>
-          {projectData.map((project, index) => (
-            <ProjectCard 
+          {projectData.map((project) => (
+            <ProjectCard
               key={project.id}
-              variants={rotateIn}
-              whileHover={{ 
-                y: -8,
-                rotateX: 2,
-                rotateY: 2,
-                transition: { duration: 0.3, ease: "easeOut" }
+              variants={{
+                hidden: { opacity: 0, y: 22 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
               }}
-              whileTap={{ scale: 0.98 }}
+              whileTap={{ scale: 0.985 }}
             >
-              {project.inProgress && <WipBadge>[WIP]</WipBadge>}
+              <CardIndex>
+                <span>{project.index}</span>
+                {project.inProgress && <WipBadge>[WIP]</WipBadge>}
+              </CardIndex>
               <ProjectTitle>{project.title}</ProjectTitle>
               <ProjectDescription>{project.description}</ProjectDescription>
               {project.inProgress && (
-                <ProgressBar>
-                  <Progress $progress={project.progress} />
-                </ProgressBar>
+                <>
+                  <ProgressLabel>progress — {project.progress}%</ProgressLabel>
+                  <ProgressBar>
+                    <Progress $progress={project.progress} />
+                  </ProgressBar>
+                </>
               )}
               <Tags>
                 {project.tags.map((tag, index) => (
@@ -270,7 +237,7 @@ const Projects = () => {
                 ))}
               </Tags>
               <Button href={project.link}>
-                {project.inProgress ? '[preview]' : '[view project →]'}
+                {project.inProgress ? 'preview' : 'view project'}
               </Button>
             </ProjectCard>
           ))}

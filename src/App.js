@@ -5,33 +5,55 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
-import PersonaBackground from './components/PersonaBackground';
-import PersonaCursor from './components/PersonaCursor';
+
+/*
+  THESIS: The portfolio is a console, not a page. The visitor operates it —
+  the CLI hero is the front door and every section is a panel of that same
+  system. It refuses the decorated-portfolio default: no Persona 5 confetti,
+  no floating shapes, no glow-everything. ONE accent (terminal green) carries
+  the signal; red is reserved for the live cursor and the rare danger state;
+  yellow for the single WIP marker. Restraint is the upgrade.
+  OWN-WORLD: near-black phosphor ground, one green accent, hairline borders,
+  JetBrains Mono for the system voice, Outfit for display. Depth comes from
+  layered panels and a single soft shadow, never colored halos.
+*/
 
 const theme = {
-  // Original terminal colors
-  background: '#0a0a0a',
-  secondaryBackground: '#111111',
-  text: '#e0e0e0',
-  secondaryText: '#888888',
-  accent: '#00ff41',
-  accentCyan: '#00d4ff',
-  warning: '#ffb800',
-  border: '#1a1a1a',
-  glowBorder: 'rgba(0, 255, 65, 0.2)',
-  
-  // Persona 5 inspired colors
-  accentRed: '#e60012',
-  accentRedLight: '#ff3a4d',
-  accentRedGlow: 'rgba(230, 0, 18, 0.3)',
-  glowBorderRed: 'rgba(230, 0, 18, 0.2)',
-  accentYellow: '#ffff00',
-  deepBlack: '#000000',
-  offWhite: '#f5f5f5',
-  
+  // Ground
+  background: '#050605',
+  surface: '#0a0c09',
+  panel: '#0e110d',
+  panelRaised: '#12150f',
+  border: '#1e241b',
+  borderStrong: '#2a3326',
+
+  // Ink
+  text: '#d6d8d2',
+  textDim: '#98a090',
+  textMuted: '#6b7365',
+
+  // Accent — terminal green is the only signal color
+  accent: '#33ff66',
+  accentDim: '#1f7a3d',
+  accentFaint: 'rgba(51, 255, 102, 0.06)',
+  accentLine: 'rgba(51, 255, 102, 0.22)',
+
+  // Rare states
+  danger: '#ff3b30',
+  dangerDim: 'rgba(255, 59, 48, 0.82)',
+  warning: '#ffd60a',
+  info: '#5bc8fa',
+
+  // Selection / caret
+  selection: '#33ff66',
+  selectionInk: '#050605',
+
   // Fonts
-  fontMono: "'JetBrains Mono', 'Courier New', monospace",
+  fontMono: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace",
   fontBody: "'Outfit', -apple-system, BlinkMacSystemFont, sans-serif",
+
+  // Elevation
+  shadowPanel: '0 1px 0 rgba(214, 216, 210, 0.035), 0 12px 40px rgba(0, 0, 0, 0.5)',
 };
 
 const GlobalStyle = createGlobalStyle`
@@ -43,7 +65,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: ${props => props.theme.fontBody};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    line-height: 1.6;
   }
 
   * {
@@ -51,12 +73,22 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::selection {
-    background: ${props => props.theme.accent};
-    color: ${props => props.theme.background};
+    background: ${props => props.theme.selection};
+    color: ${props => props.theme.selectionInk};
+  }
+
+  /* Focus rings are part of the system */
+  :focus-visible {
+    outline: 2px solid ${props => props.theme.accent};
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Caret in the terminal input */
+  input {
+    caret-color: ${props => props.theme.accent};
   }
 `;
-
-
 
 const AppContainer = styled.div`
   display: flex;
@@ -66,18 +98,16 @@ const AppContainer = styled.div`
 
 const Main = styled.main`
   flex: 1;
-  width: 90%;
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 72px 24px 96px;
 `;
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <PersonaBackground />
-      <PersonaCursor />
       <AppContainer>
         <Hero />
         <Header />

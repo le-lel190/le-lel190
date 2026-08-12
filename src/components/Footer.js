@@ -2,103 +2,102 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
-import SectionIcon from './SectionIcon';
 import { fadeInLeft, fadeInUp, staggerContainer } from '../utils/animations';
 
 const FooterContainer = styled.footer`
   background-color: ${props => props.theme.background};
-  padding: 80px 0 30px;
+  border-top: 1px solid ${props => props.theme.border};
+  padding: 88px 0 36px;
 `;
 
 const FooterContent = styled.div`
-  width: 90%;
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1060px;
   margin: 0 auto;
-  padding: 0 15px;
-  text-align: center;
+  padding: 0 24px;
 `;
 
 const SectionHeader = styled.div`
   font-family: ${props => props.theme.fontMono};
-  font-size: 1.1rem;
-  color: ${props => props.theme.accent};
-  margin-bottom: 30px;
-  display: inline-flex;
-  align-items: center;
-  position: relative;
+  font-size: 1.05rem;
+  color: ${props => props.theme.text};
+  margin-bottom: 12px;
 
-  .prompt { color: ${props => props.theme.secondaryText}; }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 100px;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      ${props => props.theme.accentRed} 0%,
-      transparent 100%
-    );
+  .prompt {
+    color: ${props => props.theme.accent};
+    margin-right: 8px;
   }
+`;
+
+const SectionRule = styled.div`
+  width: 168px;
+  height: 1px;
+  background: linear-gradient(90deg, ${props => props.theme.accent}, transparent);
+  margin-bottom: 40px;
+`;
+
+const ContactIntro = styled.p`
+  color: ${props => props.theme.textDim};
+  font-size: 0.98rem;
+  max-width: 440px;
+  margin-bottom: 32px;
+  line-height: 1.65;
 `;
 
 const ContactLinks = styled.div`
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  gap: 12px;
   flex-wrap: wrap;
 `;
 
 const ContactLink = styled(motion.a)`
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   color: ${props => props.theme.text};
   text-decoration: none;
   font-family: ${props => props.theme.fontMono};
-  font-size: 0.9rem;
-  padding: 10px 20px;
-  border: 1px solid ${props => props.theme.border};
-  border-radius: 4px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  font-size: 0.89rem;
+  padding: 11px 18px;
+  border: 1px solid ${props => props.theme.borderStrong};
+  border-radius: 7px;
+  background: ${props => props.theme.surface};
+  transition: all 0.18s ease;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: ${props => props.theme.glowBorderRed};
-    transition: left 0.3s ease;
-    z-index: -1;
+  i {
+    font-size: 1.05rem;
+    color: ${props => props.theme.textDim};
+    transition: color 0.18s ease;
   }
 
   &:hover {
-    color: ${props => props.theme.accentRed};
-    border-color: ${props => props.theme.accentRed};
-    box-shadow: 0 0 15px ${props => props.theme.glowBorderRed};
+    border-color: ${props => props.theme.accentLine};
+    color: ${props => props.theme.accent};
+    background: ${props => props.theme.accentFaint};
+    i { color: ${props => props.theme.accent}; }
   }
-
-  &:hover::before {
-    left: 0;
-  }
-
-  i { font-size: 1.1rem; }
 `;
 
 const Copyright = styled.div`
-  text-align: center;
-  margin-top: 40px;
-  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 56px;
+  padding-top: 22px;
   border-top: 1px solid ${props => props.theme.border};
-  color: ${props => props.theme.secondaryText};
+  color: ${props => props.theme.textMuted};
   font-family: ${props => props.theme.fontMono};
-  font-size: 0.75rem;
+  font-size: 0.74rem;
+
+  @media (max-width: 620px) {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+`;
+
+const StatusLine = styled.span`
+  color: ${props => props.theme.accent};
 `;
 
 const Footer = () => {
@@ -107,11 +106,17 @@ const Footer = () => {
       <FooterContent>
         <AnimatedSection variants={fadeInLeft}>
           <SectionHeader>
-            <SectionIcon type="contact" size={40} />
-            <span className="prompt">&gt; </span>./contact.sh
+            <span className="prompt">&gt;</span> ./contact.sh
           </SectionHeader>
+          <SectionRule />
         </AnimatedSection>
-        
+
+        <AnimatedSection variants={fadeInUp}>
+          <ContactIntro>
+            Open to internships and security-focused roles. Best reached on GitHub or LinkedIn — I read everything.
+          </ContactIntro>
+        </AnimatedSection>
+
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -119,50 +124,42 @@ const Footer = () => {
           viewport={{ once: true, margin: "-50px" }}
         >
           <ContactLinks>
-            <ContactLink 
-              href="https://github.com/le-lel190" 
-              target="_blank" 
+            <ContactLink
+              href="https://github.com/le-lel190"
+              target="_blank"
               rel="noopener noreferrer"
               variants={fadeInUp}
-              whileHover={{ 
-                y: -4,
-                transition: { type: "spring", stiffness: 400, damping: 10 }
-              }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
             >
               <i className="fab fa-github"></i> GitHub
             </ContactLink>
-            <ContactLink 
-              href="https://www.linkedin.com/in/le-anson-cheung/" 
-              target="_blank" 
+            <ContactLink
+              href="https://www.linkedin.com/in/le-anson-cheung/"
+              target="_blank"
               rel="noopener noreferrer"
               variants={fadeInUp}
-              whileHover={{ 
-                y: -4,
-                transition: { type: "spring", stiffness: 400, damping: 10 }
-              }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
             >
               <i className="fab fa-linkedin"></i> LinkedIn
             </ContactLink>
-            <ContactLink 
-              href="https://linktr.ee/lel190" 
-              target="_blank" 
+            <ContactLink
+              href="https://linktr.ee/lel190"
+              target="_blank"
               rel="noopener noreferrer"
               variants={fadeInUp}
-              whileHover={{ 
-                y: -4,
-                transition: { type: "spring", stiffness: 400, damping: 10 }
-              }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
             >
               <i className="fas fa-link"></i> Linktree
             </ContactLink>
           </ContactLinks>
         </motion.div>
-        
+
         <Copyright>
-          <p>&copy; {new Date().getFullYear()} lel190</p>
+          <span>&copy; {new Date().getFullYear()} lel190</span>
+          <StatusLine>● system online</StatusLine>
         </Copyright>
       </FooterContent>
     </FooterContainer>

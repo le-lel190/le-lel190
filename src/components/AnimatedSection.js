@@ -39,6 +39,7 @@ const AnimatedSection = ({
   // Check if user prefers reduced motion
   const prefersReducedMotion = 
     typeof window !== 'undefined' && 
+    typeof window.matchMedia === 'function' && 
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // If user prefers reduced motion, use simplified animation

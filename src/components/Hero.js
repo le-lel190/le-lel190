@@ -4,15 +4,15 @@ import { motion } from 'framer-motion';
 import { springIn } from '../utils/animations';
 
 const bootLines = [
-  '[OK] Loading kernel modules...',
-  '[OK] Mounting filesystems...',
-  '[OK] Starting network services...',
-  '[OK] Initializing security protocols...',
-  '[OK] Loading user profile...',
+  '[ OK ] loading kernel modules',
+  '[ OK ] mounting filesystems',
+  '[ OK ] starting network services',
+  '[ OK ] verifying credentials',
+  '[ OK ] loading user profile: anson',
 ];
 
 const HELP_HINT = "Type 'help' to list available commands.";
-const PROMPT = 'visitor@anson:~$';
+const PROMPT = 'visitor@lel190:~$';
 
 const COMMAND_GROUPS = [
   'core    :: help, whoami, about, projects, skills, contact, clear',
@@ -41,77 +41,59 @@ const CONTACT_LINES = [
 const HeroContainer = styled.div`
   position: relative;
   height: 100vh;
+  min-height: 560px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${props => props.theme.background};
+  background:
+    radial-gradient(1200px 520px at 78% -10%, rgba(51, 255, 102, 0.045), transparent 62%),
+    radial-gradient(900px 480px at 8% 118%, rgba(84, 199, 128, 0.028), transparent 58%),
+    ${props => props.theme.background};
   overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0, 255, 65, 0.03) 2px,
-      rgba(0, 255, 65, 0.03) 4px
-    );
-    pointer-events: none;
-    z-index: 1;
-  }
+  padding: 112px 24px 96px;
 `;
 
 const TerminalWindow = styled(motion.div)`
   position: relative;
   z-index: 2;
-  max-width: 700px;
-  width: 90%;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid ${props => props.theme.glowBorder};
-  border-radius: 8px;
-  padding: 30px;
+  width: 640px;
+  max-width: 100%;
+  background: ${props => props.theme.panel};
+  border: 1px solid ${props => props.theme.borderStrong};
+  border-radius: 10px;
+  padding: 26px 28px 28px;
   font-family: ${props => props.theme.fontMono};
-  box-shadow: 0 0 40px rgba(0, 255, 65, 0.1);
+  box-shadow: ${props => props.theme.shadowPanel};
   cursor: text;
   overflow: hidden;
 
-  &::before {
+  &::after {
+    /* hairline top accent — the only decorative gradient */
     content: '';
     position: absolute;
     top: 0;
-    left: -50%;
-    width: 150%;
-    height: 4px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      ${props => props.theme.accentRed} 30%,
-      ${props => props.theme.accentRed} 70%,
-      transparent 100%
-    );
-    transform: rotate(-5deg);
-    transform-origin: center;
-    animation: redAccentPulse 3s ease-in-out infinite;
-  }
-
-  @keyframes redAccentPulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
+    left: 44px;
+    right: 68px;
+    height: 1px;
+    background: linear-gradient(90deg, ${props => props.theme.accent}, transparent 74%);
   }
 `;
 
 const TerminalHeader = styled.div`
   display: flex;
-  gap: 6px;
-  margin-bottom: 20px;
-  padding-bottom: 12px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  padding-bottom: 13px;
   border-bottom: 1px solid ${props => props.theme.border};
+
+  span {
+    font-size: 0.67rem;
+    letter-spacing: 0.07em;
+    color: ${props => props.theme.textMuted};
+    text-transform: uppercase;
+  }
 `;
 
 const TerminalDot = styled.div`
@@ -121,24 +103,28 @@ const TerminalDot = styled.div`
   background: ${props => props.$color};
 `;
 
+const TerminalTitle = styled.span`
+  margin-left: auto;
+`;
+
 const TerminalLine = styled.div`
-  color: ${props => props.$isCommand ? props.theme.accent : props.theme.secondaryText};
-  font-size: 0.85rem;
-  line-height: 1.8;
+  color: ${props => props.$isCommand ? props.theme.accent : props.theme.textDim};
+  font-size: 0.83rem;
+  line-height: 1.85;
   white-space: pre-wrap;
   word-break: break-word;
 `;
 
 const PromptForm = styled.form`
-  margin-top: 8px;
+  margin-top: 10px;
 `;
 
 const PromptRow = styled.label`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   color: ${props => props.theme.accent};
-  font-size: 0.85rem;
+  font-size: 0.87rem;
 `;
 
 const PromptText = styled.span`
@@ -153,8 +139,7 @@ const PromptInput = styled.input`
   background: transparent;
   color: ${props => props.theme.text};
   font-family: inherit;
-  font-size: 0.85rem;
-  caret-color: ${props => props.theme.accent};
+  font-size: 0.87rem;
 `;
 
 const SrOnly = styled.span`
@@ -171,78 +156,63 @@ const SrOnly = styled.span`
 
 const HeroButtons = styled.div`
   display: flex;
-  gap: 15px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 22px;
   flex-wrap: wrap;
-  animation: slideInFromBottom 0.5s ease-out;
 `;
 
 const HeroButton = styled(motion.a)`
-  padding: 10px 20px;
+  padding: 9px 17px;
   font-family: ${props => props.theme.fontMono};
-  font-size: 0.85rem;
+  font-size: 0.79rem;
   text-decoration: none;
-  border-radius: 4px;
-  transition: all 0.3s ease;
+  border-radius: 5px;
+  transition: all 0.18s ease;
   cursor: pointer;
   position: relative;
   overflow: hidden;
   color: ${props => props.$primary ? props.theme.background : props.theme.accent};
   background: ${props => props.$primary ? props.theme.accent : 'transparent'};
-  border: 1px solid ${props => props.theme.accent};
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 2px;
-    background: ${props => props.theme.accentRed};
-    transition: width 0.3s ease;
-  }
+  border: 1px solid ${props => props.$primary ? props.theme.accent : props.theme.accentLine};
 
   &:hover {
-    box-shadow: 0 0 15px ${props => props.theme.glowBorder};
-    border-color: ${props => props.$primary ? props.theme.accent : props.theme.accentRed};
-  }
-
-  &:hover::before {
-    width: 100%;
+    background: ${props => props.$primary ? props.theme.accent : props.theme.accentFaint};
+    border-color: ${props => props.theme.accent};
   }
 `;
 
 const SkipButton = styled.button`
   position: absolute;
-  bottom: 30px;
-  right: 30px;
+  bottom: 76px;
+  right: 52px;
   background: none;
-  border: 1px solid ${props => props.theme.border};
-  color: ${props => props.theme.secondaryText};
+  border: 1px solid ${props => props.theme.borderStrong};
+  color: ${props => props.theme.textMuted};
   font-family: ${props => props.theme.fontMono};
-  font-size: 0.75rem;
-  padding: 6px 14px;
+  font-size: 0.73rem;
+  padding: 6px 13px;
   cursor: pointer;
-  border-radius: 3px;
+  border-radius: 4px;
   z-index: 3;
   opacity: 0;
-  animation: fadeIn 1s ease-out 1s forwards;
-  transition: color 0.3s ease;
+  animation: fadeIn 0.6s ease-out 0.9s forwards;
+  transition: color 0.18s ease, border-color 0.18s ease;
 
   &:hover {
     color: ${props => props.theme.accent};
+    border-color: ${props => props.theme.accentLine};
   }
 `;
 
 const ScrollIndicator = styled.div`
   position: absolute;
-  bottom: 20px;
+  bottom: 116px;
   left: 50%;
   transform: translateX(-50%);
-  width: 24px;
-  height: 40px;
-  border: 2px solid ${props => props.theme.accentRed};
-  border-radius: 12px;
+  width: 19px;
+  height: 29px;
+  border: 1.5px solid ${props => props.theme.borderStrong};
+  border-radius: 10px;
   cursor: pointer;
   z-index: 3;
   opacity: 0;
@@ -253,18 +223,18 @@ const ScrollIndicator = styled.div`
     content: '';
     position: absolute;
     left: 50%;
-    top: 8px;
+    top: 6px;
     transform: translateX(-50%);
-    width: 4px;
-    height: 4px;
+    width: 3px;
+    height: 3px;
     border-radius: 50%;
-    background: ${props => props.theme.accentRed};
-    animation: scrollDot 1.5s infinite;
+    background: ${props => props.theme.accent};
+    animation: scrollDot 1.6s infinite;
   }
 
   @keyframes scrollDot {
     0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-    100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(9px); }
   }
 `;
 
@@ -320,13 +290,13 @@ const Hero = () => {
     if (visibleBootLines.length < bootLines.length) {
       const timer = setTimeout(() => {
         setVisibleBootLines(bootLines.slice(0, visibleBootLines.length + 1));
-      }, 300);
+      }, 260);
       return () => clearTimeout(timer);
     }
 
     const timer = setTimeout(() => {
       enterInteractiveMode();
-    }, 500);
+    }, 450);
 
     return () => clearTimeout(timer);
   }, [enterInteractiveMode, phase, skipped, visibleBootLines]);
@@ -342,15 +312,15 @@ const Hero = () => {
       pushOutput(['Available commands:', ...COMMAND_GROUPS]);
     },
     whoami: () => {
-      pushOutput(['Anson Cheung :: CUHK CS student focused on cybersecurity, CTF, and reverse engineering.']);
+      pushOutput(['anson :: CUHK CS student :: cybersecurity, CTF, reverse engineering']);
     },
     about: () => {
       pushOutput([
-        'Name      :: Anson Cheung',
-        'Handle    :: lel190',
-        'Role      :: CS Student @ CUHK',
-        'Interests :: Cybersecurity, CTF, Reverse Engineering',
-        'Status    :: Building things...',
+        'name      :: Anson Cheung',
+        'handle    :: lel190',
+        'role      :: CS student @ CUHK',
+        'focus     :: cybersecurity, CTF, reverse engineering',
+        'status    :: building things',
       ]);
     },
     projects: () => {
@@ -384,7 +354,7 @@ const Hero = () => {
       pushOutput(['/home/visitor']);
     },
     uname: () => {
-      pushOutput(['portfolioOS 1.0.0 x86_64']);
+      pushOutput(['lel190OS 1.0.0 x86_64']);
     },
     'cat /etc/motd': () => {
       pushOutput(['Welcome to lel190.dev — type help and explore the system.']);
@@ -426,7 +396,7 @@ const Hero = () => {
 
   return (
     <HeroContainer>
-      <TerminalWindow 
+      <TerminalWindow
         onClick={focusInput}
         variants={springIn}
         initial="hidden"
@@ -436,6 +406,7 @@ const Hero = () => {
           <TerminalDot $color="#ff5f57" />
           <TerminalDot $color="#ffbd2e" />
           <TerminalDot $color="#28c840" />
+          <TerminalTitle>lel190 — secure shell</TerminalTitle>
         </TerminalHeader>
 
         {visibleBootLines.map((line, i) => (
@@ -476,32 +447,26 @@ const Hero = () => {
                 e.preventDefault();
                 scrollToContent();
               }}
-              whileHover={{ 
-                y: -3,
-                transition: { type: "spring", stiffness: 400, damping: 10 }
-              }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ y: -1 }}
+              whileTap={{ scale: 0.97 }}
             >
-              [view projects]
+              view projects
             </HeroButton>
             <HeroButton
               href="https://github.com/le-lel190"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ 
-                y: -3,
-                transition: { type: "spring", stiffness: 400, damping: 10 }
-              }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ y: -1 }}
+              whileTap={{ scale: 0.97 }}
             >
-              [github]
+              github
             </HeroButton>
           </HeroButtons>
         )}
       </TerminalWindow>
 
       {phase === 'boot' && (
-        <SkipButton onClick={skipAnimation}>skip ▸</SkipButton>
+        <SkipButton onClick={skipAnimation}>skip intro</SkipButton>
       )}
 
       {phase === 'interactive' && (
