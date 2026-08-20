@@ -31,13 +31,25 @@ const SectionRule = styled.div`
 `;
 
 const TerminalBlock = styled.div`
-  background: ${props => props.theme.panel};
+  background: linear-gradient(180deg, rgba(57, 255, 114, 0.018), transparent 24%), ${props => props.theme.panel};
   border: 1px solid ${props => props.theme.borderStrong};
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 30px 32px;
   position: relative;
   overflow: hidden;
   box-shadow: ${props => props.theme.shadowPanel};
+
+  &::before {
+    content: 'skills.txt // read-only';
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-family: ${props => props.theme.fontMono};
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: ${props => props.theme.textMuted};
+    text-transform: uppercase;
+  }
 
   &::after {
     content: '';
@@ -48,14 +60,21 @@ const TerminalBlock = styled.div`
     height: 1px;
     background: linear-gradient(90deg, ${props => props.theme.accent}, transparent 76%);
   }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 `;
 
 const CategoryHeader = styled.h3`
   font-family: ${props => props.theme.fontMono};
   font-size: 0.8rem;
+  letter-spacing: 0.06em;
   color: ${props => props.theme.textDim};
   margin-bottom: 14px;
   margin-top: ${props => props.$first ? '0' : '28px'};
+  text-transform: uppercase;
 
   &::before {
     content: '# ';
@@ -75,7 +94,7 @@ const SkillChip = styled(motion.span)`
   font-size: 0.79rem;
   padding: 5px 12px;
   border: 1px solid ${props => props.theme.borderStrong};
-  border-radius: 5px;
+  border-radius: 3px;
   color: ${props => props.theme.text};
   background: ${props => props.theme.surface};
   transition: all 0.18s ease;

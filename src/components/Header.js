@@ -7,12 +7,12 @@ const HeaderContainer = styled.header`
   top: 0;
   left: 0;
   right: 0;
-  background-color: ${props => props.$scrolled ? 'rgba(5, 6, 5, 0.86)' : 'transparent'};
+  background-color: ${props => props.$scrolled ? 'rgba(5, 6, 5, 0.92)' : 'transparent'};
   backdrop-filter: ${props => props.$scrolled ? 'blur(12px)' : 'none'};
   -webkit-backdrop-filter: ${props => props.$scrolled ? 'blur(12px)' : 'none'};
-  box-shadow: ${props => props.$scrolled ? '0 1px 0 rgba(214, 216, 210, 0.06)' : 'none'};
+  border-bottom: 1px solid ${props => props.$scrolled ? props.theme.border : 'transparent'};
   padding: 14px 0;
-  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
   z-index: 1000;
 `;
 
@@ -28,11 +28,17 @@ const HeaderContent = styled.div`
 
 const Logo = styled(motion.div)`
   font-family: ${props => props.theme.fontMono};
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
   cursor: pointer;
   color: ${props => props.theme.text};
-  letter-spacing: 0.015em;
+  letter-spacing: 0.045em;
+
+  &::before {
+    content: '~/';
+    color: ${props => props.theme.textMuted};
+    font-weight: 400;
+  }
 
   em {
     font-style: normal;
@@ -74,7 +80,7 @@ const NavItem = styled(motion.a)`
   color: ${props => props.theme.textDim};
   font-family: ${props => props.theme.fontMono};
   font-size: 0.82rem;
-  border-radius: 5px;
+  border-radius: 3px;
   position: relative;
   transition: color 0.18s ease, background-color 0.18s ease;
 
@@ -102,7 +108,7 @@ const HamburgerButton = styled.button`
   display: none;
   background: none;
   border: 1px solid ${props => props.theme.borderStrong};
-  border-radius: 6px;
+  border-radius: 3px;
   cursor: pointer;
   padding: 9px 10px;
   z-index: 1001;

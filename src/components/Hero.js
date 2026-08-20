@@ -61,15 +61,30 @@ const TerminalWindow = styled(motion.div)`
   max-width: 100%;
   background: ${props => props.theme.panel};
   border: 1px solid ${props => props.theme.borderStrong};
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 26px 28px 28px;
   font-family: ${props => props.theme.fontMono};
   box-shadow: ${props => props.theme.shadowPanel};
   cursor: text;
   overflow: hidden;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      ${props => props.theme.scanline} 3px,
+      ${props => props.theme.scanline} 4px
+    );
+    opacity: 0.6;
+  }
+
 
   &::after {
-    /* hairline top accent — the only decorative gradient */
+    /* phosphor hairline — the terminal's only bright edge */
     content: '';
     position: absolute;
     top: 0;
@@ -83,28 +98,29 @@ const TerminalWindow = styled(motion.div)`
 const TerminalHeader = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   margin-bottom: 22px;
   padding-bottom: 13px;
-  border-bottom: 1px solid ${props => props.theme.border};
+  border-bottom: 1px dashed ${props => props.theme.border};
 
   span {
     font-size: 0.67rem;
-    letter-spacing: 0.07em;
+    letter-spacing: 0.1em;
     color: ${props => props.theme.textMuted};
     text-transform: uppercase;
   }
 `;
 
 const TerminalDot = styled.div`
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
   background: ${props => props.$color};
 `;
 
 const TerminalTitle = styled.span`
   margin-left: auto;
+  letter-spacing: 0.12em;
 `;
 
 const TerminalLine = styled.div`
@@ -113,6 +129,7 @@ const TerminalLine = styled.div`
   line-height: 1.85;
   white-space: pre-wrap;
   word-break: break-word;
+  text-shadow: ${props => props.$isCommand ? `0 0 8px ${props.theme.accentLine}` : 'none'};
 `;
 
 const PromptForm = styled.form`
@@ -125,6 +142,7 @@ const PromptRow = styled.label`
   gap: 10px;
   color: ${props => props.theme.accent};
   font-size: 0.87rem;
+  text-shadow: 0 0 8px ${props => props.theme.accentLine};
 `;
 
 const PromptText = styled.span`
@@ -165,8 +183,9 @@ const HeroButton = styled(motion.a)`
   padding: 9px 17px;
   font-family: ${props => props.theme.fontMono};
   font-size: 0.79rem;
+  letter-spacing: 0.02em;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 3px;
   transition: all 0.18s ease;
   cursor: pointer;
   position: relative;
@@ -192,7 +211,7 @@ const SkipButton = styled.button`
   font-size: 0.73rem;
   padding: 6px 13px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 3px;
   z-index: 3;
   opacity: 0;
   animation: fadeIn 0.6s ease-out 0.9s forwards;
@@ -209,10 +228,10 @@ const ScrollIndicator = styled.div`
   bottom: 116px;
   left: 50%;
   transform: translateX(-50%);
-  width: 19px;
-  height: 29px;
-  border: 1.5px solid ${props => props.theme.borderStrong};
-  border-radius: 10px;
+  width: 17px;
+  height: 27px;
+  border: 1px solid ${props => props.theme.borderStrong};
+  border-radius: 3px;
   cursor: pointer;
   z-index: 3;
   opacity: 0;
@@ -227,7 +246,7 @@ const ScrollIndicator = styled.div`
     transform: translateX(-50%);
     width: 3px;
     height: 3px;
-    border-radius: 50%;
+    border-radius: 1px;
     background: ${props => props.theme.accent};
     animation: scrollDot 1.6s infinite;
   }

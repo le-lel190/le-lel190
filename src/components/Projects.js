@@ -45,24 +45,41 @@ const ProjectGrid = styled.div`
 `;
 
 const ProjectCard = styled(motion.div)`
-  background-color: ${props => props.theme.surface};
+  background: linear-gradient(180deg, rgba(57, 255, 114, 0.018), transparent 28%), ${props => props.theme.surface};
   border: 1px solid ${props => props.theme.border};
-  border-radius: 12px;
-  padding: 24px 22px 20px;
+  border-radius: 6px;
+  padding: 22px 20px 18px;
   display: flex;
   flex-direction: column;
   position: relative;
   transition: border-color 0.2s ease, transform 0.2s ease;
 
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 18px;
+    width: 42px;
+    height: 1px;
+    background: ${props => props.theme.accentDim};
+    transform-origin: left center;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
   &:hover {
     border-color: ${props => props.theme.borderStrong};
     transform: translateY(-3px);
+    &::before {
+      transform: scaleX(1.62);
+      background: ${props => props.theme.accent};
+    }
   }
 `;
 
 const CardIndex = styled.div`
   font-family: ${props => props.theme.fontMono};
   font-size: 0.71rem;
+  letter-spacing: 0.08em;
   color: ${props => props.theme.textMuted};
   margin-bottom: 18px;
   display: flex;
@@ -73,10 +90,10 @@ const CardIndex = styled.div`
 const ProjectTitle = styled.h3`
   margin-bottom: 10px;
   color: ${props => props.theme.text};
-  font-family: ${props => props.theme.fontBody};
-  font-size: 1.18rem;
-  font-weight: 650;
-  letter-spacing: -0.012em;
+  font-family: ${props => props.theme.fontMono};
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 `;
 
 const ProjectDescription = styled.p`
@@ -99,7 +116,7 @@ const Tag = styled.span`
   font-size: 0.69rem;
   padding: 3px 8px;
   border: 1px solid ${props => props.theme.borderStrong};
-  border-radius: 4px;
+  border-radius: 2px;
   color: ${props => props.theme.textDim};
 `;
 
@@ -114,7 +131,7 @@ const Button = styled.a`
   color: ${props => props.theme.accent};
   background: transparent;
   border: 1px solid ${props => props.theme.accentLine};
-  border-radius: 6px;
+  border-radius: 3px;
   text-decoration: none;
   transition: all 0.18s ease;
 
@@ -137,7 +154,7 @@ const WipBadge = styled.div`
   color: ${props => props.theme.warning};
   border: 1px solid ${props => props.theme.warning};
   padding: 2px 8px;
-  border-radius: 4px;
+  border-radius: 2px;
 `;
 
 const ProgressLabel = styled.div`
@@ -150,7 +167,7 @@ const ProgressLabel = styled.div`
 const ProgressBar = styled.div`
   height: 4px;
   background-color: ${props => props.theme.border};
-  border-radius: 99px;
+  border-radius: 2px;
   margin-bottom: 18px;
   overflow: hidden;
 `;
@@ -159,7 +176,7 @@ const Progress = styled.div`
   height: 100%;
   width: ${props => props.$progress}%;
   background-color: ${props => props.theme.warning};
-  border-radius: 99px;
+  border-radius: 2px;
 `;
 
 const projectData = [

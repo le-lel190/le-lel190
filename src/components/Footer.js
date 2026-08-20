@@ -60,7 +60,7 @@ const ContactLink = styled(motion.a)`
   font-size: 0.89rem;
   padding: 11px 18px;
   border: 1px solid ${props => props.theme.borderStrong};
-  border-radius: 7px;
+  border-radius: 3px;
   background: ${props => props.theme.surface};
   transition: all 0.18s ease;
 
@@ -98,6 +98,7 @@ const Copyright = styled.div`
 
 const StatusLine = styled.span`
   color: ${props => props.theme.accent};
+  text-shadow: 0 0 8px ${props => props.theme.accentLine};
 `;
 
 const Footer = () => {

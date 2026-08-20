@@ -19,6 +19,7 @@ code {
 
 html {
   scroll-behavior: smooth;
+  scrollbar-color: #1c291e #050605;
 }
 
 /* Browser surfaces belong to the design system */
@@ -32,18 +33,18 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e241b;
+  background: #1c291e;
   border: 2px solid #050605;
-  border-radius: 6px;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2a3326;
+  background: #2b402e;
 }
 
 /* Selection is themed in App.js; keep a fallback for non-JS contexts */
 ::selection {
-  background: #33ff66;
+  background: #39ff72;
   color: #050605;
 }
 
