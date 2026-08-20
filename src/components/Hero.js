@@ -49,7 +49,7 @@ const HeroContainer = styled.div`
   background:
     radial-gradient(1200px 520px at 78% -10%, rgba(51, 255, 102, 0.045), transparent 62%),
     radial-gradient(900px 480px at 8% 118%, rgba(84, 199, 128, 0.028), transparent 58%),
-    ${props => props.theme.background};
+    /*rgba(5, 6, 5, 0.34);*/
   overflow: hidden;
   padding: 112px 24px 96px;
 `;
@@ -64,7 +64,7 @@ const TerminalWindow = styled(motion.div)`
   border-radius: 6px;
   padding: 26px 28px 28px;
   font-family: ${props => props.theme.fontMono};
-  box-shadow: ${props => props.theme.shadowPanel};
+  /*box-shadow: ${props => props.theme.shadowPanel};*/
   cursor: text;
   overflow: hidden;
   &::before {

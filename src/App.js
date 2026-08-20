@@ -5,6 +5,7 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
+import LainDataStream from './components/LainDataStream';
 
 /*
   THESIS: The portfolio is a console, not a page. The visitor operates it —
@@ -117,6 +118,8 @@ const GlobalStyle = createGlobalStyle`
 
 
 const AppContainer = styled.div`
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -134,6 +137,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <LainDataStream />
       <AppContainer>
         <Hero />
         <Header />

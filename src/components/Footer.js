@@ -5,7 +5,7 @@ import AnimatedSection from './AnimatedSection';
 import { fadeInLeft, fadeInUp, staggerContainer } from '../utils/animations';
 
 const FooterContainer = styled.footer`
-  background-color: ${props => props.theme.background};
+  background-color: rgba(5, 6, 5, 0.78);
   border-top: 1px solid ${props => props.theme.border};
   padding: 88px 0 36px;
 `;
