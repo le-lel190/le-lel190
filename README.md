@@ -1,18 +1,33 @@
-## Hi there 👋
+# Portfolio
 
-- 📚 I'm currently studying computer science in CUHK
-- 🌱 I'm currently exploring on different frontend frameworks...
-- 📫 Feel free to reach me via Discord: 190 (yes my username is literally 190)
+Terminal-inspired portfolio built with React 18. Dark-only console aesthetic with interactive CLI hero, animated data streams, and Serial Experiments Lain visual references.
 
-## About This Portfolio
+**Live:** <https://le-lel190.github.io/le-lel190/>
 
-This is my GitHub profile page built with React.
+## Stack
 
-### Technologies Used
+- React 18 + styled-components
+- framer-motion for scroll animations
+- Canvas-based data stream background
+- GitHub Pages deployment
 
-- React
-- GitHub Pages
+## Local Development
 
-## Contributor Notes
+```bash
+npm install
+npm start       # http://localhost:3000
+npm test        # run test suite
+npm run build   # production build
+```
 
-For repository workflow, commands, and editing guidance, see `AGENTS.md`.
+## Deploy
+
+Push to `main` triggers GitHub Actions deployment to `gh-pages` branch. Manual deploy:
+
+```bash
+npm run deploy
+```
+
+## Architecture
+
+See `AGENTS.md` for component structure, animation system, and editing guidelines.
