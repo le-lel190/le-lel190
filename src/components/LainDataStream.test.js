@@ -105,23 +105,6 @@ it('pauses offscreen and in hidden tabs, caps drawing at 30fps, and cleans up', 
   expect(window.requestAnimationFrame).not.toHaveBeenCalled();
 });
 
-it('lets the visitor pause the painted frame and resume', () => {
-  mount();
-  enterViewport();
-  const button = container.querySelector('button');
-  context.clearRect.mockClear();
-  act(() => button.click());
-  expect(button.getAttribute('aria-pressed')).toBe('true');
-  expect(button.textContent).toBe('Resume background');
-  expect(window.cancelAnimationFrame).toHaveBeenCalledWith(42);
-  expect(context.clearRect).not.toHaveBeenCalled();
-  window.requestAnimationFrame.mockClear();
-  act(() => button.click());
-  enterViewport();
-  expect(button.getAttribute('aria-pressed')).toBe('false');
-  expect(window.requestAnimationFrame).toHaveBeenCalledTimes(1);
-});
-
 it('keeps the artwork available when canvas is unsupported', () => {
   HTMLCanvasElement.prototype.getContext.mockReturnValue(null);
   mount();

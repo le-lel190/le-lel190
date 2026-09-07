@@ -92,14 +92,14 @@ const Skills = () => (
       </SkillList>
     </Toolbox>
     <PersonalCorner aria-labelledby="personal-heading">
-      <FileLabel>~/personal/README.txt<span>( ͡° ͜ʖ ͡°)</span></FileLabel>
+      <FileLabel>~/personal/README.md<span>( ͡° ͜ʖ ͡°)</span></FileLabel>
       <PersonalContent>
         <Profile>
           <img src={`${process.env.PUBLIC_URL}/images/avatar.jpg`} alt="lel190's avatar" width="76" height="76" loading="lazy" />
-          <div><h3 id="personal-heading">Behind the shell.</h3><p>Anson / lel190</p></div>
+          <div><h3 id="personal-heading">"The ghost in the shell."</h3><p>Anson / lel190</p></div>
         </Profile>
-        <p>Cybersecurity, CTFs, and reverse engineering on one side. Anime, rhythm game enjoyer (??? I was top 100 in HK in osu!mania before though), and a casual gamer.</p>
-        <p>And I have to say it was Cheat Engine who taught me so many stuff.</p>
+        <p>Cybersecurity, CTFs, and reverse engineering on one side. Anime, rhythm game enjoyer (??? I was top 100 in HK in osu!mania!!!), and a casual gamer.</p>
+        <p>And I have to say it was Cheat Engine which led me to many stuff.</p>
         <Stickers aria-label="Personal interests"><span>LINUX ENJOYER</span><span>TINY BIT OF ANIME</span><span>AVERAGE CHEAT ENGINE ENJOYER</span></Stickers>
       </PersonalContent>
     </PersonalCorner>

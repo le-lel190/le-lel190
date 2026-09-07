@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled, { useTheme } from 'styled-components';
 import lainImage from '../assets/lain_bg.webp';
 
@@ -49,21 +49,6 @@ const ColorWash = styled.div`
     linear-gradient(0deg, ${props => props.theme.background}, transparent 35%);
 `;
 
-const MotionButton = styled.button`
-  position: absolute;
-  top: 24px;
-  right: 0;
-  min-height: 44px;
-  padding: 8px 12px;
-  border: 1px solid ${props => props.theme.border};
-  background: ${props => props.theme.panel};
-  color: ${props => props.theme.textDim};
-  font: 0.7rem ${props => props.theme.fontMono};
-  cursor: pointer;
-  &:hover { color: ${props => props.theme.accent}; }
-  @media (max-width: 780px) { top: 8px; }
-  @media (prefers-reduced-motion: reduce) { display: none; }
-`;
 
 const randomBetween = (min, max) => min + Math.random() * (max - min);
 
@@ -142,12 +127,10 @@ const drawStreamFrame = (context, width, height, streams, packets, fontSize, del
 const LainDataStream = () => {
   const canvasRef = useRef(null);
   const theme = useTheme();
-  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    // Keep the last painted frame when the visitor pauses the background.
-    if (!canvas || paused) return undefined;
+    if (!canvas) return undefined;
 
     const context = canvas.getContext('2d');
     if (!context) return undefined;
@@ -235,7 +218,7 @@ const LainDataStream = () => {
       document.removeEventListener('visibilitychange', syncAnimation);
       motionQuery.removeEventListener?.('change', syncAnimation);
     };
-  }, [paused, theme]);
+  }, [theme]);
 
   return (
     <>
@@ -244,9 +227,6 @@ const LainDataStream = () => {
         <StreamCanvas ref={canvasRef} />
         <ColorWash />
       </BackgroundLayer>
-      <MotionButton type="button" aria-pressed={paused} onClick={() => setPaused(value => !value)}>
-        {paused ? 'Resume background' : 'Pause background'}
-      </MotionButton>
     </>
   );
 };
