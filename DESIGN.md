@@ -38,6 +38,12 @@ typography:
     fontSize: "0.9rem"
     fontWeight: 400
     lineHeight: 1.75
+  wordmark:
+    fontFamily: "lel190 Pixel, JetBrains Mono, ui-monospace, monospace"
+    fontSize: "1.75rem"
+    fontWeight: 400
+    lineHeight: 1.4
+    letterSpacing: "0.08em"
   label:
     fontFamily: "JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, monospace"
     fontSize: "0.75rem"
@@ -96,7 +102,7 @@ Sage phosphor is the primary interactive signal. Amber distinguishes mail-projec
 
 ## Typography
 
-Chakra Petch is the angular display voice. JetBrains Mono carries commands, navigation, labels, and technical data. System sans carries readable descriptions.
+Chakra Petch is the angular display voice. JetBrains Mono carries commands, navigation, labels, and technical data. System sans carries readable descriptions. The terminal's single-line `lel190_` wordmark uses a locally hosted Silkscreen subset (`src/assets/lel190-pixel.ttf`, OFL license alongside it), not multi-line ASCII. It is 1.75rem with 0.08em letter spacing; the subset is only for this wordmark.
 
 The display name uses the large responsive role; section headings are around 2rem, project titles 1.4rem, and prose 0.85–1rem. Technical labels are smaller. Existing decorative metadata ranges around 0.61–0.7rem; this is not a body-copy scale. Terminal input becomes 16px on narrow screens to avoid mobile zoom.
 
@@ -108,7 +114,7 @@ The hero pairs identity and shell with a 64px gap, reduced to 32px below 980px; 
 
 ## Elevation & Depth
 
-Depth comes from charcoal surface changes and single-pixel rules. The current surface has no card shadows, colored glows, glass panels, or floating background effects.
+Depth comes from charcoal surface changes and single-pixel rules. The hero alone has a static anime bedroom wallpaper by Kyuririn, locally stored as `public/images/hero-bedroom.webp` with provenance in `public/images/CREDITS.md`. A dark directional fade protects the identity text; the terminal and its small labels stay opaque. Mobile uses a separate crop and stronger text-side fade. The image ends at the hero—projects and other sections retain their plain backgrounds. There is no autoplay, parallax, particle layer, or added animation.
 
 ## Shapes
 

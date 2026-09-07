@@ -78,6 +78,8 @@ describe('Hero terminal', () => {
     expect(container.querySelector('h1').textContent).toBe('AnsonCheung.');
     expect(container.querySelector('a[href="#projects"]').textContent).toContain('Explore projects');
     expect(container.querySelector('input')).toBeNull();
+    expect(container.querySelector('pre')).toBeNull();
+    expect(container.textContent).toContain('lel190_');
     unmount();
   });
 

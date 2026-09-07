@@ -12,7 +12,8 @@ React 18 portfolio using Create React App and `styled-components`, deployed to G
 - `src/components/Footer.js` — contact links and closing information.
 - `src/index.css` — baseline, browser surfaces, terminal entrance, and reduced-motion rules.
 - `src/components/AnimatedSection.js`, `src/utils/animations.js` — legacy animation helpers, not imported by the current page. Framer Motion and intersection-observer remain installed; no need to reintroduce them for simple effects.
-- `public/images/` — existing avatar and logo assets.
+- `public/images/` — existing avatar/logo assets and a static anime hero wallpaper; artwork attribution is in `public/images/CREDITS.md`.
+- `src/assets/` — a self-hosted Silkscreen subset for the `lel190_` wordmark, with its OFL license. Not a general text font.
 - `PRODUCT.md`, `DESIGN.md` — product constraints and built design language.
 - `build/` — generated; never edit manually.
 - `.github/workflows/deploy.yml` — automatically deploys to GitHub Pages on push to `dev`.

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import styled from 'styled-components';
+import pixelFont from '../assets/lel190-pixel.ttf';
 
 const bootLines = [
   '[ OK ] mounting /home/lel190',
@@ -30,15 +31,39 @@ const CONTACT_LINES = [
 ];
 
 const HeroContainer = styled.section`
-  padding: 70px 0 0;
-  @media (max-width: 780px) { padding-top: 40px; }
+  position: relative;
+  isolation: isolate;
+  padding: 110px 0 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0 -32px;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(16, 18, 17, 0.97) 0%, rgba(16, 18, 17, 0.9) 38%, rgba(16, 18, 17, 0.12) 72%),
+      linear-gradient(0deg, ${props => props.theme.background} 0%, transparent 28%, transparent 85%, rgba(16, 18, 17, 0.3) 100%),
+      url('${process.env.PUBLIC_URL}/images/hero-bedroom.webp') center / cover no-repeat;
+  }
+
+  @media (max-width: 780px) {
+    padding-top: 64px;
+    &::before {
+      background:
+        linear-gradient(90deg, rgba(16, 18, 17, 0.92), rgba(16, 18, 17, 0.65) 60%, rgba(16, 18, 17, 0.15)),
+        linear-gradient(0deg, ${props => props.theme.background} 0%, transparent 55%),
+        url('${process.env.PUBLIC_URL}/images/hero-bedroom.webp') 70% top / auto 620px no-repeat;
+    }
+  }
+  @media (max-width: 600px) { &::before { inset-inline: -20px; } }
 `;
 const HeroGrid = styled.div`
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;
   gap: 64px;
   align-items: center;
-  padding-bottom: 60px;
+  padding-bottom: 90px;
   > * { min-width: 0; }
   @media (max-width: 980px) { gap: 32px; }
   @media (max-width: 780px) { grid-template-columns: 1fr; gap: 36px; padding-bottom: 36px; }
@@ -100,6 +125,10 @@ const WorkstationLabel = styled.div`
   margin-bottom: 10px;
   color: ${props => props.theme.textMuted};
   font: 0.65rem ${props => props.theme.fontMono};
+  span {
+    padding: 4px 6px;
+    background: ${props => props.theme.panel};
+  }
   span:last-child { color: ${props => props.theme.accent}; }
 `;
 const TerminalWindow = styled.div`
@@ -132,8 +161,20 @@ const TerminalGreeting = styled.div`
   color: ${props => props.theme.accent};
   font-size: 0.78rem;
   line-height: 1.8;
-  pre { font: 700 clamp(0.75rem, 1.5vw, 1rem)/1.2 ${props => props.theme.fontMono}; margin-bottom: 12px; }
   span { color: ${props => props.theme.textMuted}; font-size: 0.7rem; }
+`;
+const PixelWordmark = styled.div`
+  @font-face {
+    font-family: 'lel190 Pixel';
+    src: url(${pixelFont}) format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  margin-bottom: 14px;
+  font: 400 1.75rem/1.4 'lel190 Pixel', ${props => props.theme.fontMono};
+  letter-spacing: 0.08em;
+  white-space: nowrap;
 `;
 const TerminalLine = styled.div`
   color: ${props => props.$isCommand ? props.theme.accent : props.theme.textDim};
@@ -184,6 +225,9 @@ const SkipButton = styled.button`
   &:hover { background: ${props => props.theme.accentFaint}; }
 `;
 const TerminalFootnote = styled.p`
+  width: fit-content;
+  padding: 4px 6px;
+  background: ${props => props.theme.panel};
   margin-top: 12px;
   font: 0.65rem/1.7 ${props => props.theme.fontMono};
   color: ${props => props.theme.textMuted};
@@ -345,7 +389,7 @@ const Hero = () => {
             <TerminalHeader><span aria-hidden="true">&gt;_</span> terminal <span>bash — visitor</span></TerminalHeader>
             <TerminalOutput ref={outputRef} role="region" aria-label="Terminal output" tabIndex="0">
               <TerminalGreeting>
-                <pre aria-hidden="true">{' _      _  _ ___  ___\n| | ___| || / _ \\/ _ \\\n| |/ _ \\ || \\_, / (_) |\n|_|\\___/_||_| /_/\\___/'}</pre>
+                <PixelWordmark>lel190_</PixelWordmark>
                 welcome to my corner of the internet.<br />
                 <span>Not a remote server. Just a curious human's homepage.</span>
               </TerminalGreeting>
