@@ -114,7 +114,7 @@ The hero pairs identity and shell with a 64px gap, reduced to 32px below 980px; 
 
 ## Elevation & Depth
 
-Depth comes from charcoal surface changes and single-pixel rules. The hero alone has a static anime bedroom wallpaper by Kyuririn, locally stored as `public/images/hero-bedroom.webp` with provenance in `public/images/CREDITS.md`. A dark directional fade protects the identity text; the terminal and its small labels stay opaque. Mobile uses a separate crop and stronger text-side fade. The image ends at the hero—projects and other sections retain their plain backgrounds. There is no autoplay, parallax, particle layer, or added animation.
+Depth comes from charcoal surface changes and single-pixel rules. The hero alone uses the existing `src/assets/lain_bg.webp` artwork with a subdued canvas data stream in the workstation palette, replacing the bedroom wallpaper. A dark directional fade protects the identity text; the terminal and its small labels stay opaque. Mobile reduces the artwork opacity. The background ends at the hero—projects and other sections retain their plain backgrounds. The artwork itself stays still: no parallax or drift.
 
 ## Shapes
 
@@ -126,6 +126,7 @@ Square corners and thin utilitarian borders define windows, controls, diagrams, 
 - **Navigation:** inline native anchors on all screen sizes, with a colored underline on hover. No mobile drawer or click-only navigation.
 - **Terminal:** labeled header, 249px scrollable output, and a separate input row. Long history scrolls internally; it does not resize the page. The command response log is announced politely.
 - **Boot and motion:** three short boot lines at 220ms intervals, a skip button, and one 600ms translate entrance. Identity and links remain visible throughout. Reduced motion removes the delay, entrance, and smooth scrolling. Automatic boot never steals focus.
+- **Hero data stream:** decorative falling glyphs and packets, capped at 30fps with a 1.5× device-pixel-ratio ceiling. Stops when offscreen, when the tab is hidden, or via the keyboard-accessible Pause background button. Reduced motion paints a still frame and hides the unnecessary pause control. The canvas and artwork are hidden from assistive technology.
 - **Projects:** an architecture panel above the description, plain technology labels, and a descriptive external link. Diagrams describe supplied architecture; they are not screenshots or live telemetry.
 - **Personal corner:** an existing avatar, personal prose, and three small interest stickers. Do not add claims about specific anime favorites or hardware without user input.
 - **Focus:** a visible sage outline with 5px offset; the terminal input row also gains a faint sage background.

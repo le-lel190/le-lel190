@@ -6,7 +6,7 @@
 
 ## About This Portfolio
 
-This is my GitHub profile page built with React: a dark, retro workstation portfolio with an interactive terminal.
+This is my GitHub profile page built with React: a dark, retro workstation portfolio with an interactive terminal and a hero-only Lain data stream. The background can be paused and becomes a still image when reduced motion is preferred.
 
 **Live:** <https://le-lel190.github.io/le-lel190/>
 

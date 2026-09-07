@@ -6,14 +6,15 @@ React 18 portfolio using Create React App and `styled-components`, deployed to G
 ## Repository Map
 - `src/App.js` — composition, dark theme tokens, global styles, and skip link.
 - `src/components/Hero.js` — visible identity and project links alongside the interactive terminal. History scrolls inside a bounded output region. Boot never gates portfolio content or automatically focuses the input.
+- `src/components/LainDataStream.js` — hero-only Lain artwork and a subdued canvas data stream. Includes a pause control, reduced-motion still, and offscreen/hidden-tab suspension.
 - `src/components/Header.js` — sticky header with native anchor navigation, including mobile.
 - `src/components/Projects.js` — two real projects with architecture diagrams and a separate WIP row.
 - `src/components/Skills.js` — toolbox and personal corner using the existing avatar.
 - `src/components/Footer.js` — contact links and closing information.
 - `src/index.css` — baseline, browser surfaces, terminal entrance, and reduced-motion rules.
 - `src/components/AnimatedSection.js`, `src/utils/animations.js` — legacy animation helpers, not imported by the current page. Framer Motion and intersection-observer remain installed; no need to reintroduce them for simple effects.
-- `public/images/` — existing avatar/logo assets and a static anime hero wallpaper; artwork attribution is in `public/images/CREDITS.md`.
-- `src/assets/` — a self-hosted Silkscreen subset for the `lel190_` wordmark, with its OFL license. Not a general text font.
+- `public/images/` — existing avatar/logo assets and the unused bedroom wallpaper retained from the earlier design; its artwork attribution is in `public/images/CREDITS.md`.
+- `src/assets/` — the existing Lain background (`lain_bg.webp`) and a self-hosted Silkscreen subset for the `lel190_` wordmark, with its OFL license. Not a general text font.
 - `PRODUCT.md`, `DESIGN.md` — product constraints and built design language.
 - `build/` — generated; never edit manually.
 - `.github/workflows/deploy.yml` — automatically deploys to GitHub Pages on push to `dev`.
@@ -37,7 +38,7 @@ npm run deploy    # only when deployment is explicitly requested
 - Keep theme colors and fonts centralized in `src/App.js`; check `src/index.css` for baseline styling too.
 - Sage phosphor accent, warm ink, charcoal surfaces, and amber secondary details. Chakra Petch headings, JetBrains Mono for commands and technical metadata, system sans for prose.
 - The terminal is an optional interaction, not a simulated remote connection. Preserve all commands and clickable equivalents.
-- The whole portfolio is visible by default. Only the terminal entrance and its short boot sequence animate.
+- The whole portfolio is visible by default. Only the terminal entrance, its short boot sequence, and the user-approved hero data stream animate. The stream is capped at 30fps, pauses offscreen/when hidden, and has a manual pause button.
 - Honor `prefers-reduced-motion` in both CSS and programmatic scrolling/boot logic.
 - Do not invent employers, awards, project metrics, favorite anime, hardware specs, or live status.
 - Preserve the name Anson Cheung and handle lel190. Keep project descriptions and URLs factual.

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import pixelFont from '../assets/lel190-pixel.ttf';
+import LainDataStream from './LainDataStream';
 
 const bootLines = [
   '[ OK ] mounting /home/lel190',
@@ -34,29 +35,7 @@ const HeroContainer = styled.section`
   position: relative;
   isolation: isolate;
   padding: 110px 0 0;
-
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    inset: 0 -32px;
-    pointer-events: none;
-    background:
-      linear-gradient(90deg, rgba(16, 18, 17, 0.97) 0%, rgba(16, 18, 17, 0.9) 38%, rgba(16, 18, 17, 0.12) 72%),
-      linear-gradient(0deg, ${props => props.theme.background} 0%, transparent 28%, transparent 85%, rgba(16, 18, 17, 0.3) 100%),
-      url('${process.env.PUBLIC_URL}/images/hero-bedroom.webp') center / cover no-repeat;
-  }
-
-  @media (max-width: 780px) {
-    padding-top: 64px;
-    &::before {
-      background:
-        linear-gradient(90deg, rgba(16, 18, 17, 0.92), rgba(16, 18, 17, 0.65) 60%, rgba(16, 18, 17, 0.15)),
-        linear-gradient(0deg, ${props => props.theme.background} 0%, transparent 55%),
-        url('${process.env.PUBLIC_URL}/images/hero-bedroom.webp') 70% top / auto 620px no-repeat;
-    }
-  }
-  @media (max-width: 600px) { &::before { inset-inline: -20px; } }
+  @media (max-width: 780px) { padding-top: 64px; }
 `;
 const HeroGrid = styled.div`
   display: grid;
@@ -410,6 +389,7 @@ const Hero = () => {
           <TerminalFootnote>Try <code>whoami</code>, <code>projects</code>, or <code>help</code>. Point-and-click works too.</TerminalFootnote>
         </Workstation>
       </HeroGrid>
+      <LainDataStream />
       <InterestStrip>
         <div><span>CYBERSECURITY</span><span>CTF</span><span>REVERSE ENGINEERING</span></div>
         <p>always a work in progress_</p>

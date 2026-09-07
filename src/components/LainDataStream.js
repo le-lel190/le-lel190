@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useRef, useState } from 'react';
+import styled, { useTheme } from 'styled-components';
 import lainImage from '../assets/lain_bg.webp';
 
 const GLYPHS = '01ZX<>[]{}|/\\:+-*=_#';
@@ -15,51 +15,22 @@ const DATA_FRAGMENTS = [
 ];
 
 const BackgroundLayer = styled.div`
-  position: fixed;
-  inset: 0;
-  z-index: 0;
+  position: absolute;
+  inset: 0 -32px;
+  z-index: -1;
   overflow: hidden;
   pointer-events: none;
   background: ${props => props.theme.background};
   isolation: isolate;
+  @media (max-width: 600px) { inset-inline: -20px; }
 `;
 
 const Artwork = styled.div`
   position: absolute;
-  inset: -3%;
-  background-image:
-    linear-gradient(180deg, rgba(5, 6, 5, 0.22), rgba(5, 6, 5, 0.78)),
-    url(${lainImage});
-  background-size: cover;
-  background-position: 58% center;
-  background-repeat: no-repeat;
-  filter: saturate(0.82) contrast(1.08);
-  opacity: 0.7;
-  transform: scale(1.035);
-  animation: lainDrift 26s ease-in-out infinite alternate;
-
-  @keyframes lainDrift {
-    from { transform: scale(1.035) translate3d(0, 0, 0); }
-    to { transform: scale(1.06) translate3d(-0.6%, -0.35%, 0); }
-  }
-
-  @media (max-width: 720px) {
-    background-position: 61% center;
-    opacity: 0.57;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-    transform: scale(1.035);
-  }
-`;
-
-const ColorWash = styled.div`
-  position: absolute;
   inset: 0;
-  background:
-    linear-gradient(90deg, rgba(5, 6, 5, 0.64) 0%, rgba(5, 6, 5, 0.2) 46%, rgba(5, 6, 5, 0.68) 100%),
-    linear-gradient(180deg, rgba(5, 6, 5, 0.18), rgba(5, 6, 5, 0.55));
+  background: url(${lainImage}) 58% center / cover no-repeat;
+  opacity: 0.38;
+  @media (max-width: 780px) { background-position: 61% top; opacity: 0.25; }
 `;
 
 const StreamCanvas = styled.canvas`
@@ -67,14 +38,31 @@ const StreamCanvas = styled.canvas`
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.48;
-  mix-blend-mode: screen;
+  opacity: 0.65;
 `;
 
-const Vignette = styled.div`
+const ColorWash = styled.div`
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 24%, rgba(5, 6, 5, 0.42) 100%);
+  background:
+    linear-gradient(90deg, ${props => props.theme.background}d9, ${props => props.theme.background}33 70%),
+    linear-gradient(0deg, ${props => props.theme.background}, transparent 35%);
+`;
+
+const MotionButton = styled.button`
+  position: absolute;
+  top: 24px;
+  right: 0;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid ${props => props.theme.border};
+  background: ${props => props.theme.panel};
+  color: ${props => props.theme.textDim};
+  font: 0.7rem ${props => props.theme.fontMono};
+  cursor: pointer;
+  &:hover { color: ${props => props.theme.accent}; }
+  @media (max-width: 780px) { top: 8px; }
+  @media (prefers-reduced-motion: reduce) { display: none; }
 `;
 
 const randomBetween = (min, max) => min + Math.random() * (max - min);
@@ -105,10 +93,10 @@ const createPacket = (width, height, fontSize) => ({
   text: `${DATA_FRAGMENTS[Math.floor(Math.random() * DATA_FRAGMENTS.length)]}  ${randomGlyph()}${randomGlyph()}${randomGlyph()}`,
 });
 
-const drawStreamFrame = (context, width, height, streams, packets, fontSize, delta, animate) => {
+const drawStreamFrame = (context, width, height, streams, packets, fontSize, delta, animate, theme) => {
   const lineHeight = fontSize * 1.15;
   context.clearRect(0, 0, width, height);
-  context.font = `${fontSize}px "JetBrains Mono", monospace`;
+  context.font = `${fontSize}px ${theme.fontMono}`;
   context.textBaseline = 'top';
 
   streams.forEach(stream => {
@@ -128,8 +116,8 @@ const drawStreamFrame = (context, width, height, streams, packets, fontSize, del
 
       const trailProgress = index / stream.length;
       const alpha = stream.alpha * (1 - trailProgress) * (index === 0 ? 1.7 : 1);
-      const color = stream.cyan ? '89, 220, 255' : '57, 255, 114';
-      context.fillStyle = `rgba(${color}, ${Math.min(alpha, 0.62)})`;
+      context.fillStyle = stream.cyan ? theme.info : theme.accent;
+      context.globalAlpha = Math.min(alpha, 0.62);
       context.fillText(glyph, stream.x, y);
     });
   });
@@ -144,24 +132,27 @@ const drawStreamFrame = (context, width, height, streams, packets, fontSize, del
       packet.y = Math.floor(randomBetween(0, Math.max(1, height / (fontSize * 1.9)))) * fontSize * 1.9;
     }
 
-    context.fillStyle = packet.cyan
-      ? `rgba(89, 220, 255, ${packet.alpha})`
-      : `rgba(57, 255, 114, ${packet.alpha})`;
+    context.fillStyle = packet.cyan ? theme.info : theme.accent;
+    context.globalAlpha = packet.alpha;
     context.fillText(packet.text, packet.x, packet.y);
   });
+  context.globalAlpha = 1;
 };
 
 const LainDataStream = () => {
   const canvasRef = useRef(null);
+  const theme = useTheme();
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return undefined;
+    // Keep the last painted frame when the visitor pauses the background.
+    if (!canvas || paused) return undefined;
 
     const context = canvas.getContext('2d');
     if (!context) return undefined;
 
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const motionQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)') || { matches: true };
     let animationFrame;
     let width = 0;
     let height = 0;
@@ -170,7 +161,11 @@ const LainDataStream = () => {
     let streams = [];
     let packets = [];
     let lastTime = 0;
-    let isVisible = document.visibilityState !== 'hidden';
+    let isOnscreen = !window.IntersectionObserver;
+
+    const draw = (delta = 0, animate = false) => {
+      drawStreamFrame(context, width, height, streams, packets, fontSize, delta, animate, theme);
+    };
 
     const resize = () => {
       const bounds = canvas.getBoundingClientRect();
@@ -191,87 +186,68 @@ const LainDataStream = () => {
         createPacket(width, height, fontSize)
       ));
 
-      drawStreamFrame(context, width, height, streams, packets, fontSize, 0, false);
+      draw();
     };
 
-    const render = (time) => {
-      if (!isVisible) {
-        animationFrame = undefined;
-        return;
-      }
-
+    const shouldAnimate = () => isOnscreen && document.visibilityState !== 'hidden' && !motionQuery.matches;
+    const stop = () => {
+      window.cancelAnimationFrame(animationFrame);
       animationFrame = undefined;
-
-      const delta = lastTime ? Math.min((time - lastTime) / 1000, 0.05) : 0;
-      lastTime = time;
-      drawStreamFrame(
-        context,
-        width,
-        height,
-        streams,
-        packets,
-        fontSize,
-        delta,
-        !motionQuery.matches,
-      );
-
-      if (!motionQuery.matches) {
+      lastTime = 0;
+    };
+    const render = (time) => {
+      animationFrame = undefined;
+      if (!shouldAnimate()) return;
+      // Cap canvas work at 30fps; resume without a jump after tab/viewport changes.
+      if (!lastTime || time - lastTime >= 1000 / 30) {
+        const delta = lastTime ? Math.min((time - lastTime) / 1000, 0.1) : 0;
+        lastTime = time;
+        draw(delta * 0.65, true);
+      }
+      animationFrame = window.requestAnimationFrame(render);
+    };
+    const syncAnimation = () => {
+      if (!shouldAnimate()) {
+        stop();
+      } else if (animationFrame === undefined) {
         animationFrame = window.requestAnimationFrame(render);
       }
     };
 
-    const start = () => {
-      if (animationFrame === undefined && isVisible) {
-        lastTime = 0;
-        animationFrame = window.requestAnimationFrame(render);
-      }
-    };
-
-    const handleVisibilityChange = () => {
-      isVisible = document.visibilityState !== 'hidden';
-      if (isVisible) {
-        start();
-      } else if (animationFrame !== undefined) {
-        window.cancelAnimationFrame(animationFrame);
-        animationFrame = undefined;
-      }
-    };
-
-    const handleMotionChange = () => {
-      if (motionQuery.matches) {
-        if (animationFrame !== undefined) {
-          window.cancelAnimationFrame(animationFrame);
-          animationFrame = undefined;
-        }
-        drawStreamFrame(context, width, height, streams, packets, fontSize, 0, false);
-      } else {
-        start();
-      }
-    };
-
+    const observer = window.IntersectionObserver && new IntersectionObserver(([entry]) => {
+      isOnscreen = entry.isIntersecting;
+      syncAnimation();
+    });
+    const resizeObserver = window.ResizeObserver && new ResizeObserver(resize);
     resize();
+    observer?.observe(canvas);
+    resizeObserver?.observe(canvas);
     window.addEventListener('resize', resize, { passive: true });
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    motionQuery.addEventListener?.('change', handleMotionChange);
-    start();
+    document.addEventListener('visibilitychange', syncAnimation);
+    motionQuery.addEventListener?.('change', syncAnimation);
+    syncAnimation();
 
     return () => {
-      if (animationFrame !== undefined) {
-        window.cancelAnimationFrame(animationFrame);
-      }
+      stop();
+      observer?.disconnect();
+      resizeObserver?.disconnect();
       window.removeEventListener('resize', resize);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      motionQuery.removeEventListener?.('change', handleMotionChange);
+      document.removeEventListener('visibilitychange', syncAnimation);
+      motionQuery.removeEventListener?.('change', syncAnimation);
     };
-  }, []);
+  }, [paused, theme]);
 
   return (
-    <BackgroundLayer aria-hidden="true">
-      <Artwork />
-      <ColorWash />
-      <StreamCanvas ref={canvasRef} />
-      <Vignette />
-    </BackgroundLayer>
+    <>
+      <BackgroundLayer aria-hidden="true">
+        <Artwork />
+        <StreamCanvas ref={canvasRef} />
+        <ColorWash />
+      </BackgroundLayer>
+      <MotionButton type="button" aria-pressed={paused} onClick={() => setPaused(value => !value)}>
+        {paused ? 'Resume background' : 'Pause background'}
+      </MotionButton>
+    </>
   );
 };
 

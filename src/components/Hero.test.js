@@ -61,6 +61,7 @@ const submitCommand = (container, value) => {
 describe('Hero terminal', () => {
   beforeEach(() => {
     globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+    jest.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(null);
     window.open = jest.fn();
     document.body.innerHTML = '<section id="projects"></section><section id="skills"></section><footer></footer>';
     document.querySelector('#projects').scrollIntoView = jest.fn();
@@ -70,6 +71,7 @@ describe('Hero terminal', () => {
 
   afterEach(() => {
     document.body.innerHTML = '';
+    jest.restoreAllMocks();
     globalThis.IS_REACT_ACT_ENVIRONMENT = false;
   });
 
