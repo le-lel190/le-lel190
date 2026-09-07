@@ -134,7 +134,7 @@ const projectData = [
   },
   {
     title: 'No-Account Temp Mail',
-    description: 'Disposable inboxes without the signup tax. Runs entirely on Cloudflare Workers with KV for mailboxes and D1 for storage — instant throwaway addresses for testing and privacy.',
+    description: 'Signup-free disposable inboxes. Runs entirely on Cloudflare Workers using KV for mailboxes and D1 for storage, enabling instant throwaway addresses for testing and privacy. Note: Primarily built for personal use.',
     tags: ['Cloudflare Workers', 'KV', 'D1', 'Temp Mail'],
     link: 'https://971236.xyz/',
     domain: '@971236.xyz',
@@ -181,10 +181,10 @@ const Projects = () => (
       <WipBadge>WIP</WipBadge>
       <div>
         <h3>Secret project</h3>
-        <p>A reverse-engineering challenge in the making. Keeping this one under wraps for now.</p>
+        <p>A secret in the making, related to Unity function-hooking. Keeping this one under wraps for now.</p>
         <Progress><progress value="35" max="100" aria-label="Secret project progress" />35% / still tinkering</Progress>
         <Tags style={{ marginTop: 12, marginBottom: 0 }} aria-label="Technologies">
-          <li>Reverse Engineering</li><li>CTF</li><li>React</li><li>Node.js</li>
+          <li>Reverse Engineering</li><li>Unity</li>
         </Tags>
       </div>
       <a href="https://github.com/le-lel190" target="_blank" rel="noopener noreferrer">Follow on GitHub ↗</a>

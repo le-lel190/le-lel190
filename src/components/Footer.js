@@ -52,8 +52,8 @@ const Footer = () => (
     <FooterContent>
       <Contact>
         <div>
-          <h2 id="contact-heading">Let's compare notes.</h2>
-          <p>Open to internships and security-focused roles. Have something interesting to build or take apart? Say hello.</p>
+          <h2 id="contact-heading">Contact me.</h2>
+          <p>Open to internships, security-focused roles and general developer roles. Have something interesting to build or take apart? Say hello.</p>
         </div>
         <ContactLinks aria-label="Contact links">
           <a href="https://github.com/le-lel190" target="_blank" rel="noopener noreferrer">GitHub ↗</a>

@@ -42,7 +42,7 @@ The site is a hacker's personal workstation with anime taste showing through: a 
 ## Brand Commitments
 
 - Handle: `lel190` (logo text).
-- Name: Anson Cheung.
+- Name: Anson Cheung
 - Dark-only theme (no light mode), permanently.
 - Static, zero-backend hosting on GitHub Pages.
 - Voice: a technically curious human, precise but personal; not a fake security console.

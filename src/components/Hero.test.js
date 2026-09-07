@@ -77,7 +77,7 @@ describe('Hero terminal', () => {
 
   it('shows the identity and project link before the terminal finishes booting', () => {
     const { container, unmount } = renderHero();
-    expect(container.querySelector('h1').textContent).toBe('AnsonCheung.');
+    expect(container.querySelector('h1').textContent).toBe('AnsonCheung');
     expect(container.querySelector('a[href="#projects"]').textContent).toContain('Explore projects');
     expect(container.querySelector('input')).toBeNull();
     expect(container.querySelector('pre')).toBeNull();

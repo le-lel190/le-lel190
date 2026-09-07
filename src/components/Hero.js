@@ -21,9 +21,9 @@ const PROJECT_LINES = [
   '3. Secret... [WIP 35%]',
 ];
 const SKILL_LINES = [
-  'Languages       :: Python, C/C++, Java, R, SQL',
+  'Languages       :: Python, C/C++, Java, R, SQL, C#, Lua',
   'Web Development :: React, Node.js, Express.js, JavaScript, HTML/CSS',
-  'Tools           :: Git, Linux, Docker',
+  'Tools           :: Git, Kubernetes, Docker, Cheat Engine, DnSpy, IDA Pro',
 ];
 const CONTACT_LINES = [
   'GitHub   :: https://github.com/le-lel190',
@@ -345,7 +345,7 @@ const Hero = () => {
     <HeroContainer id="home" aria-labelledby="name">
       <HeroGrid>
         <Introduction>
-          <h1 id="name"><span>Anson</span>Cheung<em>.</em></h1>
+          <h1 id="name"><span>Anson</span>lel190<em>.</em></h1>
           <Bio>
             CS graduate from <strong>CUHK</strong>. Building useful things,
             taking systems apart, and following the next rabbit hole.
@@ -363,7 +363,7 @@ const Hero = () => {
           </Identity>
         </Introduction>
         <Workstation>
-          <WorkstationLabel><span>~/lel190 / interactive shell</span><span>LOCAL SESSION</span></WorkstationLabel>
+          <WorkstationLabel><span>~/lel190/interactive_shell</span><span>LOCAL SESSION</span></WorkstationLabel>
           <TerminalWindow>
             <TerminalHeader><span aria-hidden="true">&gt;_</span> terminal <span>bash — visitor</span></TerminalHeader>
             <TerminalOutput ref={outputRef} role="region" aria-label="Terminal output" tabIndex="0">
@@ -386,7 +386,7 @@ const Hero = () => {
               </PromptForm>
             ) : <SkipButton onClick={skipAnimation}>skip intro / enter terminal</SkipButton>}
           </TerminalWindow>
-          <TerminalFootnote>Try <code>whoami</code>, <code>projects</code>, or <code>help</code>. Point-and-click works too.</TerminalFootnote>
+          <TerminalFootnote>Try <code>whoami</code>, <code>projects</code>, or <code>help</code>. </TerminalFootnote>
         </Workstation>
       </HeroGrid>
       <LainDataStream />
