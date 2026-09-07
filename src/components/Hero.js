@@ -347,7 +347,7 @@ const Hero = () => {
         <Introduction>
           <h1 id="name"><span>Anson</span>Cheung<em>.</em></h1>
           <Bio>
-            CS student at <strong>CUHK</strong>. Building useful things,
+            CS graduate from <strong>CUHK</strong>. Building useful things,
             taking systems apart, and following the next rabbit hole.
           </Bio>
           <HeroButtons>

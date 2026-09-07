@@ -15,7 +15,7 @@ Two audiences, weighted equally:
 
 ## Product Purpose
 
-A personal portfolio for Anson Cheung (handle `lel190`), a CUHK CS student focused on cybersecurity, CTF, and reverse engineering. Success means a recruiter can grasp his skills and projects quickly, and a peer recognizes real craft. It also doubles as a demonstration of what he can build.
+A personal portfolio for Anson Cheung (handle `lel190`), a CUHK CS graduate focused on cybersecurity, CTF, reverse engineering and general devops jobs. Success means a recruiter can grasp his skills and projects quickly, and a peer recognizes real craft. It also doubles as a demonstration of what he can build.
 
 ## Positioning
 
