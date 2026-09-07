@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/le-lel190/static/css/main.f0c8d23b.css",
-    "main.js": "/le-lel190/static/js/main.45ddcef1.js",
+    "main.js": "/le-lel190/static/js/main.9504093a.js",
     "static/media/lain_bg.webp": "/le-lel190/static/media/lain_bg.63c9d29c3de065daa00b.webp",
     "static/media/lel190-pixel.ttf": "/le-lel190/static/media/lel190-pixel.a7370511b4f1df91135b.ttf",
     "index.html": "/le-lel190/index.html",
     "main.f0c8d23b.css.map": "/le-lel190/static/css/main.f0c8d23b.css.map",
-    "main.45ddcef1.js.map": "/le-lel190/static/js/main.45ddcef1.js.map"
+    "main.9504093a.js.map": "/le-lel190/static/js/main.9504093a.js.map"
   },
   "entrypoints": [
     "static/css/main.f0c8d23b.css",
-    "static/js/main.45ddcef1.js"
+    "static/js/main.9504093a.js"
   ]
 }
