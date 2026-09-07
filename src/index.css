@@ -1,55 +1,34 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  padding: 0;
-  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.6;
+  line-height: 1.65;
+}
+button, input { font: inherit; }
+button, a, input { -webkit-tap-highlight-color: transparent; }
+img { display: block; max-width: 100%; }
+code { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+/* Browser chrome stays in the workstation's phosphor palette. */
+html { scrollbar-color: #4a5748 #101211; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #101211; }
+::-webkit-scrollbar-thumb { background: #4a5748; border: 2px solid #101211; }
+::selection { background: #b9d883; color: #101211; }
+
+@keyframes terminalEnter {
+  from { transform: translateY(10px); }
+  to { transform: translateY(0); }
 }
 
-code {
-  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-
-html {
-  scroll-behavior: smooth;
-  scrollbar-color: #1c291e #050605;
-}
-
-/* Browser surfaces belong to the design system */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #050605;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #1c291e;
-  border: 2px solid #050605;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #2b402e;
-}
-
-/* Selection is themed in App.js; keep a fallback for non-JS contexts */
-::selection {
-  background: #39ff72;
-  color: #050605;
-}
-
-/* Numerals and tabular data align on the mono face */
-@keyframes blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

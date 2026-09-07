@@ -12,11 +12,12 @@
     "styled-components": "^6.0.7"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "dev": "npm start",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+    "predeploy": "NODE_OPTIONS=--openssl-legacy-provider npm run build",
     "deploy": "gh-pages -d build -r git@github.com:le-lel190/le-lel190.git"
   },
   "eslintConfig": {

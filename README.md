@@ -1,33 +1,40 @@
-# Portfolio
+## Hi there 👋
 
-Terminal-inspired portfolio built with React 18. Dark-only console aesthetic with interactive CLI hero, animated data streams, and Serial Experiments Lain visual references.
+- 📚 I'm currently studying computer science in CUHK
+- 🌱 I'm currently exploring on different frontend frameworks...
+- 📫 Feel free to reach me via Discord: 190 (yes my username is literally 190)
+
+## About This Portfolio
+
+This is my GitHub profile page built with React: a dark, retro workstation portfolio with an interactive terminal.
 
 **Live:** <https://le-lel190.github.io/le-lel190/>
 
-## Stack
+### Technologies Used
 
 - React 18 + styled-components
-- framer-motion for scroll animations
-- Canvas-based data stream background
 - GitHub Pages deployment
 
-## Local Development
+### Local preview
 
 ```bash
 npm install
-npm start       # http://localhost:3000
-npm test        # run test suite
-npm run build   # production build
+npm run dev
 ```
 
-## Deploy
-
-Push to `main` triggers GitHub Actions deployment to `gh-pages` branch. Manual deploy:
+Open [http://localhost:3000](http://localhost:3000). `dev` is an alias for the existing Create React App `start` command; it does not deploy anything. `npm start` still works.
 
 ```bash
-npm run deploy
+CI=true npm test -- --watchAll=false --runInBand
+npm run build
 ```
 
-## Architecture
+## Deployment
 
-See `AGENTS.md` for component structure, animation system, and editing guidelines.
+Pushing to `dev` triggers `.github/workflows/deploy.yml`, which builds and deploys to the `gh-pages` branch. Only push when you intend to publish.
+
+Manual deployment is also available via `npm run deploy` over SSH.
+
+## Contributor Notes
+
+For repository workflow, commands, and editing guidance, see `AGENTS.md`.

@@ -1,106 +1,51 @@
 # AGENTS.md
 
 ## Project Overview
-
-React 18 portfolio site using Create React App, `styled-components`, and `framer-motion` for animations. Dark terminal theme only (no light mode). Deploys to GitHub Pages via `gh-pages`.
+React 18 portfolio using Create React App and `styled-components`, deployed to GitHub Pages via `gh-pages`. Dark-only, retro personal-workstation aesthetic: portfolio first, hacker/anime/old-web details in the margins.
 
 ## Repository Map
-
-- `src/App.js` — composition root. Imports theme from `src/theme.js`, wraps in `ThemeProvider`, injects global styles, renders `LainDataStream` background
-- `src/theme.js` — centralized theme object with terminal green accent and Lain-inspired color palette
-- `src/components/` — Hero (interactive terminal), Header, Projects, Skills, Footer, AnimatedSection (scroll animation wrapper), LainDataStream (canvas-based animated background)
-- `src/utils/animations.js` — centralized Framer Motion animation variants
-- `src/index.css` — baseline CSS, scrollbar, keyframes
-- `build/` — generated. Do not edit manually
-- `.github/workflows/deploy.yml` — GitHub Actions auto-deploy on push to main
+- `src/App.js` — composition, dark theme tokens, global styles, and skip link.
+- `src/components/Hero.js` — visible identity and project links alongside the interactive terminal. History scrolls inside a bounded output region. Boot never gates portfolio content or automatically focuses the input.
+- `src/components/Header.js` — sticky header with native anchor navigation, including mobile.
+- `src/components/Projects.js` — two real projects with architecture diagrams and a separate WIP row.
+- `src/components/Skills.js` — toolbox and personal corner using the existing avatar.
+- `src/components/Footer.js` — contact links and closing information.
+- `src/index.css` — baseline, browser surfaces, terminal entrance, and reduced-motion rules.
+- `src/components/AnimatedSection.js`, `src/utils/animations.js` — legacy animation helpers, not imported by the current page. Framer Motion and intersection-observer remain installed; no need to reintroduce them for simple effects.
+- `public/images/` — existing avatar and logo assets.
+- `PRODUCT.md`, `DESIGN.md` — product constraints and built design language.
+- `build/` — generated; never edit manually.
+- `.github/workflows/deploy.yml` — automatically deploys to GitHub Pages on push to `dev`.
 
 ## Local Development / Build / Test / Deploy
-
-Install dependencies:
-
 ```bash
 npm install
-```
-
-Start the local development server:
-
-```bash
-npm start
-```
-
-Run the test suite:
-
-```bash
-npm test
-```
-
-Create a production build:
-
-```bash
+npm run dev       # alias for npm start; http://localhost:3000
+npm start         # original CRA entry point also works
+CI=true npm test -- --watchAll=false --runInBand
 npm run build
+npm run deploy    # only when deployment is explicitly requested
 ```
 
-Deploy to GitHub Pages:
+- Preserve `NODE_OPTIONS=--openssl-legacy-provider` in the existing start, build, and predeploy scripts.
+- `dev` delegates to `start`; it is not a new server or toolchain.
+- `homepage` in `package.json` remains `https://le-lel190.github.io/le-lel190`.
+- Public assets use `process.env.PUBLIC_URL` or `%PUBLIC_URL%` for GitHub Pages subpath compatibility.
 
-```bash
-npm run deploy
-```
+## Design and Architecture
+- Keep theme colors and fonts centralized in `src/App.js`; check `src/index.css` for baseline styling too.
+- Sage phosphor accent, warm ink, charcoal surfaces, and amber secondary details. Chakra Petch headings, JetBrains Mono for commands and technical metadata, system sans for prose.
+- The terminal is an optional interaction, not a simulated remote connection. Preserve all commands and clickable equivalents.
+- The whole portfolio is visible by default. Only the terminal entrance and its short boot sequence animate.
+- Honor `prefers-reduced-motion` in both CSS and programmatic scrolling/boot logic.
+- Do not invent employers, awards, project metrics, favorite anime, hardware specs, or live status.
+- Preserve the name Anson Cheung and handle lel190. Keep project descriptions and URLs factual.
 
-Notes:
-
-- GitHub Actions deploys automatically on push to `main`. Manual deploy via `npm run deploy` still works over SSH.
-- The GitHub Pages target path is controlled by the `homepage` field in `package.json`.
-
-## Architecture Notes
-
-The app is currently structured as a single-page, section-based React application. `src/App.js` imports and renders the major sections in order, so content and layout changes often stay localized to one component plus top-level composition.
-
-Theme handling lives in `src/theme.js`. That file defines the dark theme object with terminal green (#39ff72) as the primary accent. `src/App.js` imports it, wraps the tree in `ThemeProvider`, and injects shared themed styles through `createGlobalStyle`.
-
-Global styling is split across two places: themed global styles inside `src/App.js` and non-theme baseline CSS inside `src/index.css`. When making visual changes, check both before assuming a style only exists in one place.
-
-**Animation system:**
-
-- `framer-motion` + `react-intersection-observer` provide scroll-triggered animations
-- `src/utils/animations.js` — centralized variants for consistency
-- `src/components/AnimatedSection.js` — reusable wrapper with viewport detection, reduced-motion support
-- All animations use GPU-accelerated transforms (opacity/transform only) for 60fps performance
-- Components use `motion` from `styled-components` + direct framer-motion props (whileHover, variants, etc.)
-
-**Lain-inspired visual system:**
-
-- `src/components/LainDataStream.js` — fixed canvas background layer with matrix-style falling glyphs and data packets. Pauses on tab hide, respects `prefers-reduced-motion`, uses `requestAnimationFrame` properly.
-- Color scheme: terminal green (#39ff72) for primary accent, cyan (#59dcff) for rare highlights
-- Performance: canvas rendering limited, reduced-motion support, visibility-based pause
-
-## Editing Guidelines
-
-- Prefer small, localized edits over broad refactors.
-- Follow the existing React function-component style and current `styled-components` usage.
-- Theme values live in `src/theme.js`. Update there, not inline.
-- Avoid mixing unrelated cleanup with a targeted content or UI change.
-- Do not manually edit files in `build/`; regenerate them through the build process.
-- Before moving or renaming components, verify imports from `src/App.js` and any files under `src/components/`.
-
-## Warnings / Inconsistencies
-
-- Styling is intentionally split between `styled-components` and `src/index.css`. Visual bugs may come from either layer.
-- Deployment is coupled to GitHub Pages configuration in `package.json`, especially the `homepage` value and deploy script.
-- This is a small repository, so path mismatches or renamed files under `src/components/` can break the app quickly. Re-check imports after structural edits.
-- **Theme note:** This site is dark-only (no light mode). The theme object in `src/theme.js` defines terminal-aesthetic colors with green accent (#39ff72) as the primary signal color.
-
-## Verification Expectations
-
-After changing code or documentation that affects behavior, use the smallest meaningful verification step and escalate as needed:
-
-- For component logic or behavior changes, run `npm test`.
-- For UI, styling, structure, or deployment-related changes, run `npm run build` before calling the work complete.
-- When changing deploy behavior, confirm the `homepage` and deploy target still match the intended GitHub Pages URL.
-
-## Contributor / Agent Behavior
-
-- Follow existing repository patterns before introducing new abstractions.
-- Keep changes easy to review, explain, and revert.
-- State assumptions clearly when making non-obvious decisions.
-- Avoid speculative refactors unless they directly support the requested task.
-- If you update project structure or workflow, update this file so future contributors inherit accurate guidance.
+## Editing and Verification
+- Prefer small local changes and current function-component/styled-components patterns.
+- Avoid unrelated refactors, dependency churn, and manual changes to generated build files.
+- Recheck imports before moving or renaming files.
+- Run tests for component behavior changes; run `npm run build` for UI, structure, or deployment changes.
+- Existing tests use React DOM utilities and Jest through CRA; no extra test framework is needed.
+- Check desktop/mobile overflow, keyboard navigation, terminal history, and reduced motion for UI changes.
+- Update these notes when structure or workflow changes. No deployment without user authorization.

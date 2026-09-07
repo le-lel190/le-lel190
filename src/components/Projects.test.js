@@ -2,7 +2,7 @@
 import ReactDOMServer from "react-dom/server";
 import { ThemeProvider } from "styled-components";
 import Projects from "./Projects";
-import theme from "../theme";
+import { theme } from "../App";
 
 describe("Projects", () => {
   it("renders the AI API Gateway project instead of the Cookie Sharing project", () => {

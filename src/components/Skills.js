@@ -1,165 +1,109 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import AnimatedSection from './AnimatedSection';
-import { fadeInLeft, fadeIn, staggerContainerFast, scaleIn } from '../utils/animations';
 
 const Section = styled.section`
-  padding: 88px 0;
-  border-top: 1px solid ${props => props.theme.border};
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 70px;
+  padding: 10px 0 80px;
+  > * { min-width: 0; }
+  h2 { font: 600 2rem/1.2 ${props => props.theme.fontDisplay}; letter-spacing: -0.02em; margin-bottom: 24px; }
+  @media (max-width: 850px) { gap: 40px; }
+  @media (max-width: 720px) { grid-template-columns: 1fr; padding-bottom: 56px; }
 `;
-
-const SectionHeader = styled.div`
-  font-family: ${props => props.theme.fontMono};
-  font-size: 1.05rem;
-  color: ${props => props.theme.text};
-  margin-bottom: 12px;
+const Toolbox = styled.div`
+  > p { color: ${props => props.theme.textDim}; font-size: 0.9rem; margin-bottom: 23px; }
+`;
+const SkillList = styled.dl`
+  > div {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 20px;
+    padding: 18px 0;
+    border-top: 1px solid ${props => props.theme.border};
+    &:last-child { border-bottom: 1px solid ${props => props.theme.border}; }
+  }
+  dt { color: ${props => props.theme.textMuted}; font: 0.7rem/1.9 ${props => props.theme.fontMono}; }
+  dd { color: ${props => props.theme.text}; font: 0.74rem/1.9 ${props => props.theme.fontMono}; }
+  ul { display: flex; flex-wrap: wrap; gap: 4px 18px; list-style: none; }
+  @media (max-width: 380px) { > div { grid-template-columns: 76px 1fr; gap: 12px; } }
+`;
+const PersonalCorner = styled.aside`
+  border: 1px solid ${props => props.theme.borderStrong};
+  background: ${props => props.theme.surface};
+  align-self: start;
+`;
+const FileLabel = styled.div`
+  padding: 10px 20px;
+  border-bottom: 1px solid ${props => props.theme.borderStrong};
+  font: 0.64rem ${props => props.theme.fontMono};
+  color: ${props => props.theme.textMuted};
+  display: flex;
+  justify-content: space-between;
+  span { color: ${props => props.theme.warning}; }
+`;
+const PersonalContent = styled.div`
+  padding: 24px;
+  > p { color: ${props => props.theme.textDim}; font-size: 0.87rem; line-height: 1.8; margin-top: 20px; }
+`;
+const Profile = styled.div`
   display: flex;
   align-items: center;
-
-  .prompt {
-    color: ${props => props.theme.accent};
-    margin-right: 8px;
-  }
+  gap: 20px;
+  img { width: 76px; height: 76px; object-fit: cover; border: 1px solid ${props => props.theme.borderStrong}; }
+  h3 { font: 600 1.5rem/1.2 ${props => props.theme.fontDisplay}; }
+  p { color: ${props => props.theme.accent}; font: 0.68rem ${props => props.theme.fontMono}; margin-top: 8px; }
 `;
-
-const SectionRule = styled.div`
-  width: 152px;
-  height: 1px;
-  background: linear-gradient(90deg, ${props => props.theme.accent}, transparent);
-  margin-bottom: 44px;
-`;
-
-const TerminalBlock = styled.div`
-  background: linear-gradient(180deg, rgba(57, 255, 114, 0.018), transparent 24%), ${props => props.theme.panel};
-  border: 1px solid ${props => props.theme.borderStrong};
-  border-radius: 6px;
-  padding: 30px 32px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: ${props => props.theme.shadowPanel};
-
-  &::before {
-    content: 'skills.txt // read-only';
-    position: absolute;
-    top: 12px;
-    right: 16px;
-    font-family: ${props => props.theme.fontMono};
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
-    color: ${props => props.theme.textMuted};
-    text-transform: uppercase;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 140px;
-    right: 160px;
-    height: 1px;
-    background: linear-gradient(90deg, ${props => props.theme.accent}, transparent 76%);
-  }
-
-  > * {
-    position: relative;
-    z-index: 1;
-  }
-`;
-
-const CategoryHeader = styled.h3`
-  font-family: ${props => props.theme.fontMono};
-  font-size: 0.8rem;
-  letter-spacing: 0.06em;
-  color: ${props => props.theme.textDim};
-  margin-bottom: 14px;
-  margin-top: ${props => props.$first ? '0' : '28px'};
-  text-transform: uppercase;
-
-  &::before {
-    content: '# ';
-    color: ${props => props.theme.accent};
-  }
-`;
-
-const SkillsRow = styled.div`
+const Stickers = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-`;
-
-const SkillChip = styled(motion.span)`
-  display: inline-block;
-  font-family: ${props => props.theme.fontMono};
-  font-size: 0.79rem;
-  padding: 5px 12px;
-  border: 1px solid ${props => props.theme.borderStrong};
-  border-radius: 3px;
-  color: ${props => props.theme.text};
-  background: ${props => props.theme.surface};
-  transition: all 0.18s ease;
-
-  &:hover {
-    border-color: ${props => props.theme.accentLine};
+  margin-top: 22px;
+  span {
+    display: inline-block;
+    border: 1px solid ${props => props.theme.borderStrong};
+    padding: 4px 9px;
+    font: 500 0.61rem ${props => props.theme.fontMono};
     color: ${props => props.theme.accent};
+    background: ${props => props.theme.panel};
+    &:nth-child(2) { color: ${props => props.theme.warning}; }
+    &:nth-child(3) { color: ${props => props.theme.info}; }
   }
 `;
 
 const skillsData = [
-  {
-    category: 'Languages',
-    skills: ['Python', 'C/C++', 'Java', 'R', 'SQL']
-  },
-  {
-    category: 'Web Development',
-    skills: ['React', 'Node.js', 'Express.js', 'JavaScript', 'HTML/CSS']
-  },
-  {
-    category: 'Tools',
-    skills: ['Git', 'Linux', 'Docker']
-  }
+  { category: 'Languages', skills: ['Python', 'C/C++', 'Java', 'R', 'SQL'] },
+  { category: 'Web', skills: ['React', 'Node.js', 'Express.js', 'JavaScript', 'HTML/CSS'] },
+  { category: 'Tools', skills: ['Git', 'Linux', 'Docker'] },
 ];
 
-const Skills = () => {
-  return (
-    <Section id="skills">
-      <AnimatedSection variants={fadeInLeft}>
-        <SectionHeader>
-          <span className="prompt">&gt;</span> cat skills.txt
-        </SectionHeader>
-        <SectionRule />
-      </AnimatedSection>
-
-      <AnimatedSection variants={fadeIn}>
-        <TerminalBlock>
-          {skillsData.map((category, index) => (
-            <div key={index}>
-              <CategoryHeader $first={index === 0}>{category.category}</CategoryHeader>
-              <motion.div
-                variants={staggerContainerFast}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <SkillsRow>
-                  {category.skills.map((skill, i) => (
-                    <SkillChip
-                      key={i}
-                      variants={scaleIn}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.96 }}
-                    >
-                      {skill}
-                    </SkillChip>
-                  ))}
-                </SkillsRow>
-              </motion.div>
-            </div>
-          ))}
-        </TerminalBlock>
-      </AnimatedSection>
-    </Section>
-  );
-};
+const Skills = () => (
+  <Section id="skills" aria-labelledby="skills-heading">
+    <Toolbox>
+      <h2 id="skills-heading">The toolbox.</h2>
+      <p>Languages, frameworks, and tools I build with.</p>
+      <SkillList>
+        {skillsData.map(category => (
+          <div key={category.category}>
+            <dt>{category.category}</dt>
+            <dd><ul>{category.skills.map(skill => <li key={skill}>{skill}</li>)}</ul></dd>
+          </div>
+        ))}
+      </SkillList>
+    </Toolbox>
+    <PersonalCorner aria-labelledby="personal-heading">
+      <FileLabel>~/personal/README.txt<span>not all work</span></FileLabel>
+      <PersonalContent>
+        <Profile>
+          <img src={`${process.env.PUBLIC_URL}/images/avatar.jpg`} alt="lel190's avatar" width="76" height="76" loading="lazy" />
+          <div><h3 id="personal-heading">Behind the shell.</h3><p>Anson / lel190</p></div>
+        </Profile>
+        <p>Cybersecurity, CTFs, and reverse engineering on one side. Anime, old-web corners, and an unreasonable interest in technology on the other.</p>
+        <p>This is a place for both. Part portfolio, part personal corner of the internet.</p>
+        <Stickers aria-label="Personal interests"><span>LINUX ENJOYER</span><span>ANIME BRAIN</span><span>WEB 1.0 SOUL</span></Stickers>
+      </PersonalContent>
+    </PersonalCorner>
+  </Section>
+);
 
 export default Skills;

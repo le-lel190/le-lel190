@@ -1,209 +1,135 @@
 ---
-name: lel190 Console
-description: A dark phosphor console portfolio for Anson Cheung — the visitor operates the site, not just reads it.
+name: lel190 Personal Workstation
+description: A retro workstation portfolio with anime and old-web personality in the margins.
 colors:
-  phosphor-ground: "#050605"
-  phosphor-surface: "#0a0c09"
-  phosphor-panel: "#0e110d"
-  phosphor-raised: "#12150f"
-  hairline: "#1e241b"
-  hairline-strong: "#2a3326"
-  terminal-ink: "#d6d8d2"
-  terminal-ink-dim: "#98a090"
-  terminal-ink-muted: "#6b7365"
-  signal-green: "#33ff66"
-  signal-green-dim: "#1f7a3d"
-  signal-danger: "#ff3b30"
-  signal-warning: "#ffd60a"
-  signal-info: "#5bc8fa"
+  background: "#101211"
+  surface: "#171b18"
+  panel: "#0c100d"
+  panel-raised: "#232923"
+  border: "#303930"
+  border-strong: "#4a5748"
+  text: "#e7e6d9"
+  text-dim: "#afb8a9"
+  text-muted: "#929f8d"
+  accent: "#b9d883"
+  accent-faint: "rgba(185, 216, 131, 0.07)"
+  warning: "#edbd79"
+  info: "#b0c2ba"
 typography:
   display:
-    fontFamily: "Outfit, -apple-system, BlinkMacSystemFont, sans-serif"
-    fontSize: "1.18rem"
-    fontWeight: 650
+    fontFamily: "Chakra Petch, Arial Narrow, sans-serif"
+    fontSize: "clamp(3.5rem, 6.7vw, 5.7rem)"
+    fontWeight: 600
+    lineHeight: 0.98
+    letterSpacing: "-0.035em"
+  headline:
+    fontFamily: "Chakra Petch, Arial Narrow, sans-serif"
+    fontSize: "clamp(1.9rem, 3vw, 2.4rem)"
+    fontWeight: 600
+    lineHeight: 1.2
+    letterSpacing: "-0.02em"
+  title:
+    fontFamily: "Chakra Petch, Arial Narrow, sans-serif"
+    fontSize: "1.4rem"
+    fontWeight: 600
     lineHeight: 1.3
-    letterSpacing: "-0.012em"
   body:
-    fontFamily: "Outfit, -apple-system, BlinkMacSystemFont, sans-serif"
-    fontSize: "0.925rem"
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontSize: "0.9rem"
     fontWeight: 400
-    lineHeight: 1.65
+    lineHeight: 1.75
   label:
     fontFamily: "JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, monospace"
-    fontSize: "0.79rem"
+    fontSize: "0.75rem"
     fontWeight: 400
-    letterSpacing: "0"
 rounded:
-  sm: "4px"
-  md: "6px"
-  lg: "10px"
-  xl: "12px"
+  square: "0px"
 spacing:
-  xs: "4px"
-  sm: "8px"
-  md: "12px"
-  lg: "16px"
-  xl: "24px"
-  xxl: "28px"
+  xs: "8px"
+  sm: "12px"
+  md: "20px"
+  lg: "24px"
+  xl: "32px"
+  xxl: "64px"
 components:
   button-primary:
-    backgroundColor: "{colors.signal-green}"
-    textColor: "{colors.phosphor-ground}"
-    rounded: "{rounded.md}"
-    padding: "9px 17px"
+    backgroundColor: "{colors.accent}"
+    textColor: "{colors.background}"
+    padding: "10px 19px"
+    rounded: "{rounded.square}"
   button-primary-hover:
-    backgroundColor: "{colors.signal-green}"
-    textColor: "{colors.phosphor-ground}"
-    rounded: "{rounded.md}"
-    padding: "9px 17px"
-  button-ghost:
+    backgroundColor: "{colors.text}"
+    textColor: "{colors.background}"
+  button-secondary:
     backgroundColor: "transparent"
-    textColor: "{colors.signal-green}"
-    rounded: "{rounded.md}"
-    padding: "9px 17px"
-  chip:
-    backgroundColor: "{colors.phosphor-surface}"
-    textColor: "{colors.terminal-ink}"
-    rounded: "{rounded.sm}"
-    padding: "5px 12px"
-  card:
-    backgroundColor: "{colors.phosphor-surface}"
-    textColor: "{colors.terminal-ink}"
-    rounded: "{rounded.xl}"
-    padding: "24px 22px 20px"
-  nav-item:
+    textColor: "{colors.text}"
+    padding: "10px 0"
+  terminal-input:
     backgroundColor: "transparent"
-    textColor: "{colors.terminal-ink-dim}"
-    rounded: "{rounded.sm}"
-    padding: "7px 11px"
+    textColor: "{colors.text}"
+    padding: "2px"
+  project-body:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text}"
+    padding: "25px 26px"
+  interest-sticker:
+    backgroundColor: "{colors.panel}"
+    textColor: "{colors.accent}"
+    padding: "4px 9px"
 ---
 
-# Design System: lel190 Console
+# Design System: lel190 Personal Workstation
 
 ## Overview
 
-**Creative North Star: "The Operator's Console"**
+**Creative North Star: "The Personal Workstation"**
 
-The portfolio is a console, not a page. The visitor operates it: the interactive CLI hero is the front door, and every section below is a panel of that same system. The terminal is not a decoration bolted onto a website — it is the product, and the rest of the page behaves like its coherent output. This world deliberately refuses the decorated-portfolio default: no Persona 5 confetti, no floating geometric shapes, no glow-everything. Restraint is the upgrade.
+A dark, human-operated workspace rather than a fictional security console. Angular headings and terminal chrome establish the retro technical character; the owner's avatar, casual copy, and small old-web interest stickers supply personality. This is a portfolio with personal details, not an immersive operating-system simulation.
 
-The palette is a phosphor CRT in a dark room: a near-black green-tinted ground, one signal green that carries every interactive promise, and hairline borders that define panels without shouting. Depth comes from layered surfaces and a single soft ambient shadow, never colored halos. Motion is sparse and purposeful — one authored entrance for the terminal, gentle reveals elsewhere — because the terminal's boot sequence is the only performance that should feel alive.
-
-**Key Characteristics:**
-- One accent color (terminal green) carries all interactive signal; red is reserved for the live cursor and danger states, yellow for the single WIP marker.
-- Hairline borders and layered panels instead of heavy cards or glow.
-- JetBrains Mono is the system voice; Outfit is the display/body voice.
-- The terminal boot sequence is the signature interaction; everything else recedes.
-- Dark-only, by product commitment.
+**Key Characteristics:** readable identity, square utilitarian surfaces, warm phosphor colors, a real optional shell, native navigation, restrained motion.
 
 ## Colors
 
-The palette is a phosphor CRT: a green-tinted near-black ground with a single saturated green accent. Secondary and tertiary accents exist only as rare state markers, not as decoration.
+Sage phosphor is the primary interactive signal. Amber distinguishes mail-project material and WIP details; the pale gray-green info color is a tertiary sticker accent. Warm text and green-tinted charcoal surfaces avoid harsh pure-white/pure-black contrast.
 
-### Primary
-- **Signal Green** (`#33ff66`): The one interactive accent. Prompts, the live cursor, primary buttons, focus rings, hover states, the header logo. Its rarity is the point — it appears where the visitor can act.
-
-### Secondary
-- **Signal Danger** (`#ff3b30`): Reserved for destructive/attention states and the terminal window's red traffic-light dot. Never decorative.
-
-### Tertiary
-- **Signal Warning** (`#ffd60a`): Used only for the single WIP badge and its progress bar. Yellow is precious.
-
-### Neutral
-- **Phosphor Ground** (`#050605`): Page background. A green-tinted near-black, not pure black.
-- **Phosphor Surface** (`#0a0c09`): Card and chip background, one step off the ground.
-- **Phosphor Panel** (`#0e110d`): Terminal window and terminal block background.
-- **Phosphor Raised** (`#12150f`): Mobile drawer and raised surfaces.
-- **Hairline** (`#1e241b`): Borders, dividers, section rules.
-- **Hairline Strong** (`#2a3326`): Panel borders and emphasized hairlines.
-- **Terminal Ink** (`#d6d8d2`): Primary text. Warm-neutral, not pure white.
-- **Terminal Ink Dim** (`#98a090`): Secondary text, descriptions.
-- **Terminal Ink Muted** (`#6b7365`): Tertiary text, captions, indices.
-
-### Named Rules
-**The One Voice Rule.** Signal green is used on a minority of any given screen. Its rarity is what makes it mean "you can act here."
-
-**The Hairline Rule.** Panels are separated by 1px hairlines, never by thick borders or colored glow. If two surfaces meet, a hairline is enough.
+**The Signal Rule.** Use the accent for links, the main action, and terminal prompts. Decorative material may use amber, but must not imply fabricated live status.
 
 ## Typography
 
-**Display/Body Font:** Outfit (with -apple-system, BlinkMacSystemFont, sans-serif)
-**Label/Mono Font:** JetBrains Mono (with ui-monospace, SFMono-Regular, Menlo, monospace)
+Chakra Petch is the angular display voice. JetBrains Mono carries commands, navigation, labels, and technical data. System sans carries readable descriptions.
 
-**Character:** Outfit is the calm, geometric humanist voice for readable content; JetBrains Mono is the system voice for everything the visitor "operates" — prompts, commands, indices, tags, labels. The pairing reads as a terminal with a comfortable body.
-
-### Hierarchy
-- **Display / Title** (650, 1.18rem, 1.3, -0.012em): Project card titles. Headings are modest — the terminal is the loudest thing on the page.
-- **Body** (400, 0.925rem, 1.65): Project descriptions, contact intro. Max ~65ch.
-- **Label / Mono** (400, 0.79rem): Buttons, tags, chips, nav items, section headers, indices, copyright. The system voice for interactive chrome.
-
-### Named Rules
-**The Mono-Chrome Rule.** Interactive and system chrome speaks in JetBrains Mono; readable prose speaks in Outfit. Don't set body copy in mono.
+The display name uses the large responsive role; section headings are around 2rem, project titles 1.4rem, and prose 0.85–1rem. Technical labels are smaller. Existing decorative metadata ranges around 0.61–0.7rem; this is not a body-copy scale. Terminal input becomes 16px on narrow screens to avoid mobile zoom.
 
 ## Layout
 
-A single centered column, max-width 1080px for content (1240px for the header), with generous vertical rhythm. Sections stack with 88px vertical padding and are separated by 1px top hairlines. Each section header is a mono prompt line (`> ls ~/projects`) followed by a short gradient hairline rule that fades to transparent — the only decorative gradient in the system.
+Content uses a centered 1160px container with 32px side padding, reduced to 20px at 600px. The header is sticky, 72px tall (64px on narrow screens). Native section anchors reserve 88px of scroll margin.
 
-The project grid is 3 columns at desktop, collapsing to 2 at ≤980px and 1 at ≤680px. The skills terminal block is a single panel. The footer centers contact links and ends with a status line.
-
-Spacing rhythm: tight groups (8–16px between related items), generous separation (40–56px between a header and its content). More space above a heading than below it.
+The hero pairs identity and shell with a 64px gap, reduced to 32px below 980px; it stacks at 780px. Projects use two columns with a 24px gap and stack at 720px. The toolbox and personal corner also stack at 720px. The WIP item is a separate horizontal row, not a third full project card. Section separation is generous; related labels and controls stay close.
 
 ## Elevation & Depth
 
-Depth is tonal layering plus a single ambient shadow — never colored glow, never hard offset shadows. The ground is darkest; surfaces step up one or two tones; the terminal window and terminal block carry the one real shadow.
-
-### Shadow Vocabulary
-- **Ambient Panel** (`0 1px 0 rgba(214,216,210,0.035), 0 12px 40px rgba(0,0,0,0.5)`): The terminal window and skills terminal block. A soft, wide, low-opacity drop that lifts the panel off the ground.
-
-Everything else is flat at rest. Cards lift on hover via a 1px border-color shift and a 3px translateY, not a shadow.
+Depth comes from charcoal surface changes and single-pixel rules. The current surface has no card shadows, colored glows, glass panels, or floating background effects.
 
 ## Shapes
 
-Radius language is a quiet scale: 4px for small chips and badges, 6px for buttons, 10px for the terminal window and terminal block, 12px for cards. No pill-shaped controls except the 4px progress bar (99px radius). Borders are 1px hairlines throughout. The only clipped geometry is the terminal window's hairline top accent (a 1px gradient line, not a shape).
+Square corners and thin utilitarian borders define windows, controls, diagrams, and stickers. No pill-shaped skill chips. The page starts with a narrow sage rule; the terminal header is a lighter solid panel.
 
 ## Components
 
-### Buttons
-- **Shape:** 6px radius, 1px border.
-- **Primary:** Signal green fill, phosphor-ground text, 9px 17px padding. Hover keeps the fill and shifts the border to full green.
-- **Ghost:** Transparent fill, signal-green text, signal-green hairline border. Hover adds a faint green wash (`rgba(51,255,102,0.06)`) and full-green border.
-- **Interaction:** 0.18s ease transitions; a subtle arrow translate on project-button hover.
-
-### Chips
-- **Style:** Phosphor-surface background, terminal-ink text, 1px hairline-strong border, 5px radius, 5px 12px padding.
-- **Hover:** Border shifts to signal-green line, text shifts to signal green.
-
-### Cards / Containers
-- **Corner Style:** 12px radius.
-- **Background:** Phosphor surface.
-- **Border:** 1px hairline; hover shifts to hairline-strong.
-- **Shadow Strategy:** Flat at rest; no shadow. Hover lifts 3px and shifts the border.
-- **Internal Padding:** 24px 22px 20px.
-
-### Terminal Window (signature component)
-- **Corner Style:** 10px radius.
-- **Background:** Phosphor panel with the ambient panel shadow.
-- **Border:** 1px hairline-strong.
-- **Header:** Three traffic-light dots (red/orange/green) plus a right-aligned uppercase mono title (`LEL190 — SECURE SHELL`).
-- **Behavior:** Boot sequence types out `[ OK ]` lines, then reveals the interactive prompt (`visitor@lel190:~$`) and two buttons. Clicking anywhere focuses the input. A skip-intro button and scroll indicator appear on the sides.
-
-### Navigation
-- **Style:** Fixed header, transparent at top, blurred phosphor-ground (`rgba(5,6,5,0.86)` + 12px blur) once scrolled.
-- **Typography:** JetBrains Mono 0.82rem, terminal-ink-dim at rest, terminal-ink on hover with a faint green wash.
-- **Hover:** A `$ ` prefix fades in before each item.
-- **Mobile:** A 240px right drawer with a hamburger toggle; items stack vertically.
+- **Primary action:** sage fill, dark ink, at least 44px tall; hover changes to warm ink fill. Secondary actions are text links.
+- **Navigation:** inline native anchors on all screen sizes, with a colored underline on hover. No mobile drawer or click-only navigation.
+- **Terminal:** labeled header, 249px scrollable output, and a separate input row. Long history scrolls internally; it does not resize the page. The command response log is announced politely.
+- **Boot and motion:** three short boot lines at 220ms intervals, a skip button, and one 600ms translate entrance. Identity and links remain visible throughout. Reduced motion removes the delay, entrance, and smooth scrolling. Automatic boot never steals focus.
+- **Projects:** an architecture panel above the description, plain technology labels, and a descriptive external link. Diagrams describe supplied architecture; they are not screenshots or live telemetry.
+- **Personal corner:** an existing avatar, personal prose, and three small interest stickers. Do not add claims about specific anime favorites or hardware without user input.
+- **Focus:** a visible sage outline with 5px offset; the terminal input row also gains a faint sage background.
+- **Browser surfaces:** dark color scheme, sage selection and caret, themed thin scrollbars. Content is visible by default, without scroll-reveal gates.
 
 ## Do's and Don'ts
 
-### Do:
-- **Do** use signal green sparingly — only where the visitor can act.
-- **Do** separate panels with 1px hairlines, not thick borders or glow.
-- **Do** set interactive chrome in JetBrains Mono and prose in Outfit.
-- **Do** keep the terminal the loudest element on the page; let sections recede.
-- **Do** use the single ambient shadow for the terminal window and skills block, and keep cards flat.
-
-### Don't:
-- **Don't** reintroduce floating shapes, diagonal stripes, scanlines, or particle bursts — the Persona 5 confetti is gone.
-- **Don't** use colored glow shadows or hard offset (neobrutalist) shadows.
-- **Don't** add a light mode — the product is dark-only by commitment.
-- **Don't** set body copy in monospace.
-- **Don't** scatter hover animations across every element; the boot sequence is the one performance.
+- **Do** keep name, background, and projects understandable without using the terminal.
+- **Do** preserve native keyboard navigation, reduced motion, touch usability, and real project URLs.
+- **Do** centralize theme values in `src/App.js` and check the baseline in `src/index.css`.
+- **Don't** replace personal content with invented system alerts, fake metrics, or remote-server claims.
+- **Don't** turn the anime references into a fandom landing page or add a mandatory intro.
+- **Don't** bring back particle systems or a custom cursor as a default embellishment.

@@ -1,217 +1,72 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 
 const HeaderContainer = styled.header`
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  background-color: ${props => props.$scrolled ? 'rgba(5, 6, 5, 0.92)' : 'transparent'};
-  backdrop-filter: ${props => props.$scrolled ? 'blur(12px)' : 'none'};
-  -webkit-backdrop-filter: ${props => props.$scrolled ? 'blur(12px)' : 'none'};
-  border-bottom: 1px solid ${props => props.$scrolled ? props.theme.border : 'transparent'};
-  padding: 14px 0;
-  transition: background-color 0.25s ease, border-color 0.25s ease;
-  z-index: 1000;
+  z-index: 100;
+  background: ${props => props.theme.background};
+  border-bottom: 1px solid ${props => props.theme.border};
 `;
 
 const HeaderContent = styled.div`
-  width: 100%;
-  max-width: 1240px;
+  max-width: 1160px;
+  min-height: 72px;
   margin: 0 auto;
-  padding: 0 28px;
+  padding: 0 32px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 32px;
+  @media (max-width: 600px) { min-height: 64px; padding: 0 20px; gap: 12px; }
 `;
 
-const Logo = styled(motion.div)`
-  font-family: ${props => props.theme.fontMono};
-  font-size: 1.05rem;
-  font-weight: 700;
-  cursor: pointer;
-  color: ${props => props.theme.text};
-  letter-spacing: 0.045em;
+const Logo = styled.a`
+  font: 700 1.1rem ${props => props.theme.fontMono};
+  text-decoration: none;
+  color: ${props => props.theme.accent};
+  white-space: nowrap;
+  span { color: ${props => props.theme.textMuted}; font-weight: 400; }
+  @media (max-width: 380px) { font-size: 0.95rem; }
+`;
 
-  &::before {
-    content: '~/';
-    color: ${props => props.theme.textMuted};
-    font-weight: 400;
-  }
-
-  em {
-    font-style: normal;
-    color: ${props => props.theme.accent};
-  }
-
-  .cursor {
-    color: ${props => props.theme.accent};
-    animation: blink 1.1s step-end infinite;
-  }
+const SiteLabel = styled.span`
+  color: ${props => props.theme.textMuted};
+  font: 0.65rem ${props => props.theme.fontMono};
+  letter-spacing: 0.08em;
+  @media (max-width: 850px) { display: none; }
 `;
 
 const NavMenu = styled.nav`
+  margin-left: auto;
   display: flex;
-  align-items: center;
-  gap: 4px;
-
-  @media (max-width: 720px) {
-    position: fixed;
-    top: 0;
-    right: ${props => props.$isOpen ? '0' : '-100%'};
-    width: 240px;
-    height: 100vh;
-    background-color: ${props => props.theme.panelRaised};
-    border-left: 1px solid ${props => props.theme.borderStrong};
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    padding: 104px 24px 24px;
-    transition: right 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: ${props => props.$isOpen ? '-16px 0 48px rgba(0, 0, 0, 0.55)' : 'none'};
+  gap: 28px;
+  a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    color: ${props => props.theme.textDim};
+    text-decoration: none;
+    font: 0.75rem ${props => props.theme.fontMono};
+    border-bottom: 2px solid transparent;
+    transition: color 160ms ease, border-color 160ms ease;
+    &:hover { color: ${props => props.theme.accent}; border-color: currentColor; }
   }
+  @media (max-width: 600px) { gap: 16px; }
+  @media (max-width: 380px) { gap: 10px; a { font-size: 0.68rem; } }
 `;
 
-const NavItem = styled(motion.a)`
-  margin: 0 6px;
-  padding: 7px 11px;
-  text-decoration: none;
-  color: ${props => props.theme.textDim};
-  font-family: ${props => props.theme.fontMono};
-  font-size: 0.82rem;
-  border-radius: 3px;
-  position: relative;
-  transition: color 0.18s ease, background-color 0.18s ease;
-
-  &::before {
-    content: '$ ';
-    color: ${props => props.theme.accent};
-    opacity: 0;
-    transition: opacity 0.18s ease;
-  }
-
-  &:hover {
-    color: ${props => props.theme.text};
-    background-color: ${props => props.theme.accentFaint};
-    &::before { opacity: 1; }
-  }
-
-  @media (max-width: 720px) {
-    margin: 6px 0;
-    padding: 11px 12px;
-    font-size: 0.93rem;
-  }
-`;
-
-const HamburgerButton = styled.button`
-  display: none;
-  background: none;
-  border: 1px solid ${props => props.theme.borderStrong};
-  border-radius: 3px;
-  cursor: pointer;
-  padding: 9px 10px;
-  z-index: 1001;
-  transition: border-color 0.18s ease;
-
-  &:hover { border-color: ${props => props.theme.accentLine}; }
-
-  @media (max-width: 720px) {
-    display: block;
-  }
-`;
-
-const HamburgerIcon = styled.div`
-  width: 18px;
-  height: 2px;
-  background-color: ${props => props.theme.accent};
-  position: relative;
-  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: ${props => props.$isOpen ? 'rotate(45deg)' : 'none'};
-
-  &:before, &:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 18px;
-    height: 2px;
-    background-color: ${props => props.theme.accent};
-    transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  &:before {
-    transform: ${props => props.$isOpen ? 'rotate(90deg)' : 'translateY(-6px)'};
-  }
-
-  &:after {
-    transform: ${props => props.$isOpen ? 'rotate(90deg)' : 'translateY(6px)'};
-    opacity: ${props => props.$isOpen ? 0 : 1};
-  }
-`;
-
-const Header = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleNavClick = (id) => {
-    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
-    setIsMenuOpen(false);
-  };
-
-  return (
-    <HeaderContainer $scrolled={scrolled}>
-      <HeaderContent>
-        <Logo
-          onClick={scrollToTop}
-          whileHover={{ scale: 1.025 }}
-          whileTap={{ scale: 0.975 }}
-        >
-          <em>lel190</em><span className="cursor">█</span>
-        </Logo>
-
-        <HamburgerButton onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
-          <HamburgerIcon $isOpen={isMenuOpen} />
-        </HamburgerButton>
-
-        <NavMenu $isOpen={isMenuOpen}>
-          <NavItem
-            href="#projects"
-            onClick={(e) => { e.preventDefault(); handleNavClick('#projects'); }}
-            whileTap={{ scale: 0.97 }}
-          >
-            projects
-          </NavItem>
-          <NavItem
-            href="#skills"
-            onClick={(e) => { e.preventDefault(); handleNavClick('#skills'); }}
-            whileTap={{ scale: 0.97 }}
-          >
-            skills
-          </NavItem>
-          <NavItem
-            href="https://github.com/le-lel190"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileTap={{ scale: 0.97 }}
-          >
-            github
-          </NavItem>
-        </NavMenu>
-      </HeaderContent>
-    </HeaderContainer>
-  );
-};
+const Header = () => (
+  <HeaderContainer>
+    <HeaderContent>
+      <Logo href="#home" aria-label="lel190 home"><span>~/</span>lel190<span>_</span></Logo>
+      <SiteLabel>PERSONAL SITE / HUMAN OPERATED</SiteLabel>
+      <NavMenu aria-label="Main navigation">
+        <a href="#projects">projects</a>
+        <a href="#skills">about</a>
+        <a href="#contact">contact</a>
+      </NavMenu>
+    </HeaderContent>
+  </HeaderContainer>
+);
 
 export default Header;
