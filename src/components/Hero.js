@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import styled from 'styled-components';
 import pixelFont from '../assets/lel190-pixel.ttf';
 import LainDataStream from './LainDataStream';
+import { skills } from '../data/profile';
 
 const bootLines = [
   '[ OK ] mounting /home/lel190',
@@ -18,13 +19,9 @@ const COMMAND_GROUPS = [
 const PROJECT_LINES = [
   '1. AI API Gateway -> https://api.lel190.dev',
   '2. No-Account Temp Mail -> https://971236.xyz/',
-  '3. Secret... [WIP 35%]',
+  '3. Unity function-hooking experiment [WIP]',
 ];
-const SKILL_LINES = [
-  'Languages       :: Python, C/C++, Java, R, SQL, C#, Lua',
-  'Web Development :: React, Node.js, Express.js, JavaScript, HTML/CSS',
-  'Tools           :: Git, Kubernetes, Docker, Cheat Engine, DnSpy, IDA Pro',
-];
+const SKILL_LINES = skills.map(({ category, items }) => `${category.padEnd(12)} :: ${items.join(', ')}`);
 const CONTACT_LINES = [
   'GitHub   :: https://github.com/le-lel190',
   'LinkedIn :: https://www.linkedin.com/in/le-anson-cheung/',
@@ -34,44 +31,46 @@ const CONTACT_LINES = [
 const HeroContainer = styled.section`
   position: relative;
   isolation: isolate;
-  padding: 110px 0 0;
-  @media (max-width: 780px) { padding-top: 64px; }
+  padding: 80px 0 0;
+  @media (max-width: 780px) { padding-top: 40px; }
 `;
 const HeroGrid = styled.div`
   display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
-  gap: 64px;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
   align-items: center;
-  padding-bottom: 90px;
+  padding-bottom: 64px;
   > * { min-width: 0; }
   @media (max-width: 980px) { gap: 32px; }
-  @media (max-width: 780px) { grid-template-columns: 1fr; gap: 36px; padding-bottom: 36px; }
+  @media (max-width: 780px) { grid-template-columns: 1fr; gap: 32px; padding-bottom: 32px; }
 `;
 const Introduction = styled.div`
   h1 {
-    font: 600 clamp(3.5rem, 6.7vw, 5.7rem)/0.98 ${props => props.theme.fontDisplay};
+    font: 600 clamp(3.5rem, 6.7vw, 5.7rem)/1 ${props => props.theme.fontDisplay};
     letter-spacing: -0.035em;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     span { display: block; }
     em { font-style: normal; color: ${props => props.theme.accent}; }
   }
 `;
 const Bio = styled.p`
   color: ${props => props.theme.textDim};
-  font-size: 1rem;
-  max-width: 38ch;
+  font-size: 1.05rem;
+  max-width: 39ch;
   line-height: 1.75;
   strong { color: ${props => props.theme.text}; font-weight: 500; }
 `;
-const Identity = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 30px;
-  font: 0.7rem/1.7 ${props => props.theme.fontMono};
+const Identity = styled.p`
+  margin-bottom: 16px;
+  color: ${props => props.theme.accent};
+  font: 0.9rem/1.6 ${props => props.theme.fontMono};
+`;
+const PersonalNote = styled.p`
+  max-width: 44ch;
+  margin-top: 20px;
   color: ${props => props.theme.textMuted};
-  img { width: 42px; height: 42px; object-fit: cover; border: 1px solid ${props => props.theme.borderStrong}; }
-  strong { color: ${props => props.theme.accent}; font-weight: 500; display: block; }
+  font-size: 0.9rem;
+  line-height: 1.75;
 `;
 const HeroButtons = styled.div`
   display: flex;
@@ -86,7 +85,7 @@ const HeroButton = styled.a`
   align-items: center;
   min-height: 44px;
   padding: ${props => props.$primary ? '10px 19px' : '10px 0'};
-  font: 500 0.78rem ${props => props.theme.fontMono};
+  font: 500 0.8rem ${props => props.theme.fontMono};
   text-decoration: none;
   color: ${props => props.$primary ? props.theme.background : props.theme.text};
   background: ${props => props.$primary ? props.theme.accent : 'transparent'};
@@ -96,19 +95,9 @@ const HeroButton = styled.a`
   svg { width: 16px; height: 16px; margin-left: 13px; }
 `;
 const Workstation = styled.div`
+  margin-top: 20px;
   animation: terminalEnter 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
-`;
-const WorkstationLabel = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  color: ${props => props.theme.textMuted};
-  font: 0.65rem ${props => props.theme.fontMono};
-  span {
-    padding: 4px 6px;
-    background: ${props => props.theme.panel};
-  }
-  span:last-child { color: ${props => props.theme.accent}; }
+  @media (max-width: 780px) { margin-top: 0; }
 `;
 const TerminalWindow = styled.div`
   background: ${props => props.theme.panel};
@@ -123,7 +112,7 @@ const TerminalHeader = styled.div`
   background: ${props => props.theme.panelRaised};
   border-bottom: 1px solid ${props => props.theme.borderStrong};
   color: ${props => props.theme.textDim};
-  font-size: 0.67rem;
+  font-size: 0.75rem;
   span:first-child { color: ${props => props.theme.accent}; }
   span:last-child { margin-left: auto; color: ${props => props.theme.textMuted}; }
 `;
@@ -140,7 +129,7 @@ const TerminalGreeting = styled.div`
   color: ${props => props.theme.accent};
   font-size: 0.78rem;
   line-height: 1.8;
-  span { color: ${props => props.theme.textMuted}; font-size: 0.7rem; }
+  span { color: ${props => props.theme.textMuted}; font-size: 0.75rem; }
 `;
 const PixelWordmark = styled.div`
   @font-face {
@@ -157,7 +146,7 @@ const PixelWordmark = styled.div`
 `;
 const TerminalLine = styled.div`
   color: ${props => props.$isCommand ? props.theme.accent : props.theme.textDim};
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   line-height: 1.9;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
@@ -173,9 +162,9 @@ const PromptRow = styled.label`
   align-items: center;
   gap: 9px;
   color: ${props => props.theme.accent};
-  font-size: 0.73rem;
+  font-size: 0.75rem;
   > span { flex-shrink: 0; }
-  @media (max-width: 380px) { gap: 5px; font-size: 0.66rem; }
+  @media (max-width: 380px) { flex-wrap: wrap; gap: 8px; }
 `;
 const PromptInput = styled.input`
   flex: 1;
@@ -199,16 +188,14 @@ const SkipButton = styled.button`
   border: none;
   border-top: 1px solid ${props => props.theme.border};
   color: ${props => props.theme.accent};
-  font: 0.72rem ${props => props.theme.fontMono};
+  font: 0.75rem ${props => props.theme.fontMono};
   cursor: pointer;
   &:hover { background: ${props => props.theme.accentFaint}; }
 `;
 const TerminalFootnote = styled.p`
-  width: fit-content;
-  padding: 4px 6px;
-  background: ${props => props.theme.panel};
-  margin-top: 12px;
-  font: 0.65rem/1.7 ${props => props.theme.fontMono};
+  padding: 12px 18px;
+  border-top: 1px solid ${props => props.theme.border};
+  font: 0.75rem/1.7 ${props => props.theme.fontMono};
   color: ${props => props.theme.textMuted};
   code { color: ${props => props.theme.accent}; }
 `;
@@ -217,15 +204,13 @@ const InterestStrip = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 12px 28px;
-  border-top: 1px solid ${props => props.theme.border};
-  border-bottom: 1px solid ${props => props.theme.border};
-  padding: 17px 0;
-  color: ${props => props.theme.textMuted};
-  font: 0.65rem/1.7 ${props => props.theme.fontMono};
-  div { display: flex; flex-wrap: wrap; gap: 8px 22px; }
-  span { color: ${props => props.theme.textDim}; }
-  > p { color: ${props => props.theme.warning}; }
+  gap: 8px 24px;
+  border-top: 1px solid ${props => props.theme.borderStrong};
+  padding: 12px 0;
+  color: ${props => props.theme.textDim};
+  font: 0.75rem/1.8 ${props => props.theme.fontMono};
+  > p { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+  > p span { color: ${props => props.theme.textMuted}; }
 `;
 
 const createEntry = (id, content, isCommand = false) => ({ id, content, isCommand });
@@ -286,12 +271,13 @@ const Hero = () => {
 
   const commandHandlers = useMemo(() => ({
     help: () => pushOutput(['Available commands:', ...COMMAND_GROUPS]),
-    whoami: () => pushOutput(['anson :: CUHK CS student :: cybersecurity, CTF, reverse engineering']),
+    whoami: () => pushOutput(['Anson Cheung / lel190 :: CUHK CS graduate :: web services, reverse engineering, CTF']),
     about: () => pushOutput([
       'name      :: Anson Cheung',
       'handle    :: lel190',
-      'role      :: CS student @ CUHK',
-      'focus     :: cybersecurity, CTF, reverse engineering',
+      'role      :: CS graduate from CUHK',
+      'interests :: web services, reverse engineering, CTF',
+      'background :: security coursework and CTF competitions',
       'status    :: building things',
     ]),
     projects: () => {
@@ -345,11 +331,13 @@ const Hero = () => {
     <HeroContainer id="home" aria-labelledby="name">
       <HeroGrid>
         <Introduction>
-          <h1 id="name"><span>Anson</span>lel190<em>.</em></h1>
+          <h1 id="name"><span>Anson</span>Cheung<em>.</em></h1>
+          <Identity>@lel190</Identity>
           <Bio>
-            CS graduate from <strong>CUHK</strong>. Building useful things,
-            taking systems apart, and following the next rabbit hole.
+            CS graduate from <strong>CUHK</strong>. I build web services
+            and enjoy taking software apart.
           </Bio>
+          <PersonalNote>Cheat Engine started the reverse-engineering rabbit hole.</PersonalNote>
           <HeroButtons>
             <HeroButton href="#projects" $primary>
               Explore projects
@@ -357,20 +345,15 @@ const Hero = () => {
             </HeroButton>
             <HeroButton href="https://github.com/le-lel190" target="_blank" rel="noopener noreferrer">GitHub ↗</HeroButton>
           </HeroButtons>
-          <Identity>
-            <img src={`${process.env.PUBLIC_URL}/images/avatar.jpg`} alt="" width="42" height="42" />
-            <div><strong>@lel190</strong>human behind the shell</div>
-          </Identity>
         </Introduction>
         <Workstation>
-          <WorkstationLabel><span>~/lel190/interactive_shell</span><span>LOCAL SESSION</span></WorkstationLabel>
           <TerminalWindow>
             <TerminalHeader><span aria-hidden="true">&gt;_</span> terminal <span>bash — visitor</span></TerminalHeader>
             <TerminalOutput ref={outputRef} role="region" aria-label="Terminal output" tabIndex="0">
               <TerminalGreeting>
                 <PixelWordmark>lel190_</PixelWordmark>
-                welcome to my corner of the internet.<br />
-                <span>Not a remote server. Just a curious human's homepage.</span>
+                take a look around.<br />
+                <span>A little shell for this homepage. Try a command below.</span>
               </TerminalGreeting>
               {visibleBootLines.map((line, i) => <TerminalLine key={`boot-${i}`}>{line}</TerminalLine>)}
               <div role="log" aria-label="Command responses" aria-live="polite" aria-relevant="additions">
@@ -385,14 +368,13 @@ const Hero = () => {
                 </PromptRow>
               </PromptForm>
             ) : <SkipButton onClick={skipAnimation}>skip intro / enter terminal</SkipButton>}
+            <TerminalFootnote>Try <code>whoami</code>, <code>projects</code>, or <code>help</code>.</TerminalFootnote>
           </TerminalWindow>
-          <TerminalFootnote>Try <code>whoami</code>, <code>projects</code>, or <code>help</code>. </TerminalFootnote>
         </Workstation>
       </HeroGrid>
-      <LainDataStream />
       <InterestStrip>
-        <div><span>CYBERSECURITY</span><span>CTF</span><span>REVERSE ENGINEERING</span></div>
-        <p>always a work in progress_</p>
+        <p>Web services <span>/</span> Reverse engineering <span>/</span> CTF</p>
+        <LainDataStream />
       </InterestStrip>
     </HeroContainer>
   );

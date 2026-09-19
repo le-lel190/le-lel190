@@ -1,12 +1,12 @@
 ## Hi there 👋
 
-- 📚 I'm currently studying computer science in CUHK
+- 📚 Computer science graduate from CUHK
 - 🌱 I'm currently exploring on different frontend frameworks...
 - 📫 Feel free to reach me via Discord: 190 (yes my username is literally 190)
 
 ## About This Portfolio
 
-This is my GitHub profile page built with React: a dark, retro workstation portfolio with an interactive terminal and a hero-only Lain data stream. The background can be paused and becomes a still image when reduced motion is preferred.
+This is my GitHub profile page built with React: a dark, retro workstation portfolio with an interactive terminal and a continuous, stationary Lain background. A sparse data stream runs only near the introduction; it has a pause control and becomes a still frame when reduced motion is preferred. Projects, tools, and contact links are readable without using the terminal.
 
 **Live:** <https://le-lel190.github.io/le-lel190/>
 

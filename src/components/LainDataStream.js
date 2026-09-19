@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
-import lainImage from '../assets/lain_bg.webp';
 
 const GLYPHS = '01ZX<>[]{}|/\\:+-*=_#';
 const DATA_FRAGMENTS = [
@@ -20,17 +19,7 @@ const BackgroundLayer = styled.div`
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-  background: ${props => props.theme.background};
-  isolation: isolate;
   @media (max-width: 600px) { inset-inline: -20px; }
-`;
-
-const Artwork = styled.div`
-  position: absolute;
-  inset: 0;
-  background: url(${lainImage}) 58% center / cover no-repeat;
-  opacity: 0.38;
-  @media (max-width: 780px) { background-position: 61% top; opacity: 0.25; }
 `;
 
 const StreamCanvas = styled.canvas`
@@ -38,17 +27,24 @@ const StreamCanvas = styled.canvas`
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.65;
+  opacity: 0.3;
 `;
 
-const ColorWash = styled.div`
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, ${props => props.theme.background}d9, ${props => props.theme.background}33 70%),
-    linear-gradient(0deg, ${props => props.theme.background}, transparent 35%);
+const PauseControl = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  border: 0;
+  padding: 8px 12px;
+  background: ${props => props.theme.panel};
+  color: ${props => props.theme.textMuted};
+  font: 0.75rem ${props => props.theme.fontMono};
+  cursor: pointer;
+  svg { width: 14px; height: 14px; }
+  &:hover { color: ${props => props.theme.accent}; }
+  @media (prefers-reduced-motion: reduce) { display: none; }
 `;
-
 
 const randomBetween = (min, max) => min + Math.random() * (max - min);
 
@@ -126,6 +122,10 @@ const drawStreamFrame = (context, width, height, streams, packets, fontSize, del
 
 const LainDataStream = () => {
   const canvasRef = useRef(null);
+  const pausedRef = useRef(false);
+  const syncRef = useRef(null);
+  const [paused, setPaused] = useState(false);
+  const [canvasAvailable, setCanvasAvailable] = useState(false);
   const theme = useTheme();
 
   useEffect(() => {
@@ -134,6 +134,7 @@ const LainDataStream = () => {
 
     const context = canvas.getContext('2d');
     if (!context) return undefined;
+    setCanvasAvailable(true);
 
     const motionQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)') || { matches: true };
     let animationFrame;
@@ -160,7 +161,7 @@ const LainDataStream = () => {
       canvas.height = Math.floor(height * devicePixelRatio);
       context.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
 
-      const columnGap = fontSize * 1.72;
+      const columnGap = fontSize * 2.8;
       const columnCount = Math.ceil(width / columnGap) + 1;
       streams = Array.from({ length: columnCount }, (_, index) => (
         createStream(index * columnGap, height, fontSize)
@@ -172,7 +173,7 @@ const LainDataStream = () => {
       draw();
     };
 
-    const shouldAnimate = () => isOnscreen && document.visibilityState !== 'hidden' && !motionQuery.matches;
+    const shouldAnimate = () => isOnscreen && document.visibilityState !== 'hidden' && !motionQuery.matches && !pausedRef.current;
     const stop = () => {
       window.cancelAnimationFrame(animationFrame);
       animationFrame = undefined;
@@ -197,6 +198,7 @@ const LainDataStream = () => {
       }
     };
 
+    syncRef.current = syncAnimation;
     const observer = window.IntersectionObserver && new IntersectionObserver(([entry]) => {
       isOnscreen = entry.isIntersecting;
       syncAnimation();
@@ -211,6 +213,7 @@ const LainDataStream = () => {
     syncAnimation();
 
     return () => {
+      syncRef.current = null;
       stop();
       observer?.disconnect();
       resizeObserver?.disconnect();
@@ -223,10 +226,18 @@ const LainDataStream = () => {
   return (
     <>
       <BackgroundLayer aria-hidden="true">
-        <Artwork />
         <StreamCanvas ref={canvasRef} />
-        <ColorWash />
       </BackgroundLayer>
+      {canvasAvailable && <PauseControl type="button" onClick={() => {
+        pausedRef.current = !pausedRef.current;
+        setPaused(pausedRef.current);
+        syncRef.current?.();
+      }}>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+          <path d={paused ? 'M5 3 12 8 5 13Z' : 'M5 3v10M11 3v10'} />
+        </svg>
+        {paused ? 'Resume motion' : 'Pause motion'}
+      </PauseControl>}
     </>
   );
 };

@@ -1,69 +1,69 @@
 import React from 'react';
 import styled from 'styled-components';
+import { skills } from '../data/profile';
 
 const Section = styled.section`
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 70px;
-  padding: 10px 0 80px;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  padding: 0 0 80px;
   > * { min-width: 0; }
-  h2 { font: 600 2rem/1.2 ${props => props.theme.fontDisplay}; letter-spacing: -0.02em; margin-bottom: 24px; }
-  @media (max-width: 850px) { gap: 40px; }
-  @media (max-width: 720px) { grid-template-columns: 1fr; padding-bottom: 56px; }
+  h2 { font: 600 ${props => props.theme.sectionTitle}/1.2 ${props => props.theme.fontDisplay}; letter-spacing: -0.02em; margin-bottom: 20px; }
+  @media (max-width: 900px) { gap: 32px; }
+  @media (max-width: 720px) { grid-template-columns: 1fr; gap: 40px; padding-bottom: 56px; }
 `;
 const Toolbox = styled.div`
-  > p { color: ${props => props.theme.textDim}; font-size: 0.9rem; margin-bottom: 23px; }
+  > p { color: ${props => props.theme.textDim}; font-size: 0.95rem; line-height: 1.8; margin-bottom: 24px; max-width: 48ch; }
 `;
 const SkillList = styled.dl`
   > div {
     display: grid;
-    grid-template-columns: 90px 1fr;
+    grid-template-columns: 92px 1fr;
     gap: 20px;
-    padding: 18px 0;
-    border-top: 1px solid ${props => props.theme.border};
-    &:last-child { border-bottom: 1px solid ${props => props.theme.border}; }
+    padding: 20px 0;
+    border-top: 1px solid ${props => props.theme.borderStrong};
+    &:last-child { border-bottom: 1px solid ${props => props.theme.borderStrong}; }
   }
-  dt { color: ${props => props.theme.textMuted}; font: 0.7rem/1.9 ${props => props.theme.fontMono}; }
-  dd { color: ${props => props.theme.text}; font: 0.74rem/1.9 ${props => props.theme.fontMono}; }
-  ul { display: flex; flex-wrap: wrap; gap: 4px 18px; list-style: none; }
-  @media (max-width: 380px) { > div { grid-template-columns: 76px 1fr; gap: 12px; } }
+  dt { color: ${props => props.theme.textMuted}; font: 0.75rem/1.9 ${props => props.theme.fontMono}; }
+  dd { color: ${props => props.theme.text}; font: 0.8rem/1.9 ${props => props.theme.fontMono}; }
+  ul { display: flex; flex-wrap: wrap; gap: 4px 16px; list-style: none; }
+  @media (max-width: 380px) { > div { grid-template-columns: 1fr; gap: 8px; } }
 `;
 const PersonalCorner = styled.aside`
+  align-self: start;
+  margin-top: 8px;
   border: 1px solid ${props => props.theme.borderStrong};
   background: ${props => props.theme.surface};
-  align-self: start;
 `;
 const FileLabel = styled.div`
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-bottom: 1px solid ${props => props.theme.borderStrong};
-  font: 0.64rem ${props => props.theme.fontMono};
   color: ${props => props.theme.textMuted};
-  display: flex;
-  justify-content: space-between;
-  span { color: ${props => props.theme.warning}; }
+  font: 0.75rem ${props => props.theme.fontMono};
 `;
 const PersonalContent = styled.div`
-  padding: 24px;
-  > p { color: ${props => props.theme.textDim}; font-size: 0.87rem; line-height: 1.8; margin-top: 20px; }
+  padding: 28px;
+  > p { color: ${props => props.theme.textDim}; font-size: 0.95rem; line-height: 1.8; margin-top: 20px; }
+  @media (max-width: 380px) { padding: 24px; }
 `;
 const Profile = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
-  img { width: 76px; height: 76px; object-fit: cover; border: 1px solid ${props => props.theme.borderStrong}; }
-  h3 { font: 600 1.5rem/1.2 ${props => props.theme.fontDisplay}; }
-  p { color: ${props => props.theme.accent}; font: 0.68rem ${props => props.theme.fontMono}; margin-top: 8px; }
+  img { width: 64px; height: 64px; object-fit: cover; border: 1px solid ${props => props.theme.borderStrong}; }
+  h3 { font: 600 1.8rem/1.2 ${props => props.theme.fontDisplay}; }
+  p { color: ${props => props.theme.accent}; font: 0.8rem ${props => props.theme.fontMono}; margin-top: 8px; }
 `;
 const Stickers = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 22px;
+  margin-top: 24px;
   span {
     display: inline-block;
     border: 1px solid ${props => props.theme.borderStrong};
-    padding: 4px 9px;
-    font: 500 0.61rem ${props => props.theme.fontMono};
+    padding: 4px 8px;
+    font: 0.75rem/1.6 ${props => props.theme.fontMono};
     color: ${props => props.theme.accent};
     background: ${props => props.theme.panel};
     &:nth-child(2) { color: ${props => props.theme.warning}; }
@@ -71,36 +71,30 @@ const Stickers = styled.div`
   }
 `;
 
-const skillsData = [
-  { category: 'Languages', skills: ['Python', 'C/C++', 'Java', 'R', 'SQL'] },
-  { category: 'Web', skills: ['React', 'Node.js', 'Express.js', 'JavaScript', 'HTML/CSS'] },
-  { category: 'Tools', skills: ['Git', 'Linux', 'Docker'] },
-];
-
 const Skills = () => (
   <Section id="skills" aria-labelledby="skills-heading">
     <Toolbox>
       <h2 id="skills-heading">The toolbox.</h2>
-      <p>Languages, frameworks, and tools I build with.</p>
+      <p>From web services to reverse-engineering experiments. Security coursework at CUHK and CTF competitions are part of the mix, too.</p>
       <SkillList>
-        {skillsData.map(category => (
-          <div key={category.category}>
-            <dt>{category.category}</dt>
-            <dd><ul>{category.skills.map(skill => <li key={skill}>{skill}</li>)}</ul></dd>
+        {skills.map(({ category, items }) => (
+          <div key={category}>
+            <dt>{category}</dt>
+            <dd><ul>{items.map(skill => <li key={skill}>{skill}</li>)}</ul></dd>
           </div>
         ))}
       </SkillList>
     </Toolbox>
     <PersonalCorner aria-labelledby="personal-heading">
-      <FileLabel>~/personal/README.md<span>( ͡° ͜ʖ ͡°)</span></FileLabel>
+      <FileLabel>~/personal/README.md</FileLabel>
       <PersonalContent>
         <Profile>
-          <img src={`${process.env.PUBLIC_URL}/images/avatar.jpg`} alt="lel190's avatar" width="76" height="76" loading="lazy" />
-          <div><h3 id="personal-heading">"The ghost in the shell."</h3><p>Anson / lel190</p></div>
+          <img src={`${process.env.PUBLIC_URL}/images/avatar.jpg`} alt="lel190's avatar" width="64" height="64" loading="lazy" />
+          <div><h3 id="personal-heading">Off the clock.</h3><p>Anson / lel190</p></div>
         </Profile>
-        <p>Cybersecurity, CTFs, and reverse engineering on one side. Anime, rhythm game enjoyer (??? I was top 100 in HK in osu!mania!!!), and a casual gamer.</p>
-        <p>And I have to say it was Cheat Engine which led me to many stuff.</p>
-        <Stickers aria-label="Personal interests"><span>LINUX ENJOYER</span><span>TINY BIT OF ANIME</span><span>AVERAGE CHEAT ENGINE ENJOYER</span></Stickers>
+        <p>Anime, rhythm games, and a bit of casual gaming. I once made the top 100 in Hong Kong in osu!mania. Yes, I'm still bringing that up.</p>
+        <p>Usually following some new rabbit hole. Occasionally remembering to finish the last one.</p>
+        <Stickers aria-label="Personal interests"><span>Linux enjoyer</span><span>Anime</span><span>osu!mania</span></Stickers>
       </PersonalContent>
     </PersonalCorner>
   </Section>

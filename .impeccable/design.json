@@ -1,19 +1,20 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-07T01:56:07Z",
+  "generatedAt": "2026-09-19T07:19:09Z",
   "title": "Design System: lel190 Personal Workstation",
   "extensions": {
     "typographyMeta": {
-      "display": { "displayName": "Angular display", "purpose": "The owner's name; Chakra Petch." },
-      "headline": { "displayName": "Section heading", "purpose": "Clear portfolio structure, not terminal output." },
+      "display": { "displayName": "Angular display", "purpose": "Anson Cheung's full name; Chakra Petch." },
+      "headline": { "displayName": "Section heading", "purpose": "One shared scale for projects, toolbox, and contact." },
       "body": { "displayName": "Readable prose", "purpose": "Project descriptions and personal notes." },
-      "label": { "displayName": "Technical voice", "purpose": "Commands, navigation, and technical metadata." }
+      "label": { "displayName": "Technical voice", "purpose": "Commands, navigation, and technical metadata; at least 0.75rem." }
     },
     "shadows": [],
     "motion": [
       { "name": "terminal-enter", "value": "600ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Translate the already-visible workstation up from 10px; disabled for reduced motion." },
       { "name": "control-hover", "value": "160ms ease", "purpose": "Color, background, and navigation-border changes; disabled for reduced motion." },
-      { "name": "boot-line", "value": "220ms", "purpose": "One boot line per interval; reduced motion skips the sequence." }
+      { "name": "boot-line", "value": "220ms", "purpose": "One boot line per interval; reduced motion skips the sequence." },
+      { "name": "hero-stream", "value": "30fps maximum", "purpose": "Sparse hero-only stream, manually pausable and suspended offscreen or in hidden tabs." }
     ],
     "breakpoints": [
       { "name": "compact-controls", "value": "380px" },
@@ -21,7 +22,9 @@
       { "name": "project-and-toolbox-stack", "value": "720px" },
       { "name": "hero-stack", "value": "780px" },
       { "name": "compact-header", "value": "850px" },
-      { "name": "compact-hero-gap", "value": "980px" }
+      { "name": "compact-project-gap", "value": "900px" },
+      { "name": "compact-hero-gap", "value": "980px" },
+      { "name": "artwork-margin", "value": "1160px" }
     ]
   },
   "components": [
@@ -29,54 +32,54 @@
       "name": "Primary Action",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Square sage project link, always visible before terminal boot.",
+      "description": "Square sage project link, available before the terminal boots.",
       "html": "<a class=\"ds-primary\" href=\"#projects\">Explore projects <svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M3 10h14m-6-6 6 6-6 6\"/></svg></a>",
-      "css": ".ds-primary { display:inline-flex; align-items:center; min-height:44px; padding:10px 19px; background:#b9d883; color:#101211; border:1px solid #b9d883; font:500 .78rem 'JetBrains Mono',monospace; text-decoration:none; transition:background 160ms ease; } .ds-primary svg { width:16px; height:16px; margin-left:13px; } .ds-primary:hover { background:#e7e6d9; } .ds-primary:focus-visible { outline:2px solid #b9d883; outline-offset:5px; }"
+      "css": ".ds-primary { display:inline-flex; align-items:center; min-height:44px; padding:10px 19px; background:#b9d883; color:#101211; border:1px solid #b9d883; font:500 .8rem 'JetBrains Mono',monospace; text-decoration:none; transition:background 160ms ease; } .ds-primary svg { width:16px; height:16px; margin-left:13px; } .ds-primary:hover { background:#e7e6d9; } .ds-primary:focus-visible { outline:2px solid #b9d883; outline-offset:5px; }"
     },
     {
       "name": "Secondary Action",
       "kind": "button",
       "refersTo": "button-secondary",
-      "description": "Quiet text link alongside the primary action.",
+      "description": "A quiet text link alongside the primary action.",
       "html": "<a class=\"ds-secondary\" href=\"https://github.com/le-lel190\">GitHub</a>",
-      "css": ".ds-secondary { display:inline-flex; align-items:center; min-height:44px; padding:10px 0; border:1px solid transparent; color:#e7e6d9; font:500 .78rem 'JetBrains Mono',monospace; text-decoration:none; transition:background 160ms ease; } .ds-secondary:hover { background:rgba(185,216,131,.07); } .ds-secondary:focus-visible { outline:2px solid #b9d883; outline-offset:5px; }"
+      "css": ".ds-secondary { display:inline-flex; align-items:center; min-height:44px; padding:10px 0; border:1px solid transparent; color:#e7e6d9; font:500 .8rem 'JetBrains Mono',monospace; text-decoration:none; transition:background 160ms ease; } .ds-secondary:hover { background:rgba(185,216,131,.07); } .ds-secondary:focus-visible { outline:2px solid #b9d883; outline-offset:5px; }"
     },
     {
       "name": "Terminal Input",
       "kind": "input",
       "refersTo": "terminal-input",
-      "description": "Real command field; the containing row gains a faint sage focus state.",
+      "description": "A real command field in a solid reading surface; mobile input remains 16px.",
       "html": "<label class=\"ds-prompt\"><span>visitor@lel190:~$</span><input aria-label=\"Terminal command input\" placeholder=\"help\" autocomplete=\"off\" spellcheck=\"false\"></label>",
-      "css": ".ds-prompt { display:flex; align-items:center; gap:9px; padding:14px 18px; background:#0c100d; border-top:1px solid #303930; color:#b9d883; font:.73rem 'JetBrains Mono',monospace; } .ds-prompt span { flex-shrink:0; } .ds-prompt:focus-within { background:rgba(185,216,131,.07); } .ds-prompt input { flex:1; min-width:0; padding:2px; border:0; background:transparent; color:#e7e6d9; caret-color:#b9d883; font:.8rem 'JetBrains Mono',monospace; } .ds-prompt input::placeholder { color:#929f8d; opacity:1; } .ds-prompt input:focus-visible { outline:2px solid #b9d883; outline-offset:5px; }"
+      "css": ".ds-prompt { display:flex; align-items:center; gap:9px; padding:14px 18px; background:#0c100d; border-top:1px solid #303930; color:#b9d883; font:.75rem 'JetBrains Mono',monospace; } .ds-prompt span { flex-shrink:0; } .ds-prompt:focus-within { background:rgba(185,216,131,.07); } .ds-prompt input { flex:1; min-width:0; padding:2px; border:0; background:transparent; color:#e7e6d9; caret-color:#b9d883; font:16px 'JetBrains Mono',monospace; } .ds-prompt input::placeholder { color:#929f8d; opacity:1; } .ds-prompt input:focus-visible { outline:2px solid #b9d883; outline-offset:5px; }"
     },
     {
       "name": "Inline Navigation",
       "kind": "nav",
-      "description": "Native anchors on desktop and mobile; no drawer.",
+      "description": "Native anchors on desktop and mobile, aligned to the content column.",
       "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a href=\"#projects\">projects</a><a href=\"#skills\">about</a><a href=\"#contact\">contact</a></nav>",
-      "css": ".ds-nav { display:flex; gap:28px; background:#101211; } .ds-nav a { display:inline-flex; align-items:center; min-height:44px; color:#afb8a9; border-bottom:2px solid transparent; font:.75rem 'JetBrains Mono',monospace; text-decoration:none; transition:color 160ms ease,border-color 160ms ease; } .ds-nav a:hover { color:#b9d883; border-color:currentColor; } .ds-nav a:focus-visible { outline:2px solid #b9d883; outline-offset:5px; }"
+      "css": ".ds-nav { display:flex; gap:28px; background:#101211; } .ds-nav a { display:inline-flex; align-items:center; min-height:44px; color:#afb8a9; border-bottom:2px solid transparent; font:.8rem 'JetBrains Mono',monospace; text-decoration:none; transition:color 160ms ease,border-color 160ms ease; } .ds-nav a:hover { color:#b9d883; border-color:currentColor; } .ds-nav a:focus-visible { outline:2px solid #b9d883; outline-offset:5px; }"
     },
     {
       "name": "Project Surface",
       "kind": "card",
       "refersTo": "project-body",
-      "description": "Flat surface with a fine border; actual cards pair architecture material with readable descriptions.",
-      "html": "<article class=\"ds-project\"><h3>AI API Gateway</h3><p>Multiple AI providers behind one clean API.</p><a href=\"https://api.lel190.dev\">View project</a></article>",
-      "css": ".ds-project { padding:25px 26px; border:1px solid #303930; background:#171b18; color:#e7e6d9; transition:border-color 180ms ease; } .ds-project:hover,.ds-project:focus-within { border-color:#4a5748; } .ds-project h3 { margin:0 0 12px; font:600 1.4rem/1.3 'Chakra Petch',sans-serif; } .ds-project p { margin:0 0 20px; color:#afb8a9; font:.9rem/1.75 system-ui,sans-serif; } .ds-project a { display:block; min-height:44px; padding-top:16px; border-top:1px solid #303930; color:#b9d883; font:500 .74rem 'JetBrains Mono',monospace; text-decoration:none; } .ds-project a:hover { text-decoration:underline; } .ds-project a:focus-visible { outline:2px solid #b9d883; outline-offset:5px; }"
+      "description": "A wide reading surface pairing project copy with its own visual.",
+      "html": "<article class=\"ds-project\"><h3>AI API Gateway</h3><p>One endpoint for multiple AI providers.</p><a href=\"https://api.lel190.dev\">api.lel190.dev</a></article>",
+      "css": ".ds-project { padding:32px; border-top:1px solid #4a5748; background:rgba(16,18,17,.94); color:#e7e6d9; } .ds-project h3 { margin:0 0 16px; font:600 2rem/1.2 'Chakra Petch',sans-serif; letter-spacing:-.02em; } .ds-project p { margin:0 0 20px; color:#afb8a9; font:.95rem/1.8 system-ui,sans-serif; } .ds-project a { display:inline-flex; align-items:center; min-height:44px; color:#b9d883; font:500 .8rem 'JetBrains Mono',monospace; text-underline-offset:5px; } .ds-project a:hover { color:#e7e6d9; } .ds-project a:focus-visible { outline:2px solid #b9d883; outline-offset:5px; }"
     },
     {
       "name": "Interest Sticker",
       "kind": "chip",
       "refersTo": "interest-sticker",
-      "description": "Non-interactive old-web personal detail, not a skill control.",
-      "html": "<span class=\"ds-sticker\">LINUX ENJOYER</span>",
-      "css": ".ds-sticker { display:inline-block; padding:4px 9px; border:1px solid #4a5748; background:#0c100d; color:#b9d883; font:500 .61rem 'JetBrains Mono',monospace; }"
+      "description": "Readable, non-interactive personal detail.",
+      "html": "<span class=\"ds-sticker\">Linux enjoyer</span>",
+      "css": ".ds-sticker { display:inline-block; padding:4px 8px; border:1px solid #4a5748; background:#0c100d; color:#b9d883; font:.75rem/1.6 'JetBrains Mono',monospace; }"
     }
   ],
   "narrative": {
     "northStar": "The Personal Workstation",
-    "overview": "A dark, human-operated workspace rather than a fictional security console. Angular headings and terminal chrome establish the retro technical character; the owner's avatar, casual copy, and small old-web interest stickers supply personality. This is a portfolio with personal details, not an immersive operating-system simulation.",
-    "keyCharacteristics": ["readable identity", "square utilitarian surfaces", "warm phosphor colors", "a real optional shell", "native navigation", "restrained motion"],
+    "overview": "A personal portfolio with the atmosphere of a working desk. Angular headings, a real optional terminal, and square reading surfaces establish the technical character. A continuous Lain backdrop, the owner's avatar, and personal writing connect the whole page. The projects lead; anime and old-web details stay recognizable around them.",
+    "keyCharacteristics": ["full-name identity", "readable work", "continuous artwork", "square utilitarian surfaces", "warm phosphor colors", "an optional shell", "native navigation", "restrained motion"],
     "rules": [{ "name": "The Signal Rule", "body": "Use the accent for links, the main action, and terminal prompts. Decorative material may use amber, but must not imply fabricated live status.", "section": "colors" }],
     "dos": ["Do keep name, background, and projects understandable without using the terminal.", "Do preserve native keyboard navigation, reduced motion, touch usability, and real project URLs.", "Do centralize theme values in src/App.js and check the baseline in src/index.css."],
     "donts": ["Don't replace personal content with invented system alerts, fake metrics, or remote-server claims.", "Don't turn the anime references into a fandom landing page or add a mandatory intro.", "Don't bring back particle systems or a custom cursor as a default embellishment."]

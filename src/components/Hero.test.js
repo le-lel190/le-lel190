@@ -4,6 +4,8 @@ import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import Hero from './Hero';
 
+import Skills from './Skills';
+import { skills } from '../data/profile';
 import { theme } from '../App';
 
 const renderHero = () => {
@@ -36,7 +38,7 @@ const setNativeValue = (element, value) => {
 };
 
 const enterInteractiveMode = (container) => {
-  const skipButton = container.querySelector('button');
+  const skipButton = Array.from(container.querySelectorAll('button')).find(button => button.textContent.includes('skip intro'));
   expect(skipButton).not.toBeNull();
 
   act(() => {
@@ -77,7 +79,7 @@ describe('Hero terminal', () => {
 
   it('shows the identity and project link before the terminal finishes booting', () => {
     const { container, unmount } = renderHero();
-    expect(container.querySelector('h1').textContent).toBe('Ansonlel190.');
+    expect(container.querySelector('h1').textContent).toBe('AnsonCheung.');
     expect(container.querySelector('a[href="#projects"]').textContent).toContain('Explore projects');
     expect(container.querySelector('input')).toBeNull();
     expect(container.querySelector('pre')).toBeNull();
@@ -160,6 +162,28 @@ describe('Hero terminal', () => {
     expect(document.querySelector('#projects').scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
     expect(container.textContent).toContain('Projects loaded. Scrolling to portfolio section...');
 
+    unmount();
+  });
+
+  it('keeps the graduate identity and toolbox consistent with terminal responses', () => {
+    const { container, unmount } = renderHero();
+    enterInteractiveMode(container);
+    submitCommand(container, 'whoami');
+    submitCommand(container, 'about');
+    submitCommand(container, 'skills');
+    expect(container.textContent).toContain('CUHK CS graduate');
+    expect(container.textContent).not.toContain('CS student');
+
+    const toolbox = document.createElement('div');
+    document.body.appendChild(toolbox);
+    const toolboxRoot = createRoot(toolbox);
+    act(() => toolboxRoot.render(<ThemeProvider theme={theme}><Skills /></ThemeProvider>));
+    skills.flatMap(({ items }) => items).forEach(skill => {
+      expect(container.querySelector('[role="log"]').textContent).toContain(skill);
+      expect(toolbox.textContent).toContain(skill);
+    });
+    act(() => toolboxRoot.unmount());
+    toolbox.remove();
     unmount();
   });
 

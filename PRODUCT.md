@@ -15,11 +15,11 @@ Two audiences, weighted equally:
 
 ## Product Purpose
 
-A personal portfolio for Anson Cheung (handle `lel190`), a CUHK CS graduate focused on cybersecurity, CTF, reverse engineering and general devops jobs. Success means a recruiter can grasp his skills and projects quickly, and a peer recognizes real craft. It also doubles as a demonstration of what he can build.
+A personal portfolio for Anson Cheung (handle `lel190`), a CUHK CS graduate who builds web services and enjoys reverse engineering. His experience also includes university security coursework and CTF competitions. Success means a recruiter can grasp his skills and projects quickly, and a peer recognizes real craft. Present this mix clearly without forcing a specialist identity or implying professional security experience that has not been supplied.
 
 ## Positioning
 
-The site is a hacker's personal workstation with anime taste showing through: a portfolio first, with personal details in the margins. Anson's name, background, and project links are immediately readable; the working terminal is an optional way to explore, never a gate. The user chose this balance over an immersive digital hideout.
+The site is a hacker's personal workstation with anime taste showing through: a portfolio first, with personal details in the margins. Anson's full name, background, and project links are immediately readable; the working terminal is an optional way to explore, never a gate. The user chose this balance over an immersive digital hideout and explicitly wants Lain recognizable in the margins across the whole page.
 
 ## Operating Context
 
@@ -32,11 +32,11 @@ The site is a hacker's personal workstation with anime taste showing through: a 
 
 - Sections: Hero (identity plus interactive terminal), Projects, Skills and personal corner, Contact/Footer, plus a sticky header.
 - The interactive terminal remains the signature interaction. Identity and project links must not wait for its boot sequence.
-- Existing content: two real projects (AI API Gateway at api.lel190.dev; No-Account Temp Mail at 971236.xyz) and one placeholder "Secret..." WIP at 35%. Contact links: GitHub (github.com/le-lel190), LinkedIn (linkedin.com/in/le-anson-cheung), Linktree (linktr.ee/lel190).
+- Existing content: two real projects (AI API Gateway at api.lel190.dev; No-Account Temp Mail at 971236.xyz) and a Unity function-hooking experiment in progress. The previous 35% placeholder is replaced with a plain WIP description. Contact links: GitHub (github.com/le-lel190), LinkedIn (linkedin.com/in/le-anson-cheung), Linktree (linktr.ee/lel190).
 - Terminal commands already implemented: help, whoami, about, projects, skills, contact, clear, github, linkedin, linktree, pwd, uname, cat /etc/motd.
-- Skills categories: Languages (Python, C/C++, Java, R, SQL); Web Development (React, Node.js, Express.js, JavaScript, HTML/CSS); Tools (Git, Linux, Docker).
+- Skills categories share `src/data/profile.js` between the visible toolbox and terminal: Languages (Python, C/C++, Java, R, SQL, C#, Lua); Web (React, Node.js, Express.js, JavaScript, HTML/CSS); Systems (Linux, Docker, Kubernetes, Git); Reversing (Cheat Engine, dnSpy, IDA Pro). These combine the tools already supplied in the two previous presentations.
 - Requested visual character: nerd, weeb, technology enthusiast, retro hacker. References include Lain/Ghost in the Shell/Eva, Persona menus, old-web personal homepages, and Linux culture. These are influences, not permission to turn the portfolio into a fandom site.
-- Personal details may use the existing avatar and broad interests. Do not invent favorite series, hardware specifications, or live activity.
+- Supplied personal details: Cheat Engine led to an interest in reverse engineering; anime, rhythm games and casual gaming; previously top 100 in Hong Kong in osu!mania. Use the existing avatar. Do not invent favorite series, hardware specifications, or live activity.
 - Copy may be enriched freely; user will review. Handle `lel190` and the name Anson Cheung must be preserved.
 
 ## Brand Commitments

@@ -1,12 +1,7 @@
 {
-  "short_name": "190 Portfolio",
-  "name": "190's GitHub Profile",
+  "short_name": "lel190",
+  "name": "Anson Cheung / lel190",
   "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
     {
       "src": "images/logo192.png",
       "type": "image/png",
@@ -20,6 +15,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#101211",
+  "background_color": "#101211"
 } 
