@@ -1,4 +1,10 @@
-# Hero artwork
+# Images
+
+## Temporary-mail project preview
+
+`temp-mail-preview.webp` is a screenshot of the public empty inbox linked from `https://971236.xyz/`, served at `https://tempmail-webapp.lolyoulolds.workers.dev/`. Captured on 2026-09-19 at 900 × 430, then encoded as WebP. The screenshot contains no email messages, addresses, or invented sample content. It is a static project preview, not a live inbox.
+
+## Retained bedroom artwork
 
 `hero-bedroom.webp` is a resized, WebP-encoded copy of `BedroomNight.png` from **Visual Novel Backgrounds** by **Kyuririn (Kyu)**.
 
