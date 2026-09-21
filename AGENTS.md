@@ -6,7 +6,7 @@ React 18 portfolio using Create React App and `styled-components`, deployed to G
 ## Repository Map
 - `src/App.js` — composition, dark theme tokens, shared layout variables, continuous fixed Lain artwork, global styles, and skip link.
 - `src/components/Hero.js` — visible identity and project links alongside the interactive terminal. History scrolls inside a bounded output region. Boot never gates portfolio content or automatically focuses the input.
-- `src/components/LainDataStream.js` — subdued hero-only canvas data stream. Includes pause/resume, a reduced-motion still, and offscreen/hidden-tab suspension; the still artwork is independent in `App.js`.
+- `src/components/LainDataStream.js` — subdued hero-only canvas data stream. Includes a reduced-motion still and offscreen/hidden-tab suspension; the still artwork is independent in `App.js`.
 - `src/components/Header.js` — sticky header with native anchor navigation, including mobile.
 - `src/components/Projects.js` — two wide project rows with a gateway routing diagram, a real empty-inbox screenshot, and a separate Unity WIP row.
 - `src/data/profile.js` — shared skills for the visible toolbox and terminal.

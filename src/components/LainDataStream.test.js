@@ -105,24 +105,6 @@ it('pauses offscreen and in hidden tabs, caps drawing at 30fps, and cleans up', 
   expect(window.requestAnimationFrame).not.toHaveBeenCalled();
 });
 
-it('lets the visitor pause and resume without restarting on viewport changes', () => {
-  mount();
-  enterViewport();
-  const control = container.querySelector('button');
-  act(() => control.dispatchEvent(new MouseEvent('click', { bubbles: true })));
-  expect(control.textContent).toBe('Resume motion');
-  expect(window.cancelAnimationFrame).toHaveBeenCalledWith(42);
-  window.requestAnimationFrame.mockClear();
-  intersect([{ isIntersecting: false }]);
-  enterViewport();
-  document.dispatchEvent(new Event('visibilitychange'));
-  expect(window.requestAnimationFrame).not.toHaveBeenCalled();
-
-  act(() => control.dispatchEvent(new MouseEvent('click', { bubbles: true })));
-  expect(control.textContent).toBe('Pause motion');
-  expect(window.requestAnimationFrame).toHaveBeenCalledTimes(1);
-});
-
 it('does not schedule animation when canvas is unsupported', () => {
   HTMLCanvasElement.prototype.getContext.mockReturnValue(null);
   mount();
