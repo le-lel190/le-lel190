@@ -80,14 +80,43 @@ const ProviderBranches = styled.div`
   gap: 24px;
   padding-top: 24px;
   background: linear-gradient(${props => props.theme.borderStrong}, ${props => props.theme.borderStrong}) center top / 1px 24px no-repeat;
-  span { width: 48px; height: 32px; border: 1px solid ${props => props.theme.borderStrong}; position: relative; }
-  span::after { content: ''; position: absolute; inset: 10px 12px; border-top: 1px solid ${props => props.theme.accent}; border-bottom: 1px solid ${props => props.theme.borderStrong}; }
+  span {
+    width: 64px;
+    height: 36px;
+    border: 1px solid ${props => props.theme.borderStrong};
+    background: ${props => props.theme.surface};
+    position: relative;
+    border-radius: 2px;
+  }
+  span::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 12px;
+    background: ${props => props.theme.borderStrong};
+  }
+  span::after {
+    content: '';
+    position: absolute;
+    inset: 10px 14px;
+    border-top: 2px solid ${props => props.theme.accent};
+    border-bottom: 2px solid ${props => props.theme.borderStrong};
+  }
 `;
 const MailPreview = styled.figure`
   border: 1px solid ${props => props.theme.borderStrong};
   background: ${props => props.theme.panel};
   > div { display: flex; justify-content: space-between; gap: 12px; padding: 12px 16px; color: ${props => props.theme.warning}; font: 0.75rem ${props => props.theme.fontMono}; }
-  img { width: 100%; height: auto; border-block: 1px solid ${props => props.theme.border}; }
+  img {
+    width: 100%;
+    height: auto;
+    border-block: 1px solid ${props => props.theme.border};
+    filter: invert(0.92) hue-rotate(180deg) brightness(0.85) contrast(1.15);
+    display: block;
+  }
   figcaption { padding: 16px; color: ${props => props.theme.textDim}; font: 0.75rem/1.7 ${props => props.theme.fontMono}; }
 `;
 const WorkInProgress = styled.article`
