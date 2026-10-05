@@ -53,7 +53,7 @@ const Footer = () => (
     <FooterContent>
       <Contact>
         <div>
-          <h2 id="contact-heading">Let's compare notes.</h2>
+          <h2 id="contact-heading">Find me online.</h2>
           <p>Open to developer and security-focused roles. Have something interesting to build or take apart? I'd like to hear about it.</p>
         </div>
         <ContactLinks aria-label="Contact links">

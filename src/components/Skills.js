@@ -18,7 +18,7 @@ const Toolbox = styled.div`
 const SkillList = styled.dl`
   > div {
     display: grid;
-    grid-template-columns: 92px 1fr;
+    grid-template-columns: 100px 1fr;
     gap: 20px;
     padding: 20px 0;
     border-top: 1px solid ${props => props.theme.borderStrong};
@@ -33,11 +33,13 @@ const PersonalCorner = styled.aside`
   align-self: start;
   margin-top: 8px;
   border: 1px solid ${props => props.theme.borderStrong};
-  background: ${props => props.theme.surface};
+  background: ${props => props.theme.panel};
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 `;
 const FileLabel = styled.div`
   padding: 12px 24px;
   border-bottom: 1px solid ${props => props.theme.borderStrong};
+  background: ${props => props.theme.surface};
   color: ${props => props.theme.textMuted};
   font: 0.75rem ${props => props.theme.fontMono};
 `;

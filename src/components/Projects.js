@@ -81,12 +81,19 @@ const ProviderBranches = styled.div`
   padding-top: 24px;
   background: linear-gradient(${props => props.theme.borderStrong}, ${props => props.theme.borderStrong}) center top / 1px 24px no-repeat;
   span {
+    min-width: 60px;
     width: 64px;
     height: 36px;
     border: 1px solid ${props => props.theme.borderStrong};
     background: ${props => props.theme.surface};
     position: relative;
     border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    color: ${props => props.theme.textMuted};
+    font-weight: 500;
   }
   span::before {
     content: '';
@@ -104,6 +111,7 @@ const ProviderBranches = styled.div`
     inset: 10px 14px;
     border-top: 2px solid ${props => props.theme.accent};
     border-bottom: 2px solid ${props => props.theme.borderStrong};
+    z-index: -1;
   }
 `;
 const MailPreview = styled.figure`
@@ -158,7 +166,7 @@ const Projects = () => (
       <Diagram aria-label="Request flow: your app connects through the gateway to multiple AI providers">
         <Client>your app</Client>
         <Gateway><strong>api.lel190.dev</strong><span>one key / one endpoint</span></Gateway>
-        <ProviderBranches aria-hidden="true"><span /><span /><span /></ProviderBranches>
+        <ProviderBranches aria-hidden="true"><span>GPT-6</span><span>Claude</span><span>Gemini</span></ProviderBranches>
         <figcaption>multiple AI providers / consistent responses</figcaption>
       </Diagram>
     </Project>
@@ -171,7 +179,7 @@ const Projects = () => (
       </ProjectBody>
       <MailPreview>
         <div><span>971236.xyz</span><span>inbox preview</span></div>
-        <img src={`${process.env.PUBLIC_URL}/images/temp-mail-preview.webp`} alt="The temporary-mail app showing its empty inbox" width="900" height="430" loading="lazy" />
+        <img src={`${process.env.PUBLIC_URL}/images/temp-mail-preview.webp`} alt="The temporary-mail app showing its empty inbox" width="900" height="430" loading="lazy" style={{filter: 'invert(0.92) hue-rotate(180deg) brightness(0.95) contrast(1.1)'}} />
         <figcaption>A small tool, built for personal use.</figcaption>
       </MailPreview>
     </Project>

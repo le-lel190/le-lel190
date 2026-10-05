@@ -49,16 +49,17 @@ const Introduction = styled.div`
     font: 600 clamp(3.5rem, 6.7vw, 5.7rem)/1 ${props => props.theme.fontDisplay};
     letter-spacing: -0.035em;
     margin-bottom: 20px;
-    span { display: block; }
+    span { display: block; font-weight: 400; opacity: 0.75; }
     em { font-style: normal; color: ${props => props.theme.accent}; }
   }
 `;
 const Bio = styled.p`
-  color: ${props => props.theme.textDim};
+  color: ${props => props.theme.text};
+  opacity: 0.85;
   font-size: 1.05rem;
   max-width: 39ch;
   line-height: 1.75;
-  strong { color: ${props => props.theme.text}; font-weight: 500; }
+  strong { opacity: 1; font-weight: 500; }
 `;
 const Identity = styled.p`
   margin-bottom: 16px;
@@ -117,7 +118,8 @@ const TerminalHeader = styled.div`
   span:last-child { margin-left: auto; color: ${props => props.theme.textMuted}; }
 `;
 const TerminalOutput = styled.div`
-  height: 249px;
+  min-height: 180px;
+  max-height: 249px;
   padding: 20px;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -145,7 +147,13 @@ const PixelWordmark = styled.div`
   white-space: nowrap;
 `;
 const TerminalLine = styled.div`
-  color: ${props => props.$isCommand ? props.theme.accent : props.theme.textDim};
+  color: ${props => {
+    if (props.$isCommand) return props.theme.accent;
+    if (props.$isResponse) return props.theme.text;
+    if (props.$isError) return props.theme.warning;
+    return props.theme.textDim;
+  }};
+  opacity: ${props => props.$isResponse ? 0.9 : 1};
   font-size: 0.8rem;
   line-height: 1.9;
   white-space: pre-wrap;
@@ -206,14 +214,15 @@ const InterestStrip = styled.div`
   flex-wrap: wrap;
   gap: 8px 24px;
   border-top: 1px solid ${props => props.theme.borderStrong};
-  padding: 12px 0;
+  padding: 20px 0;
+  margin-top: 8px;
   color: ${props => props.theme.textDim};
   font: 0.75rem/1.8 ${props => props.theme.fontMono};
   > p { display: flex; flex-wrap: wrap; gap: 4px 16px; }
   > p span { color: ${props => props.theme.textMuted}; }
 `;
 
-const createEntry = (id, content, isCommand = false) => ({ id, content, isCommand });
+const createEntry = (id, content, type = 'boot') => ({ id, content, type });
 
 const Hero = () => {
   const [phase, setPhase] = useState('boot');
@@ -226,8 +235,8 @@ const Hero = () => {
   const entryIdRef = useRef(0);
 
   const nextEntryId = useCallback(() => `entry-${++entryIdRef.current}`, []);
-  const pushOutput = useCallback((lines) => {
-    setHistory(prev => [...prev, ...lines.map(line => createEntry(nextEntryId(), line))]);
+  const pushOutput = useCallback((lines, type = 'response') => {
+    setHistory(prev => [...prev, ...lines.map(line => createEntry(nextEntryId(), line, type))]);
   }, [nextEntryId]);
   const scrollToSection = useCallback((selector) => {
     const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -236,7 +245,7 @@ const Hero = () => {
   const openExternal = useCallback((url) => window.open(url, '_blank', 'noopener,noreferrer'), []);
   const enterInteractiveMode = useCallback(() => {
     setPhase('interactive');
-    setHistory([createEntry(nextEntryId(), HELP_HINT)]);
+    setHistory([createEntry(nextEntryId(), HELP_HINT, 'response')]);
   }, [nextEntryId]);
   const skipAnimation = useCallback(() => {
     setSkipped(true);
@@ -317,12 +326,12 @@ const Hero = () => {
     event.preventDefault();
     const trimmedValue = inputValue.trim();
     if (!trimmedValue) { setInputValue(''); return; }
-    setHistory(prev => [...prev, createEntry(nextEntryId(), `${PROMPT} ${trimmedValue}`, true)]);
+    setHistory(prev => [...prev, createEntry(nextEntryId(), `${PROMPT} ${trimmedValue}`, 'command')]);
     const normalized = trimmedValue.toLowerCase().replace(/\s+/g, ' ');
     if (Object.prototype.hasOwnProperty.call(commandHandlers, normalized)) {
       commandHandlers[normalized]();
     } else {
-      pushOutput([`command not found: ${trimmedValue}`, HELP_HINT]);
+      pushOutput([`command not found: ${trimmedValue}`, HELP_HINT], 'error');
     }
     setInputValue('');
   }, [commandHandlers, inputValue, nextEntryId, pushOutput]);
@@ -357,7 +366,7 @@ const Hero = () => {
               </TerminalGreeting>
               {visibleBootLines.map((line, i) => <TerminalLine key={`boot-${i}`}>{line}</TerminalLine>)}
               <div role="log" aria-label="Command responses" aria-live="polite" aria-relevant="additions">
-                {history.map(entry => <TerminalLine key={entry.id} $isCommand={entry.isCommand}>{entry.content}</TerminalLine>)}
+                {history.map(entry => <TerminalLine key={entry.id} $isCommand={entry.type === 'command'} $isResponse={entry.type === 'response'} $isError={entry.type === 'error'}>{entry.content}</TerminalLine>)}
               </div>
             </TerminalOutput>
             {phase === 'interactive' ? (
