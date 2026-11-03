@@ -1,164 +1,146 @@
 ---
-name: lel190 Personal Workstation
-description: A retro workstation portfolio with anime and old-web personality in the margins.
+name: lel190 Component Datasheet
+description: A portfolio laid out as an engineering datasheet on a black solder mask board.
 colors:
-  background: "#101211"
-  surface: "#171b18"
-  panel: "#0c100d"
-  panel-raised: "#232923"
-  reading-surface: "rgba(16, 18, 17, 0.94)"
-  border: "#303930"
-  border-strong: "#4a5748"
-  text: "#e7e6d9"
-  text-dim: "#afb8a9"
-  text-muted: "#929f8d"
-  accent: "#b9d883"
-  accent-faint: "rgba(185, 216, 131, 0.07)"
-  warning: "#edbd79"
-  info: "#b0c2ba"
+  background: "#0b0e0d"
+  surface: "#111614"
+  panel: "#0d1211"
+  panel-raised: "#1a2320"
+  border: "#26302c"
+  border-strong: "#3d4c46"
+  text: "#eceee3"
+  text-dim: "#a9b4aa"
+  text-muted: "#838f88"
+  accent: "#e8c15c"
+  accent-dim: "#a8893a"
+  accent-faint: "rgba(232, 193, 92, 0.06)"
+  accent-line: "rgba(232, 193, 92, 0.32)"
+  warning: "#e0a35e"
+  info: "#9fb5ad"
 typography:
   display:
-    fontFamily: "Chakra Petch, Arial Narrow, sans-serif"
-    fontSize: "clamp(3.5rem, 6.7vw, 5.7rem)"
-    fontWeight: 600
-    lineHeight: 1
-    letterSpacing: "-0.035em"
-  headline:
-    fontFamily: "Chakra Petch, Arial Narrow, sans-serif"
-    fontSize: "clamp(1.9rem, 3.2vw, 2.5rem)"
-    fontWeight: 600
-    lineHeight: 1.2
-    letterSpacing: "-0.02em"
-  title:
-    fontFamily: "Chakra Petch, Arial Narrow, sans-serif"
-    fontSize: "clamp(1.6rem, 2.8vw, 2rem)"
-    fontWeight: 600
-    lineHeight: 1.2
+    fontFamily: "Datasheet Grotesk, Helvetica Neue, Arial, sans-serif"
+    fontSize: "clamp(3.2rem, 8.4vw, 7.2rem)"
+    fontWeight: 700
+    fontStretch: "78%"
+    lineHeight: 0.83
+    letterSpacing: "-0.025em"
+  section-title:
+    fontFamily: "Datasheet Grotesk, Helvetica Neue, Arial, sans-serif"
+    fontSize: "clamp(1.9rem, 3.4vw, 2.6rem)"
+    fontWeight: 700
+    fontStretch: "80%"
+    lineHeight: 1.05
+  row-title:
+    fontFamily: "Datasheet Grotesk, Helvetica Neue, Arial, sans-serif"
+    fontSize: "clamp(1.42rem, 2.5vw, 1.95rem)"
+    fontWeight: 700
+    fontStretch: "82%"
+    lineHeight: 1.05
   body:
     fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: "0.95rem"
+    fontSize: "0.92rem"
     fontWeight: 400
-    lineHeight: 1.8
+    lineHeight: 1.75
   lead:
     fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: "1.05rem"
+    fontSize: "1.02rem"
     fontWeight: 400
-    lineHeight: 1.75
-  note:
-    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: "0.9rem"
+    lineHeight: 1.7
+  data:
+    fontFamily: "Plex Data, ui-monospace, monospace"
+    fontSize: "0.78rem"
     fontWeight: 400
-    lineHeight: 1.75
-  command:
-    fontFamily: "JetBrains Mono, ui-monospace, monospace"
-    fontSize: "0.8rem"
-    fontWeight: 400
-    lineHeight: 1.9
-  mobile-input:
-    fontFamily: "JetBrains Mono, ui-monospace, monospace"
-    fontSize: "16px"
-  wordmark:
-    fontFamily: "lel190 Pixel, JetBrains Mono, ui-monospace, monospace"
-    fontSize: "1.75rem"
-    fontWeight: 400
-    lineHeight: 1.4
-    letterSpacing: "0.08em"
+    lineHeight: 1.85
   label:
-    fontFamily: "JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, monospace"
-    fontSize: "0.75rem"
+    fontFamily: "Plex Data, ui-monospace, monospace"
+    fontSize: "0.64rem"
     fontWeight: 400
+    letterSpacing: "0.16em"
+  wordmark:
+    fontFamily: "lel190 Pixel, Plex Data, monospace"
+    fontSize: "1.5rem"
+    letterSpacing: "0.08em"
 rounded:
   square: "0px"
 spacing:
   xs: "8px"
   sm: "12px"
   md: "20px"
-  lg: "24px"
-  xl: "32px"
-  xxl: "64px"
+  lg: "32px"
+  xl: "48px"
+  xxl: "72px"
 components:
-  button-primary:
+  action-primary:
     backgroundColor: "{colors.accent}"
     textColor: "{colors.background}"
-    padding: "10px 19px"
-    rounded: "{rounded.square}"
-  button-primary-hover:
-    backgroundColor: "{colors.text}"
-    textColor: "{colors.background}"
-  button-secondary:
+    padding: "10px 18px"
+  action-primary-hover:
     backgroundColor: "transparent"
-    textColor: "{colors.text}"
-    padding: "10px 0"
-  terminal-input:
-    backgroundColor: "transparent"
-    textColor: "{colors.text}"
-    padding: "2px"
-  project-body:
-    backgroundColor: "{colors.reading-surface}"
-    textColor: "{colors.text}"
-    padding: "32px"
-  interest-sticker:
-    backgroundColor: "{colors.panel}"
     textColor: "{colors.accent}"
-    padding: "4px 8px"
+  chip:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text-dim}"
+    padding: "3px 9px"
+  sheet:
+    backgroundColor: "rgba(11, 14, 13, 0.95)"
+    border: "1px solid {colors.border-strong}"
 ---
 
-# Design System: lel190 Personal Workstation
+# Design System: lel190 Component Datasheet
 
 ## Overview
 
-**Creative North Star: "The Personal Workstation"**
+**Creative North Star: "The Component Datasheet"**
 
-A personal portfolio with the atmosphere of a working desk. Angular headings, a real optional terminal, and square reading surfaces establish the technical character. A continuous Lain backdrop, the owner's avatar, and personal writing connect the whole page. The projects lead; anime and old-web details stay recognizable around them.
+The page is a single engineering document for one part: `LEL-190`. Headers are sheet metadata, projects are pin rows in a function table, skills are buses on a pinout, contact links are I/O ports. A black solder-mask ground with gold pad accents replaces the previous sage workstation; the shell is the one live circuit on the sheet.
 
-**Key Characteristics:** full-name identity, readable work, continuous artwork, square utilitarian surfaces, warm phosphor colors, an optional shell, native navigation, restrained motion.
+**Key Characteristics:** one bordered sheet, uppercase condensed display type, tabular mono data with dotted/solid leader rules, pin numbers in the margin, gold as the only saturated colour, Lain still in the right margin.
 
 ## Colors
 
-Sage phosphor is the primary interactive signal. Amber distinguishes mail-project material and WIP details; the pale gray-green info color is a tertiary sticker accent. Warm text and green-tinted charcoal surfaces avoid harsh pure-white/pure-black contrast.
+Black-green solder mask (`#0b0e0d`) is the ground; every surface is a step up from it, never pure black. Gold (`#e8c15c`) is the signal colour and the only saturated hue: it marks pads, pins, the primary action, live terminal text, and hover states. Amber-orange (`#e0a35e`) covers the mail project and WIP stamps; pale grey-green (`#9fb5ad`) is unused tertiary.
 
-**The Signal Rule.** Use the accent for links, the main action, and terminal prompts. Decorative material may use amber, but must not imply fabricated live status.
+**The Signal Rule.** Gold means "this is a pad, a connection, or an action". It never fills a reading region; body text stays in warm ink on charcoal.
 
 ## Typography
 
-Chakra Petch is the angular display voice. JetBrains Mono carries commands, navigation, labels, and technical data. System sans carries readable descriptions. The terminal's single-line `lel190_` wordmark uses a locally hosted Silkscreen subset (`src/assets/lel190-pixel.ttf`, OFL license alongside it), not multi-line ASCII. It is 1.75rem with 0.08em letter spacing; the subset is only for this wordmark.
+Two self-hosted families, no third-party font requests. **Datasheet Grotesk** is Archivo, served from `src/assets/fonts/archivo-*.woff2` (OFL), used at `font-stretch: 78–82%` for every uppercase display voice — name, section headings, project names. **Plex Data** is IBM Plex Mono, served locally (OFL), for all measurement and metadata: sheet headers, table labels, pin numbers, terminal, links, footers. System sans carries only prose.
 
-The full name uses the large responsive role; project, toolbox, and contact section headings share `theme.sectionTitle`. Body prose is 0.95rem with a 1.8 line height, and the hero lead is 1.05rem. Technical labels use 0.75rem; navigation, commands, and skill values use 0.8rem. The 0.9rem handle and 1.8rem personal heading are local identity roles. The header wordmark uses 1.1rem, reduced to 0.95rem at the narrowest breakpoint. Terminal input becomes 16px on narrow screens to avoid mobile zoom. Useful information never shrinks below 0.75rem.
+Display type is uppercase with tight negative tracking and sub-1 line-height; the name is the largest object on the page. Technical labels are 0.64–0.68rem with 0.16em tracking and uppercase; never below 0.64rem. Terminal and data rows are 0.78rem at 1.85 line height so leader lines stay legible.
 
 ## Layout
 
-Content uses a 1160px container with 32px side padding, reduced to 20px at 600px. Above 1160px it sits slightly left of center: the left margin is `max(0px, (viewport - 1320px) / 2)`, reserving a wider artwork margin on the right. Header, main, and footer align to the same grid. The sticky header is 72px tall (64px on narrow screens); section anchors reserve 96px.
+One centred 1200px sheet with 40px side padding (20px below 720px). The page is a stack of sheet regions separated by full-width rules, not floating cards: hero sheet → projects table → toolbox + personal module → contact ports → colophon.
 
-The hero pairs identity and shell with a 56px gap, reduced to 32px below 980px, and stacks at 780px. Each project is a wide row with description left and a distinct visual right; rows stack internally at 720px. The toolbox and personal corner also stack at 720px. A separate WIP row describes the Unity experiment without an arbitrary completion percentage. The story reads: name and interests, shipped work, tools and the human, contact.
+The project table shares one column definition, `--spec-columns: 56px 1fr 2fr 1.4fr`, with pin, function, and visual cells so every row lines up like a real pin table. Below 1100px the table collapses to `44px 1fr` and each visual drops under its description; the pinout stays two-column to 720px.
 
 ## Elevation & Depth
 
-Depth comes from charcoal surfaces and single-pixel rules. The existing `src/assets/lain_bg.webp` artwork lives in a fixed viewport-sized layer in `App.js`, behind the entire page. It scales to the viewport height and is centered horizontally and vertically on desktop and mobile. It never stretches to the document's height, tiles, drifts, or uses parallax. A horizontal dark gradient protects the complete reading column and opens toward the outer right margin. Mobile uses a more subdued treatment.
-
-Project rows, the header, and footer use the almost-opaque reading surface; terminal and personal content have solid surfaces. The sparse data stream remains local to the hero. The fixed artwork and scrolling content are separate layers, so scrolling to the footer never removes the artwork.
+No shadows and no blur except a 2px backdrop on the sticky header. Depth comes from three flat steps (ground, sheet, panel), single-pixel rules, and a 2px rule under section heads. The Lain artwork stays a fixed viewport layer in `App.js`, de-saturated and sepia-tinted, opening toward the right margin so the reading column stays legible.
 
 ## Shapes
 
-Square corners and thin utilitarian borders define windows, controls, diagrams, and stickers. No pill-shaped skill chips. The page starts with a narrow sage rule; the terminal header is a lighter solid panel.
+Square everywhere: no radius anywhere in the sheet, including chips, stamps, inputs, and the terminal. Pins are 13px squares drawn as nested borders. Dividers are 1px in `border`, 2px in `border-strong` under section heads.
 
 ## Components
 
-- **Primary action:** sage fill, dark ink, at least 44px tall; hover changes to warm ink fill. Secondary actions are text links.
-- **Navigation:** inline native anchors on all screen sizes, with a colored underline on hover. No mobile drawer or click-only navigation.
-- **Terminal:** labeled header, 249px scrollable output, and a separate input row. Long history scrolls internally; it does not resize the page. The command response log is announced politely.
-- **Boot and motion:** three short boot lines at 220ms intervals, a skip button, and one 600ms translate entrance. Identity and links remain visible throughout. Reduced motion removes the delay, entrance, and smooth scrolling. Automatic boot never steals focus.
-- **Hero data stream:** sparse decorative glyphs and packets at 30% canvas opacity, capped at 30fps with a 1.5× device-pixel-ratio ceiling. Stops offscreen and in hidden tabs. Pause/resume preserves the current streams and stays paused across viewport changes. Reduced motion paints a still frame and hides the pause control; unsupported canvas also omits the control. Canvas and artwork are hidden from assistive technology.
-- **Projects:** full-width work rows with readable descriptions and descriptive domain links. The gateway has a conceptual routing diagram. Temporary mail has a real screenshot of its public empty-inbox interface, captured without message contents. Neither visual implies live telemetry.
-- **Toolbox:** four plain rows share `src/data/profile.js` with terminal skill output so the two views stay consistent.
-- **Personal corner:** the existing avatar, anime/rhythm-game interests, and the supplied osu!mania achievement. The Cheat Engine origin story appears in the introduction. Preserve informal personality without inventing claims.
-- **Focus:** a visible sage outline with 5px offset; the terminal input row also gains a faint sage background.
-- **Browser surfaces:** dark color scheme, sage selection and caret, themed thin scrollbars. Content is visible by default, without scroll-reveal gates.
+- **Sheet header:** part number, chipset, package, document revision on one 10px-padded strip.
+- **Revision header (sticky):** `LEL190_` wordmark, name/CUHK/revision metadata, and numbered section links (`01 projects`, `02 about`, `03 contact`) as native anchors.
+- **Spec table:** pin, uppercase label, value, and a muted note per row.
+- **Terminal:** labelled `U1 tty console` with scanline texture, internally scrolling output, and a prompt row. Below it, quick-command chips (`whoami`, `projects`, `skills`, `contact`) run the same handlers so touch users never need to type.
+- **Footprint diagrams:** the gateway is a pad-to-provider chain naming Anthropic, OpenAI, and Gemini / others as example provider slots; the mail project is a framed screenshot. Both are code-drawn and labelled, never live telemetry.
+- **Personal module:** labelled `J1 · /home/lel190`, avatar, interests, and stencil tags.
+- **Contact ports:** labelled `section 03 / I/O ports`, one row per destination.
+- **Motion:** one authored moment — the gold trace under the name draws itself once (1100ms exponential ease-out). Nothing else animates except the hero data stream and the terminal boot.
+- **Focus:** 2px gold outline at 4px offset.
+- **Browser surfaces:** gold selection with dark ink, solder-mask scrollbars, gold caret in the terminal.
 
 ## Do's and Don'ts
 
-- **Do** keep name, background, and projects understandable without using the terminal.
-- **Do** preserve native keyboard navigation, reduced motion, touch usability, and real project URLs.
-- **Do** centralize theme values in `src/App.js` and check the baseline in `src/index.css`.
-- **Don't** replace personal content with invented system alerts, fake metrics, or remote-server claims.
-- **Don't** turn the anime references into a fandom landing page or add a mandatory intro.
-- **Don't** bring back particle systems or a custom cursor as a default embellishment.
+- **Do** keep the whole page readable without the terminal.
+- **Do** keep facts, URLs, and command names stable; this world changes presentation only.
+- **Do** keep every label uppercase mono and every reading region in warm ink.
+- **Don't** introduce rounded corners, drop shadows, gradient text, or a second saturated hue.
+- **Don't** invent part numbers with implied certifications, specs, or live status.
+- **Don't** add a third type family.

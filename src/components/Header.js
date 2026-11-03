@@ -5,66 +5,93 @@ const HeaderContainer = styled.header`
   position: sticky;
   top: 0;
   z-index: 100;
-  background: ${props => props.theme.readingSurface};
-  border-bottom: 1px solid ${props => props.theme.border};
+  background: ${props => props.theme.sheet};
+  border-bottom: 1px solid ${props => props.theme.borderStrong};
+  backdrop-filter: blur(2px);
 `;
 
 const HeaderContent = styled.div`
   width: min(var(--content-width), 100%);
-  min-height: 72px;
   margin-inline: auto;
   padding-inline: var(--page-padding);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: stretch;
+  min-height: 64px;
+  font-family: ${props => props.theme.fontMono};
+`;
+
+const Wordmark = styled.a`
   display: flex;
   align-items: center;
-  gap: 32px;
-  @media (min-width: 1160px) { margin-left: var(--content-offset); }
-  @media (max-width: 600px) { min-height: 64px; gap: 12px; }
-`;
-
-const Logo = styled.a`
-  font: 700 1.1rem ${props => props.theme.fontMono};
+  padding-right: 20px;
   text-decoration: none;
   color: ${props => props.theme.accent};
+  font: 600 0.95rem ${props => props.theme.fontMono};
+  letter-spacing: 0.14em;
   white-space: nowrap;
   span { color: ${props => props.theme.textMuted}; font-weight: 400; }
-  @media (max-width: 380px) { font-size: 0.95rem; }
+  &:hover { color: ${props => props.theme.text}; }
 `;
 
-const SiteLabel = styled.span`
+const Revision = styled.p`
+  display: flex;
+  align-items: center;
+  gap: 10px 22px;
+  flex-wrap: wrap;
+  padding: 0 24px;
+  border-left: 1px solid ${props => props.theme.border};
+  border-right: 1px solid ${props => props.theme.border};
   color: ${props => props.theme.textMuted};
-  font: 0.75rem ${props => props.theme.fontMono};
-  letter-spacing: 0.04em;
-  @media (max-width: 850px) { display: none; }
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  b { color: ${props => props.theme.textDim}; font-weight: 500; }
+  @media (max-width: 860px) { display: none; }
 `;
 
 const NavMenu = styled.nav`
-  margin-left: auto;
   display: flex;
-  gap: 28px;
+  align-items: stretch;
+  margin-left: auto;
   a {
-    min-height: 44px;
     display: inline-flex;
     align-items: center;
+    gap: 7px;
+    padding: 0 16px;
     color: ${props => props.theme.textDim};
     text-decoration: none;
-    font: 0.8rem ${props => props.theme.fontMono};
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
     border-bottom: 2px solid transparent;
-    transition: color 160ms ease, border-color 160ms ease;
-    &:hover { color: ${props => props.theme.accent}; border-color: currentColor; }
+    border-left: 1px solid ${props => props.theme.border};
+    transition: color 140ms ease, background 140ms ease, border-color 140ms ease;
+    i { color: ${props => props.theme.textMuted}; font-style: normal; font-size: 0.68rem; }
+    &:hover, &:focus-visible {
+      color: ${props => props.theme.accent};
+      background: ${props => props.theme.accentFaint};
+      border-bottom-color: ${props => props.theme.accent};
+    }
   }
-  @media (max-width: 600px) { gap: 16px; }
-  @media (max-width: 380px) { gap: 10px; a { font-size: 0.75rem; } }
+  @media (max-width: 600px) {
+    a { padding: 0 10px; font-size: 0.7rem; }
+    a i { display: none; }
+  }
 `;
 
 const Header = () => (
   <HeaderContainer>
     <HeaderContent>
-      <Logo href="#home" aria-label="lel190 home"><span>~/</span>lel190<span>_</span></Logo>
-      <SiteLabel>code, curiosity & a little anime</SiteLabel>
+      <Wordmark href="#home" aria-label="lel190 home">LEL190<span>_</span></Wordmark>
+      <Revision>
+        <span>Anson Cheung</span>
+        <span>CUHK <b>B.Sc. CS</b></span>
+        <span>Rev. <b>2026</b></span>
+      </Revision>
       <NavMenu aria-label="Main navigation">
-        <a href="#projects">projects</a>
-        <a href="#skills">about</a>
-        <a href="#contact">contact</a>
+        <a href="#projects"><i>01</i>projects</a>
+        <a href="#skills"><i>02</i>about</a>
+        <a href="#contact"><i>03</i>contact</a>
       </NavMenu>
     </HeaderContent>
   </HeaderContainer>

@@ -11,18 +11,24 @@ body {
 button, input { font: inherit; }
 button, a, input { -webkit-tap-highlight-color: transparent; }
 img { display: block; max-width: 100%; }
-code { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+code { font-family: 'Plex Data', ui-monospace, monospace; }
 
-/* Browser chrome stays in the workstation's phosphor palette. */
-html { scrollbar-color: #4a5748 #101211; scrollbar-width: thin; }
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: #101211; }
-::-webkit-scrollbar-thumb { background: #4a5748; border: 2px solid #101211; }
-::selection { background: #b9d883; color: #101211; }
+/* Browser chrome is part of the board: gold selection, solder-mask scrollbars. */
+html { scrollbar-color: #3d4c46 #0b0e0d; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #0b0e0d; }
+::-webkit-scrollbar-thumb { background: #3d4c46; border: 2px solid #0b0e0d; }
+::-webkit-scrollbar-thumb:hover { background: #5a6b62; }
+::selection { background: #e8c15c; color: #0b0e0d; }
 
-@keyframes terminalEnter {
-  from { transform: translateY(10px); }
-  to { transform: translateY(0); }
+/* The one authored entrance: the bus traces itself gold, once. */
+@keyframes traceDraw {
+  from { stroke-dashoffset: var(--dash, 900); }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes labelFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

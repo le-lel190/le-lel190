@@ -15,11 +15,10 @@ const DATA_FRAGMENTS = [
 
 const BackgroundLayer = styled.div`
   position: absolute;
-  inset: 0 -32px;
+  inset: 0;
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-  @media (max-width: 600px) { inset-inline: -20px; }
 `;
 
 const StreamCanvas = styled.canvas`

@@ -80,7 +80,7 @@ describe('Hero terminal', () => {
   it('shows the identity and project link before the terminal finishes booting', () => {
     const { container, unmount } = renderHero();
     expect(container.querySelector('h1').textContent).toBe('AnsonCheung.');
-    expect(container.querySelector('a[href="#projects"]').textContent).toContain('Explore projects');
+    expect(container.querySelector('a[href="#projects"]').textContent).toContain('Explore the projects');
     expect(container.querySelector('input')).toBeNull();
     expect(container.querySelector('pre')).toBeNull();
     expect(container.textContent).toContain('lel190_');
@@ -195,6 +195,23 @@ describe('Hero terminal', () => {
 
     expect(window.open).toHaveBeenCalledWith('https://github.com/le-lel190', '_blank', 'noopener,noreferrer');
     expect(container.textContent).toContain('Opening GitHub: https://github.com/le-lel190');
+
+    unmount();
+  });
+
+  it('runs a command from the quick chip row without typing', () => {
+    const { container, unmount } = renderHero();
+
+    enterInteractiveMode(container);
+    const chip = Array.from(container.querySelectorAll('button')).find(button => button.textContent === 'contact');
+    expect(chip).not.toBeUndefined();
+
+    act(() => {
+      chip.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+
+    expect(container.querySelector('[role="log"]').textContent).toContain('Contact routes online.');
+    expect(container.querySelector('[role="log"]').textContent).toContain('GitHub   :: https://github.com/le-lel190');
 
     unmount();
   });
