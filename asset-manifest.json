@@ -1,15 +1,20 @@
 {
   "files": {
-    "main.css": "/le-lel190/static/css/main.f0c8d23b.css",
-    "main.js": "/le-lel190/static/js/main.2824b2bd.js",
+    "main.css": "/le-lel190/static/css/main.d913b0cf.css",
+    "main.js": "/le-lel190/static/js/main.f2f95173.js",
+    "static/media/archivo-latin.woff2": "/le-lel190/static/media/archivo-latin.bb1dad4de4bf8ae0cf6f.woff2",
+    "static/media/archivo-latin-ext.woff2": "/le-lel190/static/media/archivo-latin-ext.009725e3b373d5e8f0a1.woff2",
     "static/media/lain_bg.webp": "/le-lel190/static/media/lain_bg.63c9d29c3de065daa00b.webp",
+    "static/media/plex-mono-600.woff2": "/le-lel190/static/media/plex-mono-600.45199eea8828315083bf.woff2",
+    "static/media/plex-mono-500.woff2": "/le-lel190/static/media/plex-mono-500.a1fc5384545ba0657d83.woff2",
+    "static/media/plex-mono-400.woff2": "/le-lel190/static/media/plex-mono-400.2b13cc93b07c41b27134.woff2",
     "static/media/lel190-pixel.ttf": "/le-lel190/static/media/lel190-pixel.a7370511b4f1df91135b.ttf",
     "index.html": "/le-lel190/index.html",
-    "main.f0c8d23b.css.map": "/le-lel190/static/css/main.f0c8d23b.css.map",
-    "main.2824b2bd.js.map": "/le-lel190/static/js/main.2824b2bd.js.map"
+    "main.d913b0cf.css.map": "/le-lel190/static/css/main.d913b0cf.css.map",
+    "main.f2f95173.js.map": "/le-lel190/static/js/main.f2f95173.js.map"
   },
   "entrypoints": [
-    "static/css/main.f0c8d23b.css",
-    "static/js/main.2824b2bd.js"
+    "static/css/main.d913b0cf.css",
+    "static/js/main.f2f95173.js"
   ]
 }
